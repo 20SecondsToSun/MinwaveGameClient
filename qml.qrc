@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>qml/SocketClient.qml</file>
+        <file>qml/LoginModule.qml</file>
+        <file>resources/config.json</file>
+        <file>qml/MindwaveClient.qml</file>
+        <file>qml/MindwaveGame.qml</file>
+        <file>qml/MindwaveHero.qml</file>
+        <file>resources/car.png</file>
+    </qresource>
+</RCC>
