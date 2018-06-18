@@ -121,10 +121,10 @@ Item {
                 {
                     value = mind.meditation;
                 }
-
-                if(value > hero.dataThresholdMin)
+                console.log(value , core.dataThresholdMin);
+                if(value > core.dataThresholdMin)
                 {
-                    hero.velocity = map(value, hero.dataThresholdMin,  hero.dataThresholdMax, hero.minVelocity,  hero.maxVelocity);
+                    hero.velocity = map(value, core.dataThresholdMin,  hero.dataThresholdMax, hero.minVelocity,  hero.maxVelocity);
                 }
                 else if (core.backMove)
                 {

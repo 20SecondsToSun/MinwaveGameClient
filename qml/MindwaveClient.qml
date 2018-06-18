@@ -177,6 +177,10 @@ Item {
                 text: "0"
                 checked: false
                 exclusiveGroup: tabDiff
+                onCheckedChanged:
+                {
+                   resetParams();
+                }
             }
 
             RadioButton {
@@ -186,29 +190,7 @@ Item {
                 exclusiveGroup: tabDiff
                 onCheckedChanged:
                 {
-                    core.backMove = true;
-
-                    if(diff0.checked)
-                    {
-                        core.dataThresholdMin = 40;
-                        core.backMove = false;
-                    }
-                    else if(diff1.checked)
-                    {
-                        core.dataThresholdMin = 40;
-                    }
-                    else if (diff2.checked)
-                    {
-                        core.dataThresholdMin = 50;
-                    }
-                    else if (diff3.checked)
-                    {
-                        core.dataThresholdMin = 60;
-                    }
-                    else if (diff4.checked)
-                    {
-                        core.dataThresholdMin = 70;
-                    }
+                   resetParams();
                 }
             }
             RadioButton {
@@ -216,19 +198,58 @@ Item {
                 text: "2"
                 checked: false
                 exclusiveGroup: tabDiff
+                onCheckedChanged:
+                {
+                   resetParams();
+                }
             }
             RadioButton {
                 id: diff3
                 text: "3"
                 checked: true
                 exclusiveGroup: tabDiff
+                onCheckedChanged:
+                {
+                   resetParams();
+                }
             }
             RadioButton {
                 id: diff4
                 text: "4"
                 checked: false
                 exclusiveGroup: tabDiff
+                onCheckedChanged:
+                {
+                   resetParams();
+                }
             }
+        }
+    }
+
+    function resetParams()
+    {
+        core.backMove = true;
+
+        if(diff0.checked)
+        {
+            core.dataThresholdMin = 40;
+            core.backMove = false;
+        }
+        else if(diff1.checked)
+        {
+            core.dataThresholdMin = 40;
+        }
+        else if (diff2.checked)
+        {
+            core.dataThresholdMin = 50;
+        }
+        else if (diff3.checked)
+        {
+            core.dataThresholdMin = 60;
+        }
+        else if (diff4.checked)
+        {
+            core.dataThresholdMin = 70;
         }
     }
 
