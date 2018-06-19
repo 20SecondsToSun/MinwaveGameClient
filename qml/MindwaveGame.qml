@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 1.4
-import QtCharts 2.2
+import QtQuick.Controls.Styles 1.4
 
 Item {
     id:root;
@@ -15,9 +15,15 @@ Item {
     Connections
     {
         target:gameTaskManager;
+
         onUpdateCanvas:
         {
             canvas.requestPaint();
+        }
+
+        onTaskComleteEvent:
+        {
+            gameProgressBar.value = taskNumber * 1.0/allTaskCount;
         }
     }
 
@@ -58,10 +64,36 @@ Item {
         }
     }
 
+    RowLayout
+    {
+        x: 540;
+        y: 10;
+        spacing: 6;
+        ProgressBar
+        {
+            id:gameProgressBar;
+            value: .0
+            style: ProgressBarStyle {
+                background: Rectangle {
+                    radius: 2
+                    color: "lightgray"
+                    border.color: "gray"
+                    border.width: 1
+                    implicitWidth: 200
+                    implicitHeight: 24
+                }
+                progress: Rectangle {
+                    color: "#009900"
+                    border.color: "steelblue"
+                }
+            }
+        }
+    }
+
     Text
     {
         id:gameTimeText;
-        text: "Time : 0.0";
+        text: "Time : " + gameTaskManager.gameTime.toFixed(1);
         font.family: "Helvetica";
         font.pixelSize: 35;
         color: "#009900";
@@ -76,7 +108,7 @@ Item {
         height: 600;
         y: 100;
         property var canvasColor:  Qt.rgba(0.6, 0.6, 0.6, 1);
-        property string heroView: "qrc:/resources/car.png";
+        property string heroView: "qrc:/resources/car.jpg";
         Component.onCompleted:loadImage(heroView);
 
         onPaint:
@@ -86,121 +118,44 @@ Item {
             ctx.fillRect(0, 0, width, height);
 
             if(gameTaskManager.isRunning())
-            {               
+            {
+                drawGuidePaths(ctx);
                 drawPrevPaths(ctx);
 
                 var startPoint = gameTaskManager.getStartPoint();
 
-               // ctx.beginPath();
+                ctx.beginPath();
                 ctx.lineWidth = 10;
+                ctx.strokeStyle = "red";
                 ctx.moveTo(startPoint.x, startPoint.y);
-                ctx.strokeStyle = "red"
                 var curPoint = gameTaskManager.getCurPoint();
-
                 ctx.lineTo(curPoint.x, curPoint.y);
-              //  ctx.closePath()
                 ctx.stroke();
+                ctx.closePath();
+                ctx.drawImage(heroView, curPoint.x, curPoint.y);
             }
-        }
-    }
-
-    property double finalPosition: 960;
-    property double startGameTime: 0;
-
-    MindwaveHero
-    {
-        id:hero;
-
-        property double locationX: 0;
-        property double locationY: 40;
-        property double velocity: 0;
-
-        property double dataThresholdMax: 100;
-
-        property double minVelocity: 0;
-        property double maxVelocity: 3;
-
-        property double minVelocity1: -5;
-        property double maxVelocity1: -1;
-
-        Timer
-        {
-            id:gameTimer;
-            interval: 10;
-            repeat: true;
-
-            onTriggered:
-            {
-                gameTimeText.text = "Time: " + ((new Date().getTime() - startGameTime) / 1000.).toFixed(1);
-
-                if(hero.locationX >= finalPosition)
-                {
-                    hero.locationX = finalPosition;
-                    setState("gameOver");
-                }
-
-                var value = 0;
-                if (root.state == 'game' && core.gameStrategy == 1)
-                {
-                    value = mind.attention;
-                }
-                else if (root.state == 'game' && core.gameStrategy == 2)
-                {
-                    value = mind.meditation;
-                }
-                // console.log(value , core.dataThresholdMin);
-                if(value > core.dataThresholdMin)
-                {
-                    hero.velocity = map(value, core.dataThresholdMin,  hero.dataThresholdMax, hero.minVelocity,  hero.maxVelocity);
-                }
-                else if (core.backMove)
-                {
-                    hero.velocity = map(value, 0, core.dataThresholdMin,  hero.minVelocity1, hero.maxVelocity1);
-                }
-
-                hero.locationX += hero.velocity;
-
-                if(hero.locationX <= 0)
-                {
-                    hero.locationX = 0;
-                }
-
-                canvas.requestPaint();
-            }
-        }
-
-        PropertyAnimation
-        {
-            id: heroAnim;
-            target: hero;
-            property: "locationX";
-            to: 100;
-            duration: 1000
         }
     }
 
     function setState(state)
     {
-        root.state =state;
+        root.state = state;
         switch(state)
         {
         case "gameOver":
-            gameTimer.stop();
             canvas.canvasColor = Qt.rgba(0.0, 0.6, 0.0, 1);
             btnReset.enabled = false;
             btnStart.enabled = true;
             break;
 
         case "idle":
-            hero.locationX = 0;
             btnReset.enabled = false;
             btnStart.enabled = true;
-            heroAnim.stop();
-            gameTimer.stop();
+            gameTaskManager.stop();
+            gameProgressBar.value = 0.0;
             break;
 
         case "game":
-            hero.locationX = 0;
             btnReset.enabled = true;
             btnStart.enabled = false;
             canvas.canvasColor = Qt.rgba(0.6, 0.6, 0.6, 1);
@@ -215,22 +170,37 @@ Item {
         var list = gameTaskManager.getCompletedPath();
         if(list.length > 1)
         {
-            console.log(list);
-           // ctx.beginPath()
+            ctx.beginPath();
+            ctx.lineWidth = 10;
+            ctx.strokeStyle = "red";
             ctx.moveTo(list[0].x, list[0].y);
-            ctx.strokeStyle = "blue"
+
             for(var i = 1; i < list.length; i++)
             {
                 ctx.lineTo(list[i].x, list[i].y);
             }
-           // ctx.closePath()
-
             ctx.stroke();
+
+            ctx.closePath();
         }
     }
 
-    function map(x, in_min, in_max, out_min, out_max)
+    function drawGuidePaths(ctx)
     {
-        return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+        var list = gameTaskManager.getFullPath();
+
+        ctx.beginPath()
+        ctx.moveTo(list[0].x, list[0].y);
+        ctx.strokeStyle = "gray"
+        ctx.lineWidth = 8;
+
+        for(var i = 1; i < list.length; i++)
+        {
+            ctx.lineTo(list[i].x, list[i].y);
+        }
+        ctx.stroke();
+        ctx.closePath();
     }
+
+
 }

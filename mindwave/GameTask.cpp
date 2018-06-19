@@ -7,9 +7,15 @@ GameTask::GameTask()
 
 }
 
-GameTask::GameTask(const QVector<QPointF>& value)
+GameTask::GameTask(const QVector<QPointF>& value, const VelocityCalculator& velCalc)
 {
     path = value;
+    for(int i = 0; i<value.length(); i++)
+    {
+        fullPathList.append(value[i]);
+    }
+
+    velocityCalculator = velCalc;
 }
 
 void GameTask::setPath(const QVector<QPointF>& value)
@@ -21,8 +27,15 @@ void GameTask::start()
 {
     taskComplete = false;
     currentPointIndex = 0;
-    setPoints();
-    completedPath.push_back(path[0]);
+    completedPathList.clear();
+    setPoints();   
+    addCompletedPoint(path[0]);
+}
+
+void GameTask::addCompletedPoint(const QPointF& point)
+{
+    // completedPath.push_back(point);
+     completedPathList.append(point);
 }
 
 void GameTask::setPoints()
@@ -34,13 +47,9 @@ void GameTask::setPoints()
 
     velocityDirection = QVector2D(endPoint - startPoint);
     velocityDirection.normalize();
-
-   // qDebug()<<velocityDirection.x()<< velocityDirection.y();
-   // qDebug()<<"--------------";
-
 }
 
-void GameTask::update()
+void GameTask::update(int humanValue)
 {
     if(taskComplete)
     {
@@ -48,12 +57,14 @@ void GameTask::update()
     }
 
     QVector2D vec(endPoint - curPoint);
-    const float epsilon = 0.1;
+
+    auto velocity = velocityCalculator.calculate(humanValue);
+    const float epsilon = 1.1f * velocity;
 
     if(vec.length() < epsilon)
     {
         curPoint = endPoint;
-        completedPath.push_back(curPoint);
+        addCompletedPoint(curPoint);
 
         currentPointIndex++;
 
@@ -64,27 +75,40 @@ void GameTask::update()
         else
         {
             taskComplete = true;
+            emit taskCompleteEvent();
         }
     }
     else
     {
-        position.setX(position.x() + 1);
-        position.setY(position.y() + 1);
+        position.setX(position.x() + velocity);
+        position.setY(position.y() + velocity);
 
         curPoint.setX(startPoint.x() + position.x() * velocityDirection.x());
         curPoint.setY(startPoint.y() + position.y() * velocityDirection.y());
-        qDebug()<<curPoint.x()<<curPoint.y();
+
+      //  qDebug()<< curPoint.x()<< curPoint.y();
     }
 }
 
-QVector<QPointF> GameTask::getCompletedPath() const
+//QVector<QPointF> GameTask::getCompletedPath() const
+//{
+//    return completedPath;
+//}
+
+QVariantList GameTask::getCompletedPath() const
 {
-    return completedPath;
+    return completedPathList;
+}
+
+QVariantList GameTask::getFullPath() const
+{
+    return fullPathList;
 }
 
 void GameTask::stop()
 {
-
+    // completedPath.clear();
+     completedPathList.clear();
 }
 
 QPointF GameTask::getStartPoint() const

@@ -14,7 +14,8 @@ class GameTaskManager: public QObject
 public:
     GameTaskManager();
 
-    void setMindWaveClient(MindWave* mindWave);
+    Q_PROPERTY(float gameTime READ gameTime WRITE setGameTime NOTIFY gameTimeChanged)
+
 
     Q_INVOKABLE void start();
     Q_INVOKABLE void stop();
@@ -23,23 +24,38 @@ public:
     Q_INVOKABLE QPointF getStartPoint() const;
     Q_INVOKABLE QPointF getCurPoint() const;
     Q_INVOKABLE QVariantList getCompletedPath() const;
+    Q_INVOKABLE QVariantList getFullPath() const;
+
+    void setMindWaveClient(MindWave* mindWave);
+
+    float gameTime() const;
+    void setGameTime(float value);
 
 private:
-    QList<GameTask> gameTasks;
-    GameTask currentTask;
+    QList<GameTask*> gameTasks;
+    GameTask* currentTask = nullptr;
 
     int currentTaskIndex = 0;
     MindWave* mindWave = nullptr;
     bool running = false;
     QTimer *gameTimer;
 
+    float _gameTime;
+    int gameStartTime;
+
+
     const int gameTimerMills = 10;
+
+    void runTask();
 
 signals:
     void updateCanvas();
+    void gameTimeChanged();
+    void taskComleteEvent(int taskNumber, int allTaskCount);
 
 private slots:
     void onGameTimerUpdate();
+    void onTaskCompleteEvent();
 
 };
 

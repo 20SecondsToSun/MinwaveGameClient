@@ -45,7 +45,7 @@ void ClientService::startService()
 
   if(client)
   {
-      client->init();
+     // client->init();
   }
 }
 

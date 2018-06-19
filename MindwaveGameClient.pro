@@ -19,7 +19,8 @@ SOURCES += main.cpp \
     network/http/HTTPClient.cpp \
     mindwave/MindWave.cpp \
     mindwave/GameTask.cpp \
-    mindwave/GameTaskManager.cpp
+    mindwave/GameTaskManager.cpp \
+    mindwave/VelocityCalculator.cpp
 
 RESOURCES += qml.qrc
 
@@ -62,6 +63,7 @@ HEADERS += \
     network/http/HTTPClient.h \
     mindwave/MindWave.h \
     mindwave/GameTask.h \
-    mindwave/GameTaskManager.h
+    mindwave/GameTaskManager.h \
+    mindwave/VelocityCalculator.h
 
 DISTFILES +=

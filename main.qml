@@ -14,12 +14,6 @@ ApplicationWindow {
     property int marginTop:50;
     property int columnShift:400;
 
-
-    property int gameStrategy: 1; //1 - attention, 2 - meditation
-    property double dataThresholdMin: 60;
-    property bool backMove: true;
-
-
     Component.onCompleted:
     {
         aId.start();
