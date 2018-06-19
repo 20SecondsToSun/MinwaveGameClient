@@ -101,6 +101,9 @@ Item {
         y: 10;
     }
 
+    property double scaleFactor: 0.9375;
+
+
     Canvas
     {
         id: canvas;
@@ -110,10 +113,18 @@ Item {
         property var canvasColor:  Qt.rgba(0.6, 0.6, 0.6, 1);
         property string heroView: "qrc:/resources/car.jpg";
         property string roadView: "qrc:/resources/road.jpg";
+
+
         Component.onCompleted:
         {
             loadImage(heroView);
             loadImage(roadView);
+        }
+
+        onImageLoaded:
+        {
+
+            canvas.requestPaint();
         }
 
 
@@ -128,16 +139,38 @@ Item {
             if(gameTaskManager.isRunning())
             {
                 drawGuidePaths(ctx);
-                drawPrevPaths(ctx);
+               // drawPrevPaths(ctx);
 
-                var startPoint = gameTaskManager.getStartPoint();
+                var list = gameTaskManager.getCompletedPath();
 
-                ctx.beginPath();
                 ctx.lineWidth = 10;
                 ctx.strokeStyle = "red";
-                ctx.moveTo(startPoint.x, startPoint.y);
+                ctx.lineCap = "round";
+                ctx.lineJoin = "round";
+
+
+                if(list.length > 1)
+                {
+                    ctx.beginPath();
+                    ctx.moveTo(list[0].x * scaleFactor, list[0].y * scaleFactor);
+                    for(var i = 1; i < list.length; i++)
+                    {
+                        ctx.lineTo(list[i].x * scaleFactor, list[i].y * scaleFactor);
+                    }
+                }
+                else
+                {
+                    ctx.beginPath();
+                    var startPoint = gameTaskManager.getStartPoint();
+                    ctx.moveTo(startPoint.x * scaleFactor, startPoint.y * scaleFactor);
+                }
+
+
+                //ctx.beginPath();
+                ////ctx.lineWidth = 10;
+               // ctx.strokeStyle = "red";
                 var curPoint = gameTaskManager.getCurPoint();
-                ctx.lineTo(curPoint.x, curPoint.y);
+                ctx.lineTo(curPoint.x * scaleFactor, curPoint.y * scaleFactor);
                 ctx.stroke();
                 ctx.closePath();
                // ctx.drawImage(heroView, curPoint.x, curPoint.y);
@@ -198,13 +231,13 @@ Item {
         var list = gameTaskManager.getFullPath();
 
         ctx.beginPath()
-        ctx.moveTo(list[0].x, list[0].y);
+        ctx.moveTo(list[0].x * scaleFactor, list[0].y * scaleFactor);
         ctx.strokeStyle = "gray"
         ctx.lineWidth = 8;
 
         for(var i = 1; i < list.length; i++)
         {
-            ctx.lineTo(list[i].x, list[i].y);
+            ctx.lineTo(list[i].x * scaleFactor, list[i].y * scaleFactor);
         }
         ctx.stroke();
         ctx.closePath();
