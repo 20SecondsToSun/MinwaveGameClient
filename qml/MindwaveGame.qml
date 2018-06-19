@@ -105,17 +105,25 @@ Item {
     {
         id: canvas;
         width: 1200;
-        height: 600;
+        height: 675;
         y: 100;
         property var canvasColor:  Qt.rgba(0.6, 0.6, 0.6, 1);
         property string heroView: "qrc:/resources/car.jpg";
-        Component.onCompleted:loadImage(heroView);
+        property string roadView: "qrc:/resources/road.jpg";
+        Component.onCompleted:
+        {
+            loadImage(heroView);
+            loadImage(roadView);
+        }
+
+
 
         onPaint:
         {
             var ctx = getContext("2d");
             ctx.fillStyle = canvasColor;
             ctx.fillRect(0, 0, width, height);
+            ctx.drawImage(roadView, 0, 0);
 
             if(gameTaskManager.isRunning())
             {
@@ -132,7 +140,7 @@ Item {
                 ctx.lineTo(curPoint.x, curPoint.y);
                 ctx.stroke();
                 ctx.closePath();
-                ctx.drawImage(heroView, curPoint.x, curPoint.y);
+               // ctx.drawImage(heroView, curPoint.x, curPoint.y);
             }
         }
     }

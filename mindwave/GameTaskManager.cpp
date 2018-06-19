@@ -8,20 +8,28 @@ GameTaskManager::GameTaskManager()
     velocitycalculator.setLimits(0, 3, 60);
 
     QVector<QPointF> path;
-    path<<QPointF(150, 125)<<QPointF(260, 210)<<QPointF(125, 210)<<QPointF(235, 125)<<QPointF(194, 260)<<QPointF(150, 125);
-    gameTasks.append(new GameTask(path, velocitycalculator));
+    QPointF point1 = QPointF(224, 214);
+    QPointF point2 = QPointF(440, 252);
 
     path.clear();
-    path<<QPointF(100, 100)<<QPointF(200, 300)<<QPointF(200, 200)<<QPointF(200, 100);
+    path<<point1<<point2;
     gameTasks.append(new GameTask(path, velocitycalculator));
 
-    path.clear();
-    path<<QPointF(500, 300)<<QPointF(800, 200)<<QPointF(900, 400)<<QPointF(500, 400);
-    gameTasks.append(new GameTask(path, velocitycalculator));
+//    path.clear();
+//    path<<QPointF(150, 125)<<QPointF(260, 210)<<QPointF(125, 210)<<QPointF(235, 125)<<QPointF(194, 260)<<QPointF(150, 125);
+//    gameTasks.append(new GameTask(path, velocitycalculator));
 
-    path.clear();
-    path<<QPointF(200, 200)<<QPointF(200, 400)<<QPointF(500, 400)<<QPointF(500, 300);
-    gameTasks.append(new GameTask(path, velocitycalculator));
+//    path.clear();
+//    path<<QPointF(100, 100)<<QPointF(200, 300)<<QPointF(200, 200)<<QPointF(200, 100);
+//    gameTasks.append(new GameTask(path, velocitycalculator));
+
+//    path.clear();
+//    path<<QPointF(500, 300)<<QPointF(800, 200)<<QPointF(900, 400)<<QPointF(500, 400);
+//    gameTasks.append(new GameTask(path, velocitycalculator));
+
+//    path.clear();
+//    path<<QPointF(200, 200)<<QPointF(200, 400)<<QPointF(500, 400)<<QPointF(500, 300);
+//    gameTasks.append(new GameTask(path, velocitycalculator));
 
 
     gameTimer = new QTimer(this);

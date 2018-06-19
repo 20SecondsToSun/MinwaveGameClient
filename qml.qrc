@@ -9,5 +9,6 @@
         <file>qml/MindwaveGame.qml</file>
         <file>resources/cat.png</file>
         <file>resources/car.jpg</file>
+        <file>resources/road.jpg</file>
     </qresource>
 </RCC>
