@@ -6,7 +6,7 @@ import "qml"
 ApplicationWindow {
     visible: true
     width: 1400
-    height: 800
+    height: 1200
     title: qsTr("Mind wave client")
     id:core
 

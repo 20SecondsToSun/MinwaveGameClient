@@ -1,4 +1,4 @@
-QT += qml quick
+QT += qml quick charts widgets
 
 CONFIG += c++11
 
@@ -17,7 +17,9 @@ SOURCES += main.cpp \
     tools/Logger.cpp \
     network/ClientService.cpp \
     network/http/HTTPClient.cpp \
-    mindwave/MindWave.cpp
+    mindwave/MindWave.cpp \
+    mindwave/GameTask.cpp \
+    mindwave/GameTaskManager.cpp
 
 RESOURCES += qml.qrc
 
@@ -58,6 +60,8 @@ HEADERS += \
     tools/Logger.h \
     network/ClientService.h \
     network/http/HTTPClient.h \
-    mindwave/MindWave.h
+    mindwave/MindWave.h \
+    mindwave/GameTask.h \
+    mindwave/GameTaskManager.h
 
 DISTFILES +=

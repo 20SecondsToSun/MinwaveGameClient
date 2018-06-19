@@ -9,5 +9,7 @@
         <file>qml/MindwaveGame.qml</file>
         <file>qml/MindwaveHero.qml</file>
         <file>resources/car.png</file>
+        <file>resources/cat.png</file>
+        <file>qml/Task.qml</file>
     </qresource>
 </RCC>

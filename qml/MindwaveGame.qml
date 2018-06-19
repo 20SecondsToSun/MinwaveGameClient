@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 1.4
+import QtCharts 2.2
 
 Item {
     id:root;
@@ -10,6 +11,16 @@ Item {
         State{name: "idle";},
         State{name: "game";},
         State{name: "gameOver";}]
+
+    Connections
+    {
+        target:gameTaskManager;
+        onUpdateCanvas:
+        {
+            canvas.requestPaint();
+        }
+    }
+
 
     ColumnLayout
     {
@@ -62,7 +73,7 @@ Item {
     {
         id: canvas;
         width: 1200;
-        height: 200;
+        height: 600;
         y: 100;
         property var canvasColor:  Qt.rgba(0.6, 0.6, 0.6, 1);
         property string heroView: "qrc:/resources/car.png";
@@ -73,7 +84,23 @@ Item {
             var ctx = getContext("2d");
             ctx.fillStyle = canvasColor;
             ctx.fillRect(0, 0, width, height);
-            ctx.drawImage(canvas.heroView, hero.locationX, hero.locationY);
+
+            if(gameTaskManager.isRunning())
+            {               
+                drawPrevPaths(ctx);
+
+                var startPoint = gameTaskManager.getStartPoint();
+
+               // ctx.beginPath();
+                ctx.lineWidth = 10;
+                ctx.moveTo(startPoint.x, startPoint.y);
+                ctx.strokeStyle = "red"
+                var curPoint = gameTaskManager.getCurPoint();
+
+                ctx.lineTo(curPoint.x, curPoint.y);
+              //  ctx.closePath()
+                ctx.stroke();
+            }
         }
     }
 
@@ -121,7 +148,7 @@ Item {
                 {
                     value = mind.meditation;
                 }
-                console.log(value , core.dataThresholdMin);
+                // console.log(value , core.dataThresholdMin);
                 if(value > core.dataThresholdMin)
                 {
                     hero.velocity = map(value, core.dataThresholdMin,  hero.dataThresholdMax, hero.minVelocity,  hero.maxVelocity);
@@ -176,10 +203,29 @@ Item {
             hero.locationX = 0;
             btnReset.enabled = true;
             btnStart.enabled = false;
-            startGameTime = new Date().getTime();
-            gameTimer.start();
             canvas.canvasColor = Qt.rgba(0.6, 0.6, 0.6, 1);
+            gameTaskManager.start();
+
             break;
+        }
+    }
+
+    function drawPrevPaths(ctx)
+    {
+        var list = gameTaskManager.getCompletedPath();
+        if(list.length > 1)
+        {
+            console.log(list);
+           // ctx.beginPath()
+            ctx.moveTo(list[0].x, list[0].y);
+            ctx.strokeStyle = "blue"
+            for(var i = 1; i < list.length; i++)
+            {
+                ctx.lineTo(list[i].x, list[i].y);
+            }
+           // ctx.closePath()
+
+            ctx.stroke();
         }
     }
 

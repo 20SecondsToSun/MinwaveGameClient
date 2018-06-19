@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QQmlContext>
 #include "mindwave/MindWave.h"
+#include "mindwave/GameTaskManager.h"
 #include <core/IService.h>
 
 class TCPSocketClient;
@@ -24,6 +25,8 @@ private:
      SocketServerData socketServerData;
      QScopedPointer<MindWave>  mindWave;
      QScopedPointer<TCPSocketClient> client;
+     QScopedPointer<GameTaskManager> gameTaskManager;
+
 signals:
 
 public slots:

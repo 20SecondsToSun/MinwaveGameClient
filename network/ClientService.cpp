@@ -32,9 +32,15 @@ void ClientService::startService()
 
   if(!mindWave)
   {
-   // qDebug()<< this<<" init mindwave ";
     mindWave.reset(new MindWave);
     qmlContext->setContextProperty("mind", mindWave.data());
+  }
+
+  if(!gameTaskManager)
+  {
+     gameTaskManager.reset(new GameTaskManager);
+     gameTaskManager->setMindWaveClient(mindWave.data());
+     qmlContext->setContextProperty("gameTaskManager", gameTaskManager.data());
   }
 
   if(client)

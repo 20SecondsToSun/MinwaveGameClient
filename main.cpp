@@ -1,4 +1,5 @@
 #include <QGuiApplication>
+#include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlEngine>
 #include <QQmlContext>
@@ -16,7 +17,7 @@ int main(int argc, char *argv[])
     qRegisterMetaType<ConnectedAppData>("ConnectedAppData");
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    QGuiApplication app(argc, argv);
+    QApplication app(argc, argv);
     QQmlApplicationEngine engine;
 
     QScopedPointer<Logger> logger(new Logger);
