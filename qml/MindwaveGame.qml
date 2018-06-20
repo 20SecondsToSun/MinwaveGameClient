@@ -165,7 +165,6 @@ Item {
         id:consts;
     }
 
-
     Image
     {
         id:road
@@ -266,8 +265,8 @@ Item {
     {
         id:shadow
         y: consts.canvasY;
-       // width: consts.carWidth;
-       // height: consts.carHeight;
+        // width: consts.carWidth;
+        // height: consts.carHeight;
         visible: false;
         source: "qrc:/resources/shadow.png"
         smooth:true;
@@ -342,7 +341,7 @@ Item {
         var scaleFactor = consts.scaleFactor;
         var list = gameTaskManager.getFullPath();
 
-        ctx.beginPath()
+        ctx.beginPath();
         ctx.moveTo(list[0].x * scaleFactor, list[0].y * scaleFactor);
         ctx.strokeStyle =  consts.guideColor;
         ctx.lineWidth = consts.lineWidth;

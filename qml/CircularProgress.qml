@@ -15,10 +15,9 @@ Item
         onAttentionChanged:
         {
             nextAttentionValue = mind.attention / 100.0;
-
-
+            //canvasCirc.percentAttention = nextAttentionValue;
             attentionAnim.to = nextAttentionValue;
-            attentionAnim.duration = 1000;
+            attentionAnim.duration = 100;
             attentionAnim.start();
         }
     }
@@ -77,8 +76,9 @@ Item
         onPaint:
         {
             var colorBg = Qt.rgba(0., 164./255., 227.0 / 255., 0.3);
-            var colorLimit = Qt.rgba(232./ 255., 187./255., 6.0 / 255., 0.5);
-            var colorAttention = Qt.rgba(0., 164./255., 227.0 / 255., 1.3);
+            var colorLimit =  Qt.rgba(255./255.,52./255., 12./255., 1.);
+            var colorAttention = Qt.rgba(159./255., 217./255., 239.0 / 255., 0.9);
+
             var lineWidth = 10;
 
             var ctx = getContext("2d");
@@ -100,17 +100,27 @@ Item
             ctx.stroke();
             ctx.closePath();
 
-            ctx.strokeStyle = colorLimit;
-            ctx.beginPath();
-            ctx.arc(canvasCirc.centerWidth,
-                    canvasCirc.centerHeight,
-                    canvasCirc.radius,
-                    0,
-                    2*Math.PI * canvasCirc.percentLimit);
-            ctx.stroke();
-            ctx.closePath();
+//            ctx.strokeStyle = colorLimit;
+//            ctx.beginPath();
+//            ctx.arc(canvasCirc.centerWidth,
+//                    canvasCirc.centerHeight,
+//                    canvasCirc.radius,
+//                    0,
+//                    2*Math.PI * canvasCirc.percentLimit);
+//            ctx.stroke();
+//            ctx.closePath();
 
-            ctx.strokeStyle = colorAttention;
+            var col = colorAttention;
+            if(canvasCirc.percentAttention > canvasCirc.percentLimit )
+            {
+                col = colorLimit;
+            }
+            else
+            {
+                col = colorAttention;
+            }
+
+            ctx.strokeStyle = col;
             ctx.beginPath();
             ctx.arc(canvasCirc.centerWidth,
                     canvasCirc.centerHeight,
@@ -127,7 +137,7 @@ Item
             target: canvasCirc;
             property: "percentAttention";
             to: 100;
-            duration: 500
+            duration: 50
         }
     }
 }
