@@ -102,6 +102,7 @@ Item {
 
         RowLayout
         {
+            visible: false
             opacity: core.gameStrategy == 1? root.alphaInvis : 1;
             Text {
                 text: "Meditation";
@@ -142,6 +143,7 @@ Item {
 
         RowLayout
         {
+            visible: false
             spacing: 6;
             ExclusiveGroup { id: tabPositionGroup }
             RadioButton {
@@ -164,6 +166,7 @@ Item {
 
         RowLayout
         {
+            visible: false
             spacing: 6;
             Text {
                 text: "Difficult level";

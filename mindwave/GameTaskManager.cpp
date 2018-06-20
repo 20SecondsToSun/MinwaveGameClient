@@ -29,30 +29,38 @@ GameTaskManager::GameTaskManager()
     QPointF point19 = QPointF(1144, 616);
     QPointF point20 = QPointF(1002, 316);
 
+
+    //PATH0
+   // path.clear();
+   // path<<QPointF(200, 300)<<QPointF(400, 300)<<QPointF(600, 300)<<QPointF(600, 700);
+   // gameTasks.append(new GameTask(path, velocitycalculator));
+
+
+
     //PATH1
     path.clear();
     path<<point4<<point6<<point10<<point7<<point16<<point17;
     gameTasks.append(new GameTask(path, velocitycalculator));
 
-    //PATH2
-    path.clear();
-    path<<point17<<point20<<point3<<point2;
-    gameTasks.append(new GameTask(path, velocitycalculator));
+//    //PATH2
+//    path.clear();
+//    path<<point17<<point20<<point3<<point2;
+//    gameTasks.append(new GameTask(path, velocitycalculator));
 
-    //PATH3
-    path.clear();
-    path<<point2<<point1<<point6<<point5<<point9;
-    gameTasks.append(new GameTask(path, velocitycalculator));
+//    //PATH3
+//    path.clear();
+//    path<<point2<<point1<<point6<<point5<<point9;
+//    gameTasks.append(new GameTask(path, velocitycalculator));
 
-    //PATH4
-    path.clear();
-    path<<point9<<point13<<point10<<point14<<point15<<point16<<point17<<point18<<point19;
-    gameTasks.append(new GameTask(path, velocitycalculator));
+//    //PATH4
+//    path.clear();
+//    path<<point9<<point13<<point10<<point14<<point15<<point16<<point17<<point18<<point19;
+//    gameTasks.append(new GameTask(path, velocitycalculator));
 
-    //PATH5
-    path.clear();
-    path<<point19<<point12<<point11<<point20<<point8<<point10<<point1;
-    gameTasks.append(new GameTask(path, velocitycalculator));
+//    //PATH5
+//    path.clear();
+//    path<<point19<<point12<<point11<<point20<<point8<<point10<<point1;
+//    gameTasks.append(new GameTask(path, velocitycalculator));
 
     // penta
     //path.clear();
@@ -156,6 +164,11 @@ void GameTaskManager::onTaskCompleteEvent()
         stop();
         qDebug()<<"------------------------------- Game Finished -------------------------------";
     }
+}
+
+float GameTaskManager::getForwardVectorRotation() const
+{
+   return currentTask->getForwardVectorRotation();
 }
 
 QVariantList GameTaskManager::getCompletedPath() const

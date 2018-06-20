@@ -7,8 +7,7 @@
         <file>resources/config.json</file>
         <file>qml/MindwaveClient.qml</file>
         <file>qml/MindwaveGame.qml</file>
-        <file>resources/cat.png</file>
-        <file>resources/car.jpg</file>
         <file>resources/road.jpg</file>
+        <file>resources/car.png</file>
     </qresource>
 </RCC>

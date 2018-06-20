@@ -6,7 +6,7 @@ import "qml"
 ApplicationWindow {
     visible: true
     width: 1400
-    height: 1200
+    height: 1050
     title: qsTr("Mind wave client")
     id:core
 
@@ -36,7 +36,7 @@ ApplicationWindow {
     MindwaveGame
     {
         x:marginLeft;
-        y:marginTop + 280
+        y:marginTop + 180
         id:mindWaveGame
     }
 }

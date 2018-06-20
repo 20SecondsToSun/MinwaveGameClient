@@ -38,7 +38,7 @@ void MindWave::setMeditation(int value)
 void MindWave::setPoorSignalLevel(int value)
 {
     _poorSignalLevel = value;
-    if(value > 0 && value < 50)
+    if(value >= 0 && value < 50)
     {
         _poorSignalColor = "#009900";
     }

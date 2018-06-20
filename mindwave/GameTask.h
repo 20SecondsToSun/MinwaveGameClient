@@ -27,6 +27,7 @@ public:
     QVariantList getCompletedPath() const;
     QVariantList getFullPath() const;
    // QVector<QPointF> getFullPath() const;
+    float getForwardVectorRotation() const;
 
 private:
     QVector<QPointF> path;

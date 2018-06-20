@@ -25,11 +25,14 @@ public:
     Q_INVOKABLE QPointF getCurPoint() const;
     Q_INVOKABLE QVariantList getCompletedPath() const;
     Q_INVOKABLE QVariantList getFullPath() const;
+    Q_INVOKABLE float getForwardVectorRotation() const;
 
     void setMindWaveClient(MindWave* mindWave);
 
     float gameTime() const;
     void setGameTime(float value);
+
+
 
 private:
     QList<GameTask*> gameTasks;

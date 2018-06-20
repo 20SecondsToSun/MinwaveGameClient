@@ -1,6 +1,7 @@
 #include "GameTask.h"
 #include <QVector2D>
 #include <QDebug>
+#include <QtMath>
 
 GameTask::GameTask()
 {
@@ -120,5 +121,12 @@ QPointF GameTask::getCurPoint() const
 {
     return curPoint;
 }
+
+float GameTask::getForwardVectorRotation() const
+{
+    QVector2D forwardVec(endPoint - startPoint);
+    return qAtan2(forwardVec.y(), forwardVec.x());
+}
+
 
 

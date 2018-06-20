@@ -103,15 +103,15 @@ Item {
 
     property double scaleFactor: 0.9375;
 
-
-    Canvas
+     Canvas
     {
+      // visible:false
         id: canvas;
         width: 1200;
         height: 675;
         y: 100;
         property var canvasColor:  Qt.rgba(0.6, 0.6, 0.6, 1);
-        property string heroView: "qrc:/resources/car.jpg";
+        property string heroView: "qrc:/resources/car.png";
         property string roadView: "qrc:/resources/road.jpg";
 
 
@@ -165,17 +165,31 @@ Item {
                     ctx.moveTo(startPoint.x * scaleFactor, startPoint.y * scaleFactor);
                 }
 
-
-                //ctx.beginPath();
-                ////ctx.lineWidth = 10;
-               // ctx.strokeStyle = "red";
                 var curPoint = gameTaskManager.getCurPoint();
                 ctx.lineTo(curPoint.x * scaleFactor, curPoint.y * scaleFactor);
                 ctx.stroke();
                 ctx.closePath();
-               // ctx.drawImage(heroView, curPoint.x, curPoint.y);
+
+
+                car.x = curPoint.x * scaleFactor;
+                car.y = curPoint.y * scaleFactor;
+                car.visible = true;
+
+                var rotation = gameTaskManager.getForwardVectorRotation();
+                var degrees = rotation * 180 / Math.PI;
+                car.rotation = degrees - 90;
             }
         }
+    }
+
+    Image
+    {
+       id:car
+       visible: false;
+       y: 100;
+       width: 49; height: 88
+       source: "qrc:/resources/car.png"
+       transform: Translate { x: -car.width * 0.5; y: car.height * 0.5 }
     }
 
     function setState(state)
@@ -187,6 +201,7 @@ Item {
             canvas.canvasColor = Qt.rgba(0.0, 0.6, 0.0, 1);
             btnReset.enabled = false;
             btnStart.enabled = true;
+            car.visible = false;
             break;
 
         case "idle":
@@ -194,6 +209,7 @@ Item {
             btnStart.enabled = true;
             gameTaskManager.stop();
             gameProgressBar.value = 0.0;
+            car.visible = false;
             break;
 
         case "game":
@@ -201,6 +217,7 @@ Item {
             btnStart.enabled = false;
             canvas.canvasColor = Qt.rgba(0.6, 0.6, 0.6, 1);
             gameTaskManager.start();
+
 
             break;
         }
