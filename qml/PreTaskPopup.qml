@@ -38,7 +38,7 @@ Item {
         id: canvasPopup;
         width: 300;
         height: 300;
-        property var canvasColor:  Qt.rgba(0., 0.9, 0., 0.4);
+        property var canvasColor:  Qt.rgba(255./255.,52./255., 12./255., 0.6);
 
         Component.onCompleted:
         {

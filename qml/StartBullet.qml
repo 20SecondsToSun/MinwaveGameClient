@@ -39,4 +39,17 @@ Item
             ctx.fill();
         }
     }
+
+//    Image
+//    {
+//        id:bullet
+//       // visible: false;
+//        smooth:true;
+//        antialiasing: true
+//      //  y: consts.canvasY;
+//        width: 136 * consts.artScaleFactor
+//        height: 259 * consts.artScaleFactor
+//        source: "qrc:/resources/start.png"
+//        transform: Translate { x: -bullet.width * 0.5; y: -bullet.height}
+//    }
 }

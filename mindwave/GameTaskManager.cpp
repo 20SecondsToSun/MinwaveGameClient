@@ -29,6 +29,12 @@ GameTaskManager::GameTaskManager()
     QPointF point19 = QPointF(1144, 616);
     QPointF point20 = QPointF(1002, 316);
 
+    //penta
+    //path.clear();
+   // path<<QPointF(150, 125)<<QPointF(260, 210)<<QPointF(125, 210)<<QPointF(235, 125)<<QPointF(194, 260)<<QPointF(150, 125);
+   // gameTasks.append(new GameTask(path, velocitycalculator));
+
+
     //PATH1
     path.clear();
     path<<point4<<point6<<point10<<point7<<point16<<point17;
@@ -59,10 +65,6 @@ GameTaskManager::GameTaskManager()
     path<<point19<<point12<<point11<<point20<<point8<<point10<<point1;
     gameTasks.append(new GameTask(path, velocitycalculator));
 
-    //penta
-    //path.clear();
-    //path<<QPointF(150, 125)<<QPointF(260, 210)<<QPointF(125, 210)<<QPointF(235, 125)<<QPointF(194, 260)<<QPointF(150, 125);
-    //gameTasks.append(new GameTask(path, velocitycalculator));
 
     gameTimer = new QTimer(this);
     connect(gameTimer, SIGNAL(timeout()), this, SLOT(onGameTimerUpdate()));

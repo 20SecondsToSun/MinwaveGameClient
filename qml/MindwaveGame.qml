@@ -165,14 +165,28 @@ Item {
         id:consts;
     }
 
+
+    Image
+    {
+        id:road
+        // visible: false;
+        y: consts.canvasY;
+        width: 1200;
+        height: 675
+        source: "qrc:/resources/road1.jpg"
+        smooth:true;
+    }
+
     Canvas
     {
         id: canvas;
         width: 1200;
         height: 675;
         y: consts.canvasY;
+        antialiasing: true;
         property string heroView: "qrc:/resources/car.png";
-        property string roadView: "qrc:/resources/road.jpg";
+        property string roadView: "qrc:/resources/road1.jpg";
+        //smooth: true;
 
         Component.onCompleted:
         {
@@ -189,7 +203,8 @@ Item {
         {
             var scaleFactor = consts.scaleFactor;
             var ctx = getContext("2d");
-            ctx.drawImage(roadView, 0, 0);
+            //ctx.drawImage(roadView, 0, 0, 1200, 675);
+            ctx.clearRect(0, 0,1200, 675);
 
             if(gameTaskManager.isPreTaskState())
             {
@@ -249,14 +264,30 @@ Item {
 
     Image
     {
+        id:shadow
+        y: consts.canvasY;
+       // width: consts.carWidth;
+       // height: consts.carHeight;
+        visible: false;
+        source: "qrc:/resources/shadow.png"
+        smooth:true;
+        antialiasing :true;
+        transform: Translate { x: -shadow.width * 0.5; y: -shadow.height * 0.5 }
+    }
+
+    Image
+    {
         id:car
         visible: false;
         y: consts.canvasY;
         width: consts.carWidth;
         height: consts.carHeight;
-        source: "qrc:/resources/car.png"
+        source: "qrc:/resources/car2.png"
+        smooth:true;
+        antialiasing :true;
         transform: Translate { x: -car.width * 0.5; y: -car.height * 0.5 }
     }
+
 
     PreTaskPopup
     {
@@ -274,6 +305,7 @@ Item {
             btnReset.enabled = false;
             btnStart.enabled = true;
             car.visible = false;
+            shadow.visible = false;
             break;
 
         case "idle":
@@ -282,6 +314,7 @@ Item {
             gameTaskManager.stop();
             gameProgressBar.value = 0.0;
             car.visible = false;
+            shadow.visible = false;
             setComplitionProgressText(0, gameTaskManager.getTaskCount());
             pretaskPopup.visible = false;
             fullGameTimeText.visible = false;
@@ -306,7 +339,7 @@ Item {
         ctx.beginPath()
         ctx.moveTo(list[0].x * scaleFactor, list[0].y * scaleFactor);
         ctx.strokeStyle =  consts.guideColor;
-        ctx.lineWidth = 8;
+        ctx.lineWidth = consts.lineWidth;
 
         for(var i = 1; i < list.length; i++)
         {
@@ -326,10 +359,17 @@ Item {
         car.x = curPoint.x * scaleFactor;
         car.y = canvasY + curPoint.y * scaleFactor;
         car.visible = true;
+        car.scale = consts.artScaleFactor;
 
         var rotation = gameTaskManager.getForwardVectorRotation();
         var degrees = rotation * consts.toDegrees;
         car.rotation = degrees + consts.carAddAngle;
+
+        shadow.x = car.x;
+        shadow.y = car.y;
+        shadow.scale = car.scale;
+        shadow.visible = true;
+        shadow.rotation = car.rotation;
     }
 
     function setComplitionProgressText(taskNumber, allTaskCount)

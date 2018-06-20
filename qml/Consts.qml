@@ -2,25 +2,25 @@ import QtQuick 2.0
 
 Item {
 
-    property int lineWidth: 10;
+    property int lineWidth: 5;
     property string lineCap: "round";
     property string lineJoin: "round";
-    property int bulletSize: 20;
+    property int bulletSize: 10;
     property int finishBulletSize: finBulletSizeAnimateHelper.size;
 
-    property int carAddAngle: -90;
-    property int carWidth: 30;
-    property int carHeight: 54;
+    property int carAddAngle: -90 + 180;
+    property int carWidth: 64;//30;
+    property int carHeight: 124;//54;
 
     property double scaleFactor: 0.9375;
+    property double artScaleFactor: 0.925;
     property int canvasY: 100;
-    property var redColor: Qt.rgba(0.9, 0.0, 0.0, 1);
-
-    property var finishBulletColor:  Qt.rgba(0.6, 0.6, 0.6, 1.);
-    property var startBulletColor:  Qt.rgba(0.9, 0.0, 0.0, 1);
 
 
-    property var guideColor: Qt.rgba(0.6, 0.6, 0.6, animateHelper.opacity);
+    property var redColor: Qt.rgba(0., 164./255., 227.0 / 255., 1);
+    property var finishBulletColor: Qt.rgba(0., 164./255., 227.0 / 255., 1);
+    property var startBulletColor:  Qt.rgba(0., 164./255., 227.0 / 255., 1);
+    property var guideColor: Qt.rgba(0.9, 0.9, 0.9, animateHelper.opacity);
 
     property double toDegrees: 180 / Math.PI;
     Item {
@@ -30,7 +30,7 @@ Item {
             target: animateHelper;
             property: "opacity";
             from: 0;
-            to: 1;
+            to: 0.5;
             duration: 500 }
     }
 

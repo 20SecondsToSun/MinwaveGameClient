@@ -13,5 +13,9 @@
         <file>qml/StartBullet.qml</file>
         <file>qml/FinishBullet.qml</file>
         <file>qml/Consts.qml</file>
+        <file>resources/road1.jpg</file>
+        <file>resources/start.png</file>
+        <file>resources/car2.png</file>
+        <file>resources/shadow.png</file>
     </qresource>
 </RCC>
