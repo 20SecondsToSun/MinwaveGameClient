@@ -138,6 +138,8 @@ Item {
     }
 
     property double scaleFactor: 0.9375;
+    property int canvasY: 100;
+
 
     Canvas
     {
@@ -145,7 +147,7 @@ Item {
         id: canvas;
         width: 1200;
         height: 675;
-        y: 100;
+        y: canvasY;
         property var canvasColor:  Qt.rgba(0.6, 0.6, 0.6, 1);
         property string heroView: "qrc:/resources/car.png";
         property string roadView: "qrc:/resources/road.jpg";
@@ -222,11 +224,11 @@ Item {
     Image
     {
        id:car
-       visible: false;
-       y: 100;
-       width: 49; height: 88
+       visible: true;
+       y: canvasY;
+       width: 30; height: 54
        source: "qrc:/resources/car.png"
-       transform: Translate { x: -car.width * 0.5; y: car.height * 0.5 }
+       transform: Translate { x: -car.width * 0.5; y: -car.height * 0.5 }
     }
 
     function setState(state)
@@ -303,7 +305,7 @@ Item {
         var curPoint = gameTaskManager.getCurPoint();
 
         car.x = curPoint.x * scaleFactor;
-        car.y = curPoint.y * scaleFactor;
+        car.y = canvasY + curPoint.y * scaleFactor;
         car.visible = true;
 
         var rotation = gameTaskManager.getForwardVectorRotation();
