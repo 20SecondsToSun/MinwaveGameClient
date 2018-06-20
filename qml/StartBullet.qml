@@ -2,24 +2,14 @@ import QtQuick 2.0
 
 Item
 {
-    property double scaleFactor: 0.9375;
-    property int canvasY: 100;
-    property int bulletSize: 20;
-
+    Consts
+    {
+        id:consts;
+    }
 
     Connections
     {
         target:gameTaskManager;
-
-        onUpdateCanvas:
-        {
-
-        }
-
-        onTaskNumberChangedEvent:
-        {
-
-        }
 
         onAllTaskComleteEvent:
         {
@@ -30,18 +20,8 @@ Item
         {
             visible = true;
             var startPoint = gameTaskManager.getStartPoint();
-            x = startPoint.x * scaleFactor - bulletSize * 0.5;
-            y = canvasY + startPoint.y * scaleFactor - bulletSize * 0.5;
-        }
-
-        onTaskStartEvent:
-        {
-
-        }
-
-        onPreTaskCoundownUpdate:
-        {
-
+            x = startPoint.x * consts.scaleFactor - consts.bulletSize * 0.5;
+            y = consts.canvasY + startPoint.y * consts.scaleFactor - consts.bulletSize * 0.5;
         }
     }
 
@@ -50,13 +30,12 @@ Item
         id: canVasBullet;
         width: 50;
         height: 50;
-        property var canvasColor:  Qt.rgba(0., 0.9, 0., 0.4);
 
         onPaint:
         {
             var ctx = getContext("2d");
-            ctx.fillStyle = canvasColor;
-            ctx.ellipse(0, 0, bulletSize, bulletSize);
+            ctx.fillStyle = consts.startBulletColor;
+            ctx.ellipse(0, 0, consts.bulletSize, consts.bulletSize);
             ctx.fill();
         }
     }

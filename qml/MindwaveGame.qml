@@ -14,14 +14,14 @@ Item {
 
     Timer
     {
-           interval: 500;
-           running: true;
-           repeat: false
-           id:preloadTimer
-           onTriggered:
-           {
-               setComplitionProgressText(0, gameTaskManager.getTaskCount());
-           }
+        interval: 500;
+        running: true;
+        repeat: false
+        id:preloadTimer
+        onTriggered:
+        {
+            setComplitionProgressText(0, gameTaskManager.getTaskCount());
+        }
     }
 
     Component.onCompleted:
@@ -53,7 +53,7 @@ Item {
 
         onPreTaskStartEvent:
         {
-
+            consts.animateGuideColor();
         }
 
         onTaskStartEvent:
@@ -61,7 +61,6 @@ Item {
 
         }
     }
-
 
     ColumnLayout
     {
@@ -161,18 +160,17 @@ Item {
         y: -110;
     }
 
-    property double scaleFactor: 0.9375;
-    property int canvasY: 100;
-
+    Consts
+    {
+        id:consts;
+    }
 
     Canvas
     {
-       //visible:false
         id: canvas;
         width: 1200;
         height: 675;
-        y: canvasY;
-        property var canvasColor:  Qt.rgba(0.6, 0.6, 0.6, 1);
+        y: consts.canvasY;
         property string heroView: "qrc:/resources/car.png";
         property string roadView: "qrc:/resources/road.jpg";
 
@@ -189,30 +187,25 @@ Item {
 
         onPaint:
         {
+            var scaleFactor = consts.scaleFactor;
             var ctx = getContext("2d");
-            ctx.fillStyle = canvasColor;
-            ctx.fillRect(0, 0, width, height);
             ctx.drawImage(roadView, 0, 0);
-
 
             if(gameTaskManager.isPreTaskState())
             {
-               drawGuidePaths(ctx);
-               moveCar();
+                drawGuidePaths(ctx);
+                moveCar();
             }
 
             if(gameTaskManager.isRunning())
             {
                 drawGuidePaths(ctx);
-               // drawPrevPaths(ctx);
-
                 var list = gameTaskManager.getCompletedPath();
 
-                ctx.lineWidth = 10;
-                ctx.strokeStyle = "red";
-                ctx.lineCap = "round";
-                ctx.lineJoin = "round";
-
+                ctx.lineWidth = consts.lineWidth;
+                ctx.strokeStyle = consts.redColor;
+                ctx.lineCap = consts.lineCap;
+                ctx.lineJoin = consts.lineJoin;
 
                 if(list.length > 1)
                 {
@@ -236,33 +229,33 @@ Item {
                 ctx.closePath();
 
                 moveCar();
-
             }
         }
     }
 
     FinishBullet
     {
-       id:finishBullet
-       visible: false;
-       y: canvasY;
+        id:finishBullet
+        visible: false;
+        y: consts.canvasY;
     }
 
     StartBullet
     {
-       id:startBullet
-       visible: false;
-       y: canvasY;
+        id:startBullet
+        visible: false;
+        y: consts.canvasY;
     }
 
     Image
     {
-       id:car
-       visible: false;
-       y: canvasY;
-       width: 30; height: 54
-       source: "qrc:/resources/car.png"
-       transform: Translate { x: -car.width * 0.5; y: -car.height * 0.5 }
+        id:car
+        visible: false;
+        y: consts.canvasY;
+        width: consts.carWidth;
+        height: consts.carHeight;
+        source: "qrc:/resources/car.png"
+        transform: Translate { x: -car.width * 0.5; y: -car.height * 0.5 }
     }
 
     PreTaskPopup
@@ -272,14 +265,12 @@ Item {
         y:100 + 10;
     }
 
-
     function setState(state)
     {
         root.state = state;
         switch(state)
         {
         case "gameOver":
-            canvas.canvasColor = Qt.rgba(0.0, 0.6, 0.0, 1);
             btnReset.enabled = false;
             btnStart.enabled = true;
             car.visible = false;
@@ -299,8 +290,7 @@ Item {
         case "game":
             btnReset.enabled = true;
             btnStart.enabled = false;
-             gameProgressBar.value = 0.0;
-            canvas.canvasColor = Qt.rgba(0.6, 0.6, 0.6, 1);
+            gameProgressBar.value = 0.0;
             gameTaskManager.start();
             setComplitionProgressText(0, gameTaskManager.getTaskCount());
             fullGameTimeText.visible = false;
@@ -308,33 +298,14 @@ Item {
         }
     }
 
-    function drawPrevPaths(ctx)
-    {
-        var list = gameTaskManager.getCompletedPath();
-        if(list.length > 1)
-        {
-            ctx.beginPath();
-            ctx.lineWidth = 10;
-            ctx.strokeStyle = "red";
-            ctx.moveTo(list[0].x, list[0].y);
-
-            for(var i = 1; i < list.length; i++)
-            {
-                ctx.lineTo(list[i].x, list[i].y);
-            }
-            ctx.stroke();
-
-            ctx.closePath();
-        }
-    }
-
     function drawGuidePaths(ctx)
     {
+        var scaleFactor = consts.scaleFactor;
         var list = gameTaskManager.getFullPath();
 
         ctx.beginPath()
         ctx.moveTo(list[0].x * scaleFactor, list[0].y * scaleFactor);
-        ctx.strokeStyle = "gray"
+        ctx.strokeStyle =  consts.guideColor;
         ctx.lineWidth = 8;
 
         for(var i = 1; i < list.length; i++)
@@ -347,6 +318,9 @@ Item {
 
     function moveCar()
     {
+        var scaleFactor = consts.scaleFactor;
+        var canvasY = consts.canvasY;
+
         var curPoint = gameTaskManager.getCurPoint();
 
         car.x = curPoint.x * scaleFactor;
@@ -354,8 +328,8 @@ Item {
         car.visible = true;
 
         var rotation = gameTaskManager.getForwardVectorRotation();
-        var degrees = rotation * 180 / Math.PI;
-        car.rotation = degrees - 90;
+        var degrees = rotation * consts.toDegrees;
+        car.rotation = degrees + consts.carAddAngle;
     }
 
     function setComplitionProgressText(taskNumber, allTaskCount)

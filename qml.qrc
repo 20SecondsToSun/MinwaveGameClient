@@ -12,5 +12,6 @@
         <file>qml/PreTaskPopup.qml</file>
         <file>qml/StartBullet.qml</file>
         <file>qml/FinishBullet.qml</file>
+        <file>qml/Consts.qml</file>
     </qresource>
 </RCC>
