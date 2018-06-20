@@ -47,6 +47,18 @@ Item {
         onAllTaskComleteEvent:
         {
             setState("gameOver");
+            fullGameTimeText.visible = true;
+            fullGameTimeText.text = "Your full time " + (gameTaskManager. getAllTaskCleanTime()).toFixed(1);
+        }
+
+        onPreTaskStartEvent:
+        {
+
+        }
+
+        onTaskStartEvent:
+        {
+
         }
     }
 
@@ -137,13 +149,25 @@ Item {
         y: 10;
     }
 
+    Text
+    {
+        visible: false;
+        id:fullGameTimeText;
+        text: "Yor Full Time : ";
+        font.family: "Helvetica";
+        font.pixelSize: 35;
+        color: "#009900";
+        x: 540;
+        y: -110;
+    }
+
     property double scaleFactor: 0.9375;
     property int canvasY: 100;
 
 
     Canvas
     {
-      // visible:false
+       //visible:false
         id: canvas;
         width: 1200;
         height: 675;
@@ -151,7 +175,6 @@ Item {
         property var canvasColor:  Qt.rgba(0.6, 0.6, 0.6, 1);
         property string heroView: "qrc:/resources/car.png";
         property string roadView: "qrc:/resources/road.jpg";
-
 
         Component.onCompleted:
         {
@@ -161,11 +184,8 @@ Item {
 
         onImageLoaded:
         {
-
             canvas.requestPaint();
         }
-
-
 
         onPaint:
         {
@@ -221,15 +241,37 @@ Item {
         }
     }
 
+    FinishBullet
+    {
+       id:finishBullet
+       visible: false;
+       y: canvasY;
+    }
+
+    StartBullet
+    {
+       id:startBullet
+       visible: false;
+       y: canvasY;
+    }
+
     Image
     {
        id:car
-       visible: true;
+       visible: false;
        y: canvasY;
        width: 30; height: 54
        source: "qrc:/resources/car.png"
        transform: Translate { x: -car.width * 0.5; y: -car.height * 0.5 }
     }
+
+    PreTaskPopup
+    {
+        id:pretaskPopup
+        x:canvas.width - 300 - 10;
+        y:100 + 10;
+    }
+
 
     function setState(state)
     {
@@ -250,6 +292,8 @@ Item {
             gameProgressBar.value = 0.0;
             car.visible = false;
             setComplitionProgressText(0, gameTaskManager.getTaskCount());
+            pretaskPopup.visible = false;
+            fullGameTimeText.visible = false;
             break;
 
         case "game":
@@ -259,6 +303,7 @@ Item {
             canvas.canvasColor = Qt.rgba(0.6, 0.6, 0.6, 1);
             gameTaskManager.start();
             setComplitionProgressText(0, gameTaskManager.getTaskCount());
+            fullGameTimeText.visible = false;
             break;
         }
     }

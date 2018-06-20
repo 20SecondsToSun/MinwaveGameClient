@@ -50,7 +50,7 @@ GameTaskManager::GameTaskManager()
     //PATH3
     path.clear();
     path<<point2<<point1<<point6<<point5<<point9;
-    gameTasks.append(new GameTask(path, velocitycalculator));
+    //gameTasks.append(new GameTask(path, velocitycalculator));
 
 //    //PATH4
 //    path.clear();
@@ -105,6 +105,8 @@ float GameTaskManager::gameTime() const
 void GameTaskManager::start()
 {  
     currentTaskIndex = 0;
+    emit taskNumberChangedEvent(currentTaskIndex);
+
     allTaskCleanTime = 0;
     runPreTask();
 }
@@ -123,11 +125,13 @@ void GameTaskManager::runPreTask()
     preTaskState = true;
 
     running = false;
+    emit preTaskStartEvent();
 }
 
 void GameTaskManager::onPreTaskTimerUpdate()
 {
     int newPreGameTime = QDateTime::currentMSecsSinceEpoch() - preTaskStartTime;
+    emit preTaskCoundownUpdate((preTaskMills - newPreGameTime) / 1000.0f);
 
     if(newPreGameTime < preTaskMills)
     {
@@ -153,6 +157,7 @@ void GameTaskManager::runTask()
     currentTask->start();
     connect(currentTask, SIGNAL(taskCompleteEvent()), this, SLOT(onTaskCompleteEvent()));
     gameTimer->start(gameTimerMills);
+    emit taskStartEvent();
 }
 
 void GameTaskManager::stop()
@@ -192,6 +197,11 @@ QPointF GameTaskManager::getCurPoint() const
    return currentTask->getCurPoint();
 }
 
+QPointF GameTaskManager::getEndPoint() const
+{
+   return currentTask->getEndPoint();
+}
+
 void GameTaskManager::onTaskCompleteEvent()
 {
      qDebug()<<"-------------------------------onTaskCompleteEvent-------------------------------";
@@ -199,6 +209,7 @@ void GameTaskManager::onTaskCompleteEvent()
 
     if(++currentTaskIndex < gameTasks.length())
     {
+        emit taskNumberChangedEvent(currentTaskIndex);
         emit taskComleteEvent(currentTaskIndex, gameTasks.length());
         gameTimer->stop();
         runPreTask();
@@ -210,6 +221,11 @@ void GameTaskManager::onTaskCompleteEvent()
         stop();
         qDebug()<<"------------------------------- Game Finished -------------------------------";
     }
+}
+
+float GameTaskManager::getAllTaskCleanTime() const
+{
+   return allTaskCleanTime;
 }
 
 float GameTaskManager::getForwardVectorRotation() const

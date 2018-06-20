@@ -23,12 +23,16 @@ public:
     Q_INVOKABLE bool isRunning() const;
     Q_INVOKABLE bool isPreTaskState() const;
 
-    Q_INVOKABLE QPointF getStartPoint() const;
+    Q_INVOKABLE QPointF getStartPoint() const;    
     Q_INVOKABLE QPointF getCurPoint() const;
+    Q_INVOKABLE QPointF getEndPoint() const;
     Q_INVOKABLE QVariantList getCompletedPath() const;
     Q_INVOKABLE QVariantList getFullPath() const;
     Q_INVOKABLE float getForwardVectorRotation() const;
+    Q_INVOKABLE float getAllTaskCleanTime() const;
     Q_INVOKABLE int getTaskCount() const;
+
+
 
     void setMindWaveClient(MindWave* mindWave);
 
@@ -66,6 +70,11 @@ signals:
     void gameTimeChanged();
     void taskComleteEvent(int taskNumber, int allTaskCount);
     void allTaskComleteEvent();
+
+    void taskStartEvent();
+    void preTaskStartEvent();
+    void taskNumberChangedEvent(int taskNumber);
+    void preTaskCoundownUpdate(float time);
 
 private slots:
     void onGameTimerUpdate();

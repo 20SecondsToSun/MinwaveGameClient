@@ -80,7 +80,7 @@ Item {
                         color: "lightgray"
                         border.color: "gray"
                         border.width: 1
-                        implicitWidth: 400
+                        implicitWidth: 300
                         implicitHeight: 24
                     }
                     progress: Rectangle {

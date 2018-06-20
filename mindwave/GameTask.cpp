@@ -133,6 +133,11 @@ QPointF GameTask::getCurPoint() const
     return curPoint;
 }
 
+QPointF GameTask::getEndPoint() const
+{
+    return path.last();
+}
+
 float GameTask::getForwardVectorRotation() const
 {
     QVector2D forwardVec(endPoint - startPoint);

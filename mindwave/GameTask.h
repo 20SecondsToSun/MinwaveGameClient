@@ -21,8 +21,9 @@ public:
 
     void update(int humanValue);    
 
-    QPointF getStartPoint() const;
+    QPointF getStartPoint() const;    
     QPointF getCurPoint() const;
+    QPointF getEndPoint() const;
     int getCompletionTime() const;
 
     void getCurrentPoint();
