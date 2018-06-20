@@ -12,6 +12,23 @@ Item {
         State{name: "game";},
         State{name: "gameOver";}]
 
+    Timer
+    {
+           interval: 500;
+           running: true;
+           repeat: false
+           id:preloadTimer
+           onTriggered:
+           {
+               setComplitionProgressText(0, gameTaskManager.getTaskCount());
+           }
+    }
+
+    Component.onCompleted:
+    {
+
+    }
+
     Connections
     {
         target:gameTaskManager;
@@ -24,6 +41,12 @@ Item {
         onTaskComleteEvent:
         {
             gameProgressBar.value = taskNumber * 1.0/allTaskCount;
+            setComplitionProgressText(taskNumber, allTaskCount);
+        }
+
+        onAllTaskComleteEvent:
+        {
+            setState("gameOver");
         }
     }
 
@@ -64,27 +87,40 @@ Item {
         }
     }
 
-    RowLayout
+    ColumnLayout
     {
         x: 540;
-        y: 10;
-        spacing: 6;
-        ProgressBar
+        spacing: 20;
+        RowLayout {
+            spacing: 6;
+            Text {
+                id:completionText
+                text: "Completion 0/0";
+                font.family: "Helvetica";
+                font.pixelSize: 18;
+                color: "#009900";
+            }
+        }
+        RowLayout
         {
-            id:gameProgressBar;
-            value: .0
-            style: ProgressBarStyle {
-                background: Rectangle {
-                    radius: 2
-                    color: "lightgray"
-                    border.color: "gray"
-                    border.width: 1
-                    implicitWidth: 200
-                    implicitHeight: 24
-                }
-                progress: Rectangle {
-                    color: "#009900"
-                    border.color: "steelblue"
+            spacing: 6;
+            ProgressBar
+            {
+                id:gameProgressBar;
+                value: .0
+                style: ProgressBarStyle {
+                    background: Rectangle {
+                        radius: 2
+                        color: "lightgray"
+                        border.color: "gray"
+                        border.width: 1
+                        implicitWidth: 200
+                        implicitHeight: 24
+                    }
+                    progress: Rectangle {
+                        color: "#009900"
+                        border.color: "steelblue"
+                    }
                 }
             }
         }
@@ -103,7 +139,7 @@ Item {
 
     property double scaleFactor: 0.9375;
 
-     Canvas
+    Canvas
     {
       // visible:false
         id: canvas;
@@ -135,6 +171,13 @@ Item {
             ctx.fillStyle = canvasColor;
             ctx.fillRect(0, 0, width, height);
             ctx.drawImage(roadView, 0, 0);
+
+
+            if(gameTaskManager.isPreTaskState())
+            {
+               drawGuidePaths(ctx);
+               moveCar();
+            }
 
             if(gameTaskManager.isRunning())
             {
@@ -170,14 +213,8 @@ Item {
                 ctx.stroke();
                 ctx.closePath();
 
+                moveCar();
 
-                car.x = curPoint.x * scaleFactor;
-                car.y = curPoint.y * scaleFactor;
-                car.visible = true;
-
-                var rotation = gameTaskManager.getForwardVectorRotation();
-                var degrees = rotation * 180 / Math.PI;
-                car.rotation = degrees - 90;
             }
         }
     }
@@ -210,15 +247,16 @@ Item {
             gameTaskManager.stop();
             gameProgressBar.value = 0.0;
             car.visible = false;
+            setComplitionProgressText(0, gameTaskManager.getTaskCount());
             break;
 
         case "game":
             btnReset.enabled = true;
             btnStart.enabled = false;
+             gameProgressBar.value = 0.0;
             canvas.canvasColor = Qt.rgba(0.6, 0.6, 0.6, 1);
             gameTaskManager.start();
-
-
+            setComplitionProgressText(0, gameTaskManager.getTaskCount());
             break;
         }
     }
@@ -260,5 +298,21 @@ Item {
         ctx.closePath();
     }
 
+    function moveCar()
+    {
+        var curPoint = gameTaskManager.getCurPoint();
 
+        car.x = curPoint.x * scaleFactor;
+        car.y = curPoint.y * scaleFactor;
+        car.visible = true;
+
+        var rotation = gameTaskManager.getForwardVectorRotation();
+        var degrees = rotation * 180 / Math.PI;
+        car.rotation = degrees - 90;
+    }
+
+    function setComplitionProgressText(taskNumber, allTaskCount)
+    {
+        completionText.text = "Completion " + taskNumber + "/" + allTaskCount;
+    }
 }

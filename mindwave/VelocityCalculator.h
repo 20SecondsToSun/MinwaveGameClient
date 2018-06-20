@@ -33,13 +33,7 @@ private:
     float minBackVelocity =  -5;
     float maxBackVelocity =  -1;
 
-    bool backMove = false;
-
-    template <typename T>
-    T map(T value, T minIn, T maxIn, T minOut, T maxOut)
-    {
-        return (value - minIn) * (maxOut - minOut) / (maxIn - minIn) + minOut;
-    }
+    bool backMove = false;   
 };
 
 #endif // VELOCITYCALCULATOR_H

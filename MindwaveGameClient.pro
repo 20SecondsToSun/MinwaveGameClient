@@ -20,7 +20,8 @@ SOURCES += main.cpp \
     mindwave/MindWave.cpp \
     mindwave/GameTask.cpp \
     mindwave/GameTaskManager.cpp \
-    mindwave/VelocityCalculator.cpp
+    mindwave/VelocityCalculator.cpp \
+    tools/MathTools.cpp
 
 RESOURCES += qml.qrc
 
@@ -64,6 +65,7 @@ HEADERS += \
     mindwave/MindWave.h \
     mindwave/GameTask.h \
     mindwave/GameTaskManager.h \
-    mindwave/VelocityCalculator.h
+    mindwave/VelocityCalculator.h \
+    tools/MathTools.h
 
 DISTFILES +=

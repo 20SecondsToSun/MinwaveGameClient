@@ -1,4 +1,5 @@
 #include "VelocityCalculator.h"
+#include "tools/MathTools.h"
 
 VelocityCalculator::VelocityCalculator()
 {
@@ -42,11 +43,11 @@ float VelocityCalculator::calculate(int humanValue)
 
     if(humanValue > humanValueThresholdMin)
     {
-        velocity = map<float>(humanValue, humanValueThresholdMin,  humanValueThresholdMax, minVelocity,  maxVelocity);
+        velocity = MathTools::map<float>(humanValue, humanValueThresholdMin,  humanValueThresholdMax, minVelocity,  maxVelocity);
     }
     else if (backMove)
     {
-        velocity =  map<float>(humanValue, 0, humanValueThresholdMin,  minBackVelocity, maxBackVelocity);
+        velocity = MathTools::map<float>(humanValue, 0, humanValueThresholdMin,  minBackVelocity, maxBackVelocity);
     }
 
     return velocity;

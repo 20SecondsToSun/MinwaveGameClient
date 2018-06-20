@@ -14,13 +14,16 @@ public:
     GameTask();
     GameTask(const QVector<QPointF>& value, const VelocityCalculator& velCalc);
     void setPath(const QVector<QPointF>& value);
-    void start();
 
-    void update(int humanValue);
+    void init();
+    void start();
     void stop();
+
+    void update(int humanValue);    
 
     QPointF getStartPoint() const;
     QPointF getCurPoint() const;
+    int getCompletionTime() const;
 
     void getCurrentPoint();
     //QVector<QPointF> getCompletedPath() const;
@@ -33,6 +36,7 @@ private:
     QVector<QPointF> path;
     QPointF curPoint, startPoint, endPoint, position;
     int currentPointIndex = 0;
+    int taskStartTime;
     bool taskComplete = false;
     //QVector<QPointF> completedPath, fullPath;
     QVariantList completedPathList, fullPathList;

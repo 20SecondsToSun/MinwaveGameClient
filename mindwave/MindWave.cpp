@@ -2,6 +2,7 @@
 #include <QDebug>
 #include <QJsonDocument.h>
 #include <QJsonObject.h>
+#include "tools/MathTools.h"
 
 MindWave::MindWave()
 {
@@ -96,6 +97,24 @@ void MindWave::parse(const QString& data)
         setMeditation(RandMed);
     }
    //  qDebug()<<data;
-    setPoorSignalLevel(jsonObj.value("poorSignalLevel").toInt());
+    int signalValue = jsonObj.value("poorSignalLevel").toInt();
+    int signalRemappedValue = MathTools::map<float>(signalValue, 0,  200, 100,  0);
+
+    setPoorSignalLevel(signalRemappedValue);
+
     qDebug()<<"attention: "<<_attention <<"meditation: "<<_meditation <<"poorSignalLevel: "<<_poorSignalLevel;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

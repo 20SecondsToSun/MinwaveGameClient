@@ -2,6 +2,7 @@
 #include <QVector2D>
 #include <QDebug>
 #include <QtMath>
+#include <QDateTime>
 
 GameTask::GameTask()
 {
@@ -24,13 +25,18 @@ void GameTask::setPath(const QVector<QPointF>& value)
     path = value;
 }
 
-void GameTask::start()
+void GameTask::init()
 {
     taskComplete = false;
     currentPointIndex = 0;
     completedPathList.clear();
     setPoints();   
     addCompletedPoint(path[0]);
+}
+
+void GameTask::start()
+{
+   taskStartTime = QDateTime::currentMSecsSinceEpoch();
 }
 
 void GameTask::addCompletedPoint(const QPointF& point)
@@ -110,6 +116,11 @@ void GameTask::stop()
 {
     // completedPath.clear();
      completedPathList.clear();
+}
+
+int GameTask::getCompletionTime() const
+{
+    return QDateTime::currentMSecsSinceEpoch() - taskStartTime;
 }
 
 QPointF GameTask::getStartPoint() const

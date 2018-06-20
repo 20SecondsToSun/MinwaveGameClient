@@ -36,7 +36,7 @@ private:
      int _lastAttention = 0;
      int _lastMeditation = 0;
 
-     int _poorSignalLevel = 200;
+     int _poorSignalLevel = 0;
 
      QString _poorSignalColor = "black";
 
