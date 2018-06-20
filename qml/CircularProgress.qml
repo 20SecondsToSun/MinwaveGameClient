@@ -61,7 +61,6 @@ Item
 
     Canvas
     {
-
         id: canvasCirc;
         width: 250;
         height: 250;
@@ -72,13 +71,11 @@ Item
         property real percentLimit: 0.0;
         property real percentAttention: 0.0;
 
-
         onPaint:
         {
             var colorBg = Qt.rgba(0., 164./255., 227.0 / 255., 0.3);
             var colorLimit =  Qt.rgba(255./255.,52./255., 12./255., 1.);
             var colorAttention = Qt.rgba(159./255., 217./255., 239.0 / 255., 0.9);
-
             var lineWidth = 10;
 
             var ctx = getContext("2d");
@@ -96,7 +93,7 @@ Item
                     canvasCirc.centerHeight,
                     canvasCirc.radius,
                     0,
-                    2*Math.PI);
+                    2 * Math.PI);
             ctx.stroke();
             ctx.closePath();
 
@@ -126,7 +123,7 @@ Item
                     canvasCirc.centerHeight,
                     canvasCirc.radius,
                     0,
-                    2*Math.PI * canvasCirc.percentAttention);
+                    2 * Math.PI * canvasCirc.percentAttention);
             ctx.stroke();
             ctx.closePath();
         }

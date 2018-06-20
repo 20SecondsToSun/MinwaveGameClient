@@ -39,7 +39,7 @@ Item {
 
     ColumnLayout
     {
-        spacing: 20;
+        spacing: 10;
         RowLayout {
             spacing: 6;
             Text {
@@ -59,21 +59,18 @@ Item {
                 font.pixelSize: 12
                 color: "#999999"
             }
-        }
 
-        RowLayout
-        {
-            opacity: 0.2;//core.gameStrategy == 2? root.alphaInvis : 1;
             Text {
                 text: "Attention";
                 font.family: "Helvetica"
                 font.pixelSize: 12
                 color: "#990000"
             }
-            spacing: 6;
+            //spacing: 6;
             ProgressBar
             {
                 id:attentionProgressBar;
+                opacity:0.2
                 value: 0.0;
                 style: ProgressBarStyle {
                     background: Rectangle {
@@ -182,7 +179,7 @@ Item {
                 exclusiveGroup: tabDiff
                 onCheckedChanged:
                 {
-                   resetParams();
+                    resetParams();
                 }
             }
 
@@ -193,7 +190,7 @@ Item {
                 exclusiveGroup: tabDiff
                 onCheckedChanged:
                 {
-                   resetParams();
+                    resetParams();
                 }
             }
             RadioButton {
@@ -203,7 +200,7 @@ Item {
                 exclusiveGroup: tabDiff
                 onCheckedChanged:
                 {
-                   resetParams();
+                    resetParams();
                 }
             }
             RadioButton {
@@ -213,7 +210,7 @@ Item {
                 exclusiveGroup: tabDiff
                 onCheckedChanged:
                 {
-                   resetParams();
+                    resetParams();
                 }
             }
             RadioButton {
@@ -223,7 +220,7 @@ Item {
                 exclusiveGroup: tabDiff
                 onCheckedChanged:
                 {
-                   resetParams();
+                    resetParams();
                 }
             }
         }

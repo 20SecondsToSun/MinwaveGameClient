@@ -249,21 +249,21 @@ Item {
 
     FinishBullet
     {
-        id:finishBullet
+        id: finishBullet;
         visible: false;
         y: consts.canvasY;
     }
 
     StartBullet
     {
-        id:startBullet
+        id: startBullet;
         visible: false;
         y: consts.canvasY;
     }
 
     Image
     {
-        id:shadow
+        id: shadow;
         y: consts.canvasY;
         // width: consts.carWidth;
         // height: consts.carHeight;
@@ -311,6 +311,9 @@ Item {
             btnStart.enabled = true;
             car.visible = false;
             shadow.visible = false;
+            finishBullet.visible = false;
+            circProgress.visible = false;
+            startBullet.visible = false;
             break;
 
         case "idle":
@@ -320,6 +323,9 @@ Item {
             gameProgressBar.value = 0.0;
             car.visible = false;
             shadow.visible = false;
+            startBullet.visible = false;
+            finishBullet.visible = false;
+            circProgress.visible = false;
             setComplitionProgressText(0, gameTaskManager.getTaskCount());
             pretaskPopup.visible = false;
             fullGameTimeText.visible = false;

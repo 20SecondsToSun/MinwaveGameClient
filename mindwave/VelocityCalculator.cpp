@@ -38,7 +38,7 @@ float VelocityCalculator::calculate(int humanValue)
     int min = 50;
     int max = 100;
 
-  //  humanValue = 100;// qrand() % ((max + 1) - min) + min;
+   // humanValue = 100;// qrand() % ((max + 1) - min) + min;
 
     float velocity = 0.0;
 

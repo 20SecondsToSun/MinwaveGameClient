@@ -50,8 +50,8 @@ Item
         antialiasing: true
         //  y: consts.canvasY;
         width: 136 * consts.artScaleFactor
-        height: 259 * consts.artScaleFactor
-        source: "qrc:/resources/start.png"
+        height: 164 * consts.artScaleFactor
+        source: "qrc:/resources/start2.png"
         // transform: Translate {  x: -bullet.width * 0.5; y: -bullet.height}
     }
 }

@@ -14,20 +14,34 @@ ApplicationWindow {
     property int marginTop:10;
     property int columnShift:400;
 
+
     Component.onCompleted:
     {
-        aId.start();
+      //
+        //aId.start();
+
+        core.showFullScreen();
     }
 
-//    SocketClient
-//    {
-//        x:marginLeft;
-//        y:marginTop
-//        id:sockets
-//    }
+    //    SocketClient
+    //    {
+    //        x:marginLeft;
+    //        y:marginTop
+    //        id:sockets
+    //    }
 
     MindwaveClient
     {
+       // anchors.fill: parent
+            focus: true
+
+        Keys.onPressed:
+        {
+            if (event.key == Qt.Key_0) {
+                console.log("move left");
+                Qt.quit();
+            }
+        }
         x:marginLeft// + columnShift;
         y:marginTop
         id:mindWave
@@ -36,7 +50,7 @@ ApplicationWindow {
     MindwaveGame
     {
         x:marginLeft;
-        y:marginTop + 130
+        y:marginTop + 90
         id:mindWaveGame
     }
 }
