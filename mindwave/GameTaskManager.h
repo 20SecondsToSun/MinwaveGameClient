@@ -32,14 +32,15 @@ public:
     Q_INVOKABLE float getAllTaskCleanTime() const;
     Q_INVOKABLE int getTaskCount() const;
 
-
-
     void setMindWaveClient(MindWave* mindWave);
 
     float gameTime() const;
     void setGameTime(float value);
 
 private:
+    const int gameTimerMills = 10;
+    const int preTaskMills = 3 * 1000;
+
     QList<GameTask*> gameTasks;
     GameTask* currentTask = nullptr;
 
@@ -55,15 +56,10 @@ private:
     float allTaskCleanTime;
     int gameStartTime, preTaskStartTime;
 
-
-    const int gameTimerMills = 10;
-    const int preTaskMills = 2 * 1000;
-
-   // QMetaObject::Connection taskCompleteSignal;
-
     void runPreTask();
     void runTask();
     void preTaskTimerComplete();
+    void setCurrentTaskIndex(int index);
 
 signals:
     void updateCanvas();
@@ -78,10 +74,8 @@ signals:
 
 private slots:
     void onGameTimerUpdate();
-
     void onPreTaskTimerUpdate();
     void onTaskCompleteEvent();
-
 };
 
 #endif // GAMETASKMANAGER_H

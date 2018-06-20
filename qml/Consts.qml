@@ -5,7 +5,8 @@ Item {
     property int lineWidth: 10;
     property string lineCap: "round";
     property string lineJoin: "round";
-     property int bulletSize: 20;
+    property int bulletSize: 20;
+    property int finishBulletSize: finBulletSizeAnimateHelper.size;
 
     property int carAddAngle: -90;
     property int carWidth: 30;
@@ -33,8 +34,21 @@ Item {
             duration: 500 }
     }
 
+    Item {
+        id: finBulletSizeAnimateHelper
+        property int size: 40;
+        PropertyAnimation { id: sizeAnimtor;
+            target: finBulletSizeAnimateHelper;
+            property: "size";
+            from: 10;
+            to: 20;
+            duration: 500
+        }
+    }
+
     function animateGuideColor()
     {
+        sizeAnimtor.start();
         opacityAnimtor.start();
     }
 }

@@ -32,6 +32,7 @@ Item {
 
         onPoorSignalLevelChanged:
         {
+            console.log("mind.poorSignalColor()  ", mind.poorSignalColor());
             signalLevel.color = mind.poorSignalColor();
         }
     }

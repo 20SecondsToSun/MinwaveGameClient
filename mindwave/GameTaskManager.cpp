@@ -29,43 +29,40 @@ GameTaskManager::GameTaskManager()
     QPointF point19 = QPointF(1144, 616);
     QPointF point20 = QPointF(1002, 316);
 
-
-    //PATH0
-   // path.clear();
-   // path<<QPointF(200, 300)<<QPointF(400, 300)<<QPointF(600, 300)<<QPointF(600, 700);
-   // gameTasks.append(new GameTask(path, velocitycalculator));
-
-
-
     //PATH1
     path.clear();
     path<<point4<<point6<<point10<<point7<<point16<<point17;
+    velocitycalculator.setLimits(0, 3.5, 40);
     gameTasks.append(new GameTask(path, velocitycalculator));
 
     //PATH2
     path.clear();
     path<<point17<<point20<<point3<<point2;
+    velocitycalculator.setLimits(0, 3.3, 45);
     gameTasks.append(new GameTask(path, velocitycalculator));
 
     //PATH3
     path.clear();
+    velocitycalculator.setLimits(0, 3, 60);
     path<<point2<<point1<<point6<<point5<<point9;
-    //gameTasks.append(new GameTask(path, velocitycalculator));
+    gameTasks.append(new GameTask(path, velocitycalculator));
 
-//    //PATH4
-//    path.clear();
-//    path<<point9<<point13<<point10<<point14<<point15<<point16<<point17<<point18<<point19;
-//    gameTasks.append(new GameTask(path, velocitycalculator));
+    //PATH4
+    path.clear();
+    velocitycalculator.setLimits(0, 2, 65);
+    path<<point9<<point13<<point10<<point14<<point15<<point16<<point17<<point18<<point19;
+    gameTasks.append(new GameTask(path, velocitycalculator));
 
-//    //PATH5
-//    path.clear();
-//    path<<point19<<point12<<point11<<point20<<point8<<point10<<point1;
-//    gameTasks.append(new GameTask(path, velocitycalculator));
+    //PATH5
+    path.clear();
+    velocitycalculator.setLimits(0, 3, 70);
+    path<<point19<<point12<<point11<<point20<<point8<<point10<<point1;
+    gameTasks.append(new GameTask(path, velocitycalculator));
 
-    // penta
+    //penta
     //path.clear();
     //path<<QPointF(150, 125)<<QPointF(260, 210)<<QPointF(125, 210)<<QPointF(235, 125)<<QPointF(194, 260)<<QPointF(150, 125);
-   // gameTasks.append(new GameTask(path, velocitycalculator));
+    //gameTasks.append(new GameTask(path, velocitycalculator));
 
     gameTimer = new QTimer(this);
     connect(gameTimer, SIGNAL(timeout()), this, SLOT(onGameTimerUpdate()));
@@ -104,9 +101,7 @@ float GameTaskManager::gameTime() const
 
 void GameTaskManager::start()
 {  
-    currentTaskIndex = 0;
-    emit taskNumberChangedEvent(currentTaskIndex);
-
+    setCurrentTaskIndex(0);
     allTaskCleanTime = 0;
     runPreTask();
 }
@@ -187,6 +182,35 @@ void GameTaskManager::onGameTimerUpdate()
     emit updateCanvas();
 }
 
+void GameTaskManager::setCurrentTaskIndex(int index)
+{
+    currentTaskIndex = index;
+    emit taskNumberChangedEvent(currentTaskIndex);
+}
+
+void GameTaskManager::onTaskCompleteEvent()
+{
+    qDebug()<<"-------------------------------onTaskCompleteEvent-------------------------------";
+
+    allTaskCleanTime += currentTask->getCompletionTime() / 1000.;
+
+    if(currentTaskIndex + 1 < gameTasks.length())
+    {
+        setCurrentTaskIndex(currentTaskIndex + 1);
+        emit taskComleteEvent(currentTaskIndex, gameTasks.length());
+        gameTimer->stop();
+        runPreTask();
+    }
+    else
+    {
+        emit taskComleteEvent(gameTasks.length(), gameTasks.length());
+        emit allTaskComleteEvent();
+        stop();
+
+        qDebug()<<"------------------------------- Game Finished -------------------------------";
+    }
+}
+
 QPointF GameTaskManager::getStartPoint() const
 {
    return currentTask->getStartPoint();
@@ -200,27 +224,6 @@ QPointF GameTaskManager::getCurPoint() const
 QPointF GameTaskManager::getEndPoint() const
 {
    return currentTask->getEndPoint();
-}
-
-void GameTaskManager::onTaskCompleteEvent()
-{
-     qDebug()<<"-------------------------------onTaskCompleteEvent-------------------------------";
-    allTaskCleanTime += currentTask->getCompletionTime() / 1000.;
-
-    if(++currentTaskIndex < gameTasks.length())
-    {
-        emit taskNumberChangedEvent(currentTaskIndex);
-        emit taskComleteEvent(currentTaskIndex, gameTasks.length());
-        gameTimer->stop();
-        runPreTask();
-    }
-    else
-    {
-        emit taskComleteEvent(gameTasks.length(), gameTasks.length());
-        emit allTaskComleteEvent();
-        stop();
-        qDebug()<<"------------------------------- Game Finished -------------------------------";
-    }
 }
 
 float GameTaskManager::getAllTaskCleanTime() const

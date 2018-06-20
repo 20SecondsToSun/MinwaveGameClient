@@ -18,10 +18,11 @@ Item
 
         onPreTaskStartEvent:
         {
+            var finishBulletSize = consts.finishBulletSize;
             visible = true;
             var endPoint = gameTaskManager.getEndPoint();
-            x = endPoint.x * consts.scaleFactor - consts.bulletSize * 0.5;
-            y = consts.canvasY + endPoint.y * consts.scaleFactor - consts.bulletSize * 0.5;
+            x = endPoint.x * consts.scaleFactor - finishBulletSize * 0.5;
+            y = consts.canvasY + endPoint.y * consts.scaleFactor - finishBulletSize * 0.5;
         }
     }
 
@@ -32,9 +33,11 @@ Item
         height: 50;
         onPaint:
         {
+            var finishBulletSize = consts.finishBulletSize;
+
             var ctx = getContext("2d");
             ctx.fillStyle = consts.finishBulletColor;
-            ctx.ellipse(0, 0, consts.bulletSize, consts.bulletSize);
+            ctx.ellipse(0, 0, finishBulletSize, finishBulletSize);
             ctx.fill();
         }
     }
