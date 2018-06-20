@@ -5,13 +5,13 @@ import "qml"
 
 ApplicationWindow {
     visible: true
-    width: 1400
-    height: 1050
+    width: 1700
+    height: 1080
     title: qsTr("Mind wave client")
     id:core
 
     property int marginLeft:50;
-    property int marginTop:50;
+    property int marginTop:10;
     property int columnShift:400;
 
     Component.onCompleted:
@@ -36,7 +36,7 @@ ApplicationWindow {
     MindwaveGame
     {
         x:marginLeft;
-        y:marginTop + 180
+        y:marginTop + 130
         id:mindWaveGame
     }
 }

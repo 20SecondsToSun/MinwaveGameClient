@@ -23,6 +23,11 @@ public:
                     float minBackVelocity = -5.0f,
                     float maxBackVelocity = 1.0f);
 
+    float getThreshold() const
+    {
+       return humanValueThresholdMin / humanValueThresholdMax;
+    }
+
 private:
     float humanValueThresholdMax = 100;
     float humanValueThresholdMin = 60;

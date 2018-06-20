@@ -31,6 +31,7 @@ public:
     Q_INVOKABLE float getForwardVectorRotation() const;
     Q_INVOKABLE float getAllTaskCleanTime() const;
     Q_INVOKABLE int getTaskCount() const;
+    Q_INVOKABLE float getMindwaveLimit() const;
 
     void setMindWaveClient(MindWave* mindWave);
 

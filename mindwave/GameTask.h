@@ -33,6 +33,7 @@ public:
    // QVector<QPointF> getFullPath() const;
     float getForwardVectorRotation() const;
 
+    float getMindwaveLimit() const;
 private:
     QVector<QPointF> path;
     QPointF curPoint, startPoint, endPoint, position;

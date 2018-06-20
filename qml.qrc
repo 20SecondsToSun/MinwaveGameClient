@@ -17,5 +17,6 @@
         <file>resources/start.png</file>
         <file>resources/car2.png</file>
         <file>resources/shadow.png</file>
+        <file>qml/CircularProgress.qml</file>
     </qresource>
 </RCC>

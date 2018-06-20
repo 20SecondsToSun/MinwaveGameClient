@@ -102,6 +102,12 @@ void GameTask::update(int humanValue)
 //    return completedPath;
 //}
 
+
+float GameTask::getMindwaveLimit() const
+{
+    return velocityCalculator.getThreshold();
+}
+
 QVariantList GameTask::getCompletedPath() const
 {
     return completedPathList;

@@ -63,7 +63,7 @@ Item {
 
         RowLayout
         {
-            opacity: core.gameStrategy == 2? root.alphaInvis : 1;
+            opacity: 0.2;//core.gameStrategy == 2? root.alphaInvis : 1;
             Text {
                 text: "Attention";
                 font.family: "Helvetica"

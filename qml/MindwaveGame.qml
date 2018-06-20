@@ -144,7 +144,7 @@ Item {
         font.family: "Helvetica";
         font.pixelSize: 35;
         color: "#009900";
-        x: 1040;
+        x: 1450;
         y: 10;
     }
 
@@ -171,8 +171,8 @@ Item {
         id:road
         // visible: false;
         y: consts.canvasY;
-        width: 1200;
-        height: 675
+        width: 1600;//1200;
+        height: 900;//675
         source: "qrc:/resources/road1.jpg"
         smooth:true;
     }
@@ -180,8 +180,8 @@ Item {
     Canvas
     {
         id: canvas;
-        width: 1200;
-        height: 675;
+        width: 1600;
+        height: 900;
         y: consts.canvasY;
         antialiasing: true;
         property string heroView: "qrc:/resources/car.png";
@@ -204,7 +204,7 @@ Item {
             var scaleFactor = consts.scaleFactor;
             var ctx = getContext("2d");
             //ctx.drawImage(roadView, 0, 0, 1200, 675);
-            ctx.clearRect(0, 0,1200, 675);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             if(gameTaskManager.isPreTaskState())
             {
@@ -288,6 +288,12 @@ Item {
         transform: Translate { x: -car.width * 0.5; y: -car.height * 0.5 }
     }
 
+    CircularProgress
+    {
+        id:circProgress
+        visible: false;
+        y: consts.canvasY;
+    }
 
     PreTaskPopup
     {

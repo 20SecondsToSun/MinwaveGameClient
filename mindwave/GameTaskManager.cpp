@@ -252,3 +252,8 @@ int GameTaskManager::getTaskCount() const
 {
     return gameTasks.length();
 }
+
+float GameTaskManager::getMindwaveLimit() const
+{
+    return currentTask->getMindwaveLimit();
+}

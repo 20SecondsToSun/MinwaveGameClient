@@ -12,7 +12,7 @@ Item {
     property int carWidth: 64;//30;
     property int carHeight: 124;//54;
 
-    property double scaleFactor: 0.9375;
+    property double scaleFactor: 1.25;//9375;
     property double artScaleFactor: 0.925;
     property int canvasY: 100;
 

@@ -90,7 +90,7 @@ void MindWave::parse(const QString& data)
     QJsonObject eSenseJson = jsonObj.value("eSense").toObject();
     int _poorSignalLevel = jsonObj.value("poorSignalLevel").toInt();
 
-    const bool test = false;
+    const bool test = true;
 
     _lastAttention = _attention;
     _lastMeditation = _meditation;
