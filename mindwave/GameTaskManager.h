@@ -7,6 +7,10 @@
 #include <QVariantList>
 #include "mindwave/MindWave.h"
 #include "mindwave/GameTask.h"
+#include "mindwave/GamePreTask.h"
+#include "mindwave/TaskCreator.h"
+#include "mindwave/GameSession.h"
+
 
 class GameTaskManager: public QObject
 {
@@ -42,7 +46,12 @@ private:
     const int gameTimerMills = 10;
     const int preTaskMills = 3 * 1000;
 
+    TaskCreator* taskCreator;
+
+
     QList<GameTask*> gameTasks;
+    QList<GamePreTask*> gamePreTasks;
+    GamePreTask* currentPreTask;
     GameTask* currentTask = nullptr;
 
     int currentTaskIndex = 0;
@@ -57,10 +66,15 @@ private:
     float allTaskCleanTime;
     int gameStartTime, preTaskStartTime;
 
-    void runPreTask();
     void runTask();
     void preTaskTimerComplete();
     void setCurrentTaskIndex(int index);
+
+    void initCurrentTask();
+
+    GameSession* gameSession;
+
+    bool isAllTaskCompleted() const;
 
 signals:
     void updateCanvas();
@@ -75,8 +89,12 @@ signals:
 
 private slots:
     void onGameTimerUpdate();
-    void onPreTaskTimerUpdate();
+    //void onPreTaskTimerUpdate();
     void onTaskCompleteEvent();
+
+private slots:
+    void onPreGameTaskUpdate(float countDown);
+    void onPreGameTaskComplete();
 };
 
 #endif // GAMETASKMANAGER_H

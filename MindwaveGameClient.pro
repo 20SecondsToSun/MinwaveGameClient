@@ -18,10 +18,13 @@ SOURCES += main.cpp \
     network/ClientService.cpp \
     network/http/HTTPClient.cpp \
     mindwave/MindWave.cpp \
-    mindwave/GameTask.cpp \
     mindwave/GameTaskManager.cpp \
     mindwave/VelocityCalculator.cpp \
-    tools/MathTools.cpp
+    tools/MathTools.cpp \
+    mindwave/TaskCreator.cpp \
+    mindwave/GameTask.cpp \
+    mindwave/GamePreTask.cpp \
+    mindwave/GameSession.cpp
 
 RESOURCES += qml.qrc
 
@@ -66,6 +69,9 @@ HEADERS += \
     mindwave/GameTask.h \
     mindwave/GameTaskManager.h \
     mindwave/VelocityCalculator.h \
-    tools/MathTools.h
+    tools/MathTools.h \
+    mindwave/TaskCreator.h \
+    mindwave/GamePreTask.h \
+    mindwave/GameSession.h
 
 DISTFILES +=

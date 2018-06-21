@@ -49,6 +49,9 @@ private:
     void setPoints();
     void addCompletedPoint(const QPointF& point);
 
+
+
+
 signals:
     void taskCompleteEvent();
 

@@ -156,7 +156,6 @@ Item {
         id:consts;
     }
 
-
     Window {
         objectName: "wnd1"
         visible: true
