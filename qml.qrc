@@ -21,5 +21,6 @@
         <file>resources/start2.png</file>
         <file>resources/finish.png</file>
         <file>resources/gameplay-new.jpg</file>
+        <file>qml/GameScreen.qml</file>
     </qresource>
 </RCC>

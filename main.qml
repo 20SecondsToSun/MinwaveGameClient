@@ -1,14 +1,14 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
 
-import QtQuick.Window 2.2
+
 //import QtQuick.Layouts 1.3
 import "qml"
 
 ApplicationWindow {
     visible: true
     width: 1700
-    height: 1080
+    height: 480
     title: qsTr("Mind wave client")
     id:core
 
@@ -16,26 +16,11 @@ ApplicationWindow {
     property int marginTop:10;
     property int columnShift:400;
 
-//    Item {
-
-//        Window {
-//            objectName: "wnd1"
-//            visible: true
-//        }
-
-//        Window {
-//            objectName: "wnd2"
-//            visible: true
-//        }
-//    }
-
-
     Component.onCompleted:
     {
       //
-        //aId.start();
-
-        core.showFullScreen();
+      // aId.start();
+      // core.showFullScreen();
     }
 
     //    SocketClient

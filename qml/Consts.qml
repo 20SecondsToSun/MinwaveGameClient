@@ -2,22 +2,25 @@ import QtQuick 2.0
 
 Item {
 
+    property string cityMapUrl : "qrc:/resources/gameplay-new.jpg";
+    property int canvasY: 100;
     property int lineWidth: 5;
     property string lineCap: "round";
     property string lineJoin: "round";
-    property int bulletSize: 10;
-    property int finishBulletSize: finBulletSizeAnimateHelper.size;
-
-    property int carAddAngle: -90 + 180;
-    property int carWidth: 64;//30;
-    property int carHeight: 124;//54;
 
     property double scaleFactor: 1.25;//9375;
     property double artScaleFactor: 0.925;
-    property int canvasY: 100;
 
+    property string carUrl: "qrc:/resources/car2.png";
+    property string carShadowUrl: "qrc:/resources/shadow.png";
+    property int carWidth: 64;//30;
+    property int carHeight: 124;//54;
+    property int carAddAngle: -90 + 180;
 
-    property var redColor: Qt.rgba(0., 164./255., 227.0 / 255., 1);
+    property int bulletSize: 10;
+    property int finishBulletSize: finBulletSizeAnimateHelper.size;
+
+     property var redColor: Qt.rgba(0., 164./255., 227.0 / 255., 1);
     property var finishBulletColor: Qt.rgba(0., 164./255., 227.0 / 255., 1);
     property var startBulletColor:  Qt.rgba(0., 164./255., 227.0 / 255., 1);
     property var guideColor: Qt.rgba(0.9, 0.9, 0.9, animateHelper.opacity);
