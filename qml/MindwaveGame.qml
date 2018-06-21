@@ -184,7 +184,7 @@ Item {
         y: consts.canvasY;
         antialiasing: true;
         property string heroView: "qrc:/resources/car.png";
-        property string roadView: "qrc:/resources/road1.jpg";
+        property string roadView: "qrc:/resources/gameplay-new.jpg";
         //smooth: true;
 
         Component.onCompleted:

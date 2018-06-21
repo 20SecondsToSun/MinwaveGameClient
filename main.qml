@@ -1,5 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
+
+import QtQuick.Window 2.2
 //import QtQuick.Layouts 1.3
 import "qml"
 
@@ -13,6 +15,19 @@ ApplicationWindow {
     property int marginLeft:50;
     property int marginTop:10;
     property int columnShift:400;
+
+//    Item {
+
+//        Window {
+//            objectName: "wnd1"
+//            visible: true
+//        }
+
+//        Window {
+//            objectName: "wnd2"
+//            visible: true
+//        }
+//    }
 
 
     Component.onCompleted:
@@ -37,7 +52,7 @@ ApplicationWindow {
 
         Keys.onPressed:
         {
-            if (event.key == Qt.Key_0) {
+            if (event.key == Qt.Key_Escape) {
                 console.log("move left");
                 Qt.quit();
             }

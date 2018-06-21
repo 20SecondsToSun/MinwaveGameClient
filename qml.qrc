@@ -19,5 +19,7 @@
         <file>resources/shadow.png</file>
         <file>qml/CircularProgress.qml</file>
         <file>resources/start2.png</file>
+        <file>resources/finish.png</file>
+        <file>resources/gameplay-new.jpg</file>
     </qresource>
 </RCC>
