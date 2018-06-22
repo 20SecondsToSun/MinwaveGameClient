@@ -8,7 +8,6 @@ Item {
 
     property double nextAttentionValue: 0.0;
     property double nextMeditationValue: 0.0;
-
     property double alphaInvis: 0.2;
 
     Connections
@@ -43,17 +42,27 @@ Item {
         RowLayout {
             spacing: 6;
             Text {
-                text: "Mindwave data";
+                text: "Mindwave component";
                 font.family: "Helvetica"
-                font.pixelSize: 18
+                font.pixelSize: 17
                 color: "#009900"
             }
         }
+
+        Text
+        {
+            id:conStatus;
+            text: "connection status: ";
+            font.family: "Helvetica"
+            font.pixelSize: 15
+            color: "#999999"
+        }
+
         Text {
             id:signalLevel
             text: "Signal level: " + mind.poorSignalLevel;
             font.family: "Helvetica"
-            font.pixelSize: 12
+            font.pixelSize: 15
             color: "#999999"
         }
 
@@ -64,7 +73,7 @@ Item {
             Text {
                 text: "Attention";
                 font.family: "Helvetica"
-                font.pixelSize: 12
+                font.pixelSize: 15
                 color: "#990000"
             }
             //spacing: 6;
@@ -106,7 +115,7 @@ Item {
             Text {
                 text: "Meditation";
                 font.family: "Helvetica"
-                font.pixelSize: 12
+                font.pixelSize: 15
                 color: "#000099"
             }
             spacing: 6;
@@ -154,14 +163,14 @@ Item {
                     core.gameStrategy = btn1.checked ? 1 : 2;
                 }
             }
+
             RadioButton {
                 id: btn2
                 text: "Meditation"
                 checked: false
                 exclusiveGroup: tabPositionGroup
             }
+
         }
-
     }
-
 }

@@ -9,14 +9,16 @@ Item {
         spacing: 10;
         Text
         {
-            text: "GameSession";
+            text: "Arduino component";
             font.family: "Helvetica"
-            font.pixelSize: 20
-            color: "#000099"
+            font.pixelSize: 17
+            color: "#008800"
         }
+
         Text
         {
-            text: "SessionTime: " + gameSession.sessionTime.toFixed(1);
+            id:conStatus;
+            text: "connection status: ";
             font.family: "Helvetica"
             font.pixelSize: 15
             color: "#999999"
@@ -24,8 +26,8 @@ Item {
 
         Text
         {
-            id:nonActiveText;
-            text: "UserNonActiveTime: 0";
+            id:cleanTimeText;
+            text: "arduino data: 0";
             font.family: "Helvetica"
             font.pixelSize: 15
             color: "#999999"

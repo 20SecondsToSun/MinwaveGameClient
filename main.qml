@@ -4,11 +4,16 @@ import QtQuick.Controls 2.2
 
 //import QtQuick.Layouts 1.3
 import "qml"
+import "qml/login"
+import "qml/components"
+import "qml/touchScreens"
+import "qml/tests"
+
 
 ApplicationWindow {
     visible: true
     width: 1700
-    height: 480
+    height: 580
     title: qsTr("Mind wave client")
     id:core
 
@@ -17,9 +22,7 @@ ApplicationWindow {
     property int columnShift:400;
 
     Component.onCompleted:
-    {
-      //
-      // aId.start();
+    { 
       // core.showFullScreen();
     }
 
@@ -30,7 +33,7 @@ ApplicationWindow {
     //        id:sockets
     //    }
 
-    MindwaveClient
+    MindwaveComponent
     {
        // anchors.fill: parent
         focus: true
@@ -47,22 +50,55 @@ ApplicationWindow {
         id:mindWave
     }
 
+    LoginModule
+    {
+        id:loginModule;
+        x:marginLeft + 500;
+        y:marginTop
+    }
+
+
+
+
+    LoginTest
+    {
+        x:marginLeft + 500;
+        y:marginTop + 300;
+
+        onLoginState:
+        {
+            touchWindow.setLoginTestState(state);
+        }
+    }
+
     UserData
     {
-        x:marginLeft + 700;
+        x:marginLeft + 900;
         y:marginTop
     }
 
     GameSession
     {
-        x:marginLeft + 1000;
+        x:marginLeft + 1200;
         y:marginTop
+    }
+
+    TouchWindow
+    {
+        id:touchWindow;
     }
 
     MindwaveGame
     {
-        x:marginLeft;
-        y:marginTop + 130
+        x:marginLeft + 1200;
+        y:marginTop + 190
         id:mindWaveGame
+    }
+
+    HealthCheckerComponent
+    {
+        x:marginLeft;
+        y:marginTop + 190
+        id:health
     }
 }

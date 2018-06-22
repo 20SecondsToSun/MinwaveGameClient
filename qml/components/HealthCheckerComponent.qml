@@ -4,19 +4,23 @@ import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 
 Item {
+
     ColumnLayout
     {
         spacing: 10;
         Text
         {
-            text: "GameSession";
+            text: "HealthChecker component";
             font.family: "Helvetica"
-            font.pixelSize: 20
-            color: "#000099"
+            font.pixelSize: 17
+            color: "#008800"
         }
+        RowLayout
+        {
         Text
         {
-            text: "SessionTime: " + gameSession.sessionTime.toFixed(1);
+            id:conStatus;
+            text: "Arduino health: ";
             font.family: "Helvetica"
             font.pixelSize: 15
             color: "#999999"
@@ -24,11 +28,22 @@ Item {
 
         Text
         {
-            id:nonActiveText;
-            text: "UserNonActiveTime: 0";
+            id:cleanTimeText;
+            text: "Mindwave health: ";
             font.family: "Helvetica"
             font.pixelSize: 15
             color: "#999999"
         }
+
+        Text
+        {
+            id:timeText;
+            text: "Server health: ";
+            font.family: "Helvetica"
+            font.pixelSize: 15
+            color: "#999999"
+        }
+        }
+
     }
 }

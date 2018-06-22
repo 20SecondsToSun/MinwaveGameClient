@@ -25,7 +25,8 @@ SOURCES += main.cpp \
     mindwave/GameTask.cpp \
     mindwave/GamePreTask.cpp \
     mindwave/GameSession.cpp \
-    mindwave/GamePostTask.cpp
+    mindwave/GamePostTask.cpp \
+    components/ArduinoComponent.cpp
 
 RESOURCES += qml.qrc
 
@@ -75,6 +76,7 @@ HEADERS += \
     mindwave/GamePreTask.h \
     mindwave/GameSession.h \
     mindwave/gametypes.h \
-    mindwave/GamePostTask.h
+    mindwave/GamePostTask.h \
+    components/ArduinoComponent.h
 
 DISTFILES +=

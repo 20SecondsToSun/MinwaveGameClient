@@ -3,9 +3,7 @@
         <file>main.qml</file>
         <file>qtquickcontrols2.conf</file>
         <file>qml/SocketClient.qml</file>
-        <file>qml/LoginModule.qml</file>
         <file>resources/config.json</file>
-        <file>qml/MindwaveClient.qml</file>
         <file>qml/MindwaveGame.qml</file>
         <file>resources/road.jpg</file>
         <file>resources/car.png</file>
@@ -24,5 +22,16 @@
         <file>qml/GameScreen.qml</file>
         <file>qml/GameSession.qml</file>
         <file>qml/UserData.qml</file>
+        <file>qml/components/ArduinoComponent.qml</file>
+        <file>qml/login/ServerLogin.qml</file>
+        <file>qml/login/LoginModule.qml</file>
+        <file>qml/components/MindwaveComponent.qml</file>
+        <file>qml/touchScreens/HelloScreen.qml</file>
+        <file>qml/components/HealthCheckerComponent.qml</file>
+        <file>qml/touchScreens/TouchWindow.qml</file>
+        <file>qml/tests/LoginTest.qml</file>
+        <file>qml/touchScreens/InstructionScreen.qml</file>
+        <file>qml/touchScreens/BackBtn.qml</file>
+        <file>qml/touchScreens/GameScreen.qml</file>
     </qresource>
 </RCC>

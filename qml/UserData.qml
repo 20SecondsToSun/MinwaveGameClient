@@ -45,10 +45,10 @@ Item {
         spacing: 10;
         Text
         {
-            text: "UserData";
+            text: "User data";
             font.family: "Helvetica"
             font.pixelSize: 20
-            color: "#009900"
+            color: "#000099"
         }
 
         Text

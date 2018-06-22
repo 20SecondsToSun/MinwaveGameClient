@@ -4,28 +4,28 @@ import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 
 Item {
+
+//    anchors {
+//        bottom: parent.bottom
+//        left: parent.left
+//        right: parent.right
+//    }
+
     ColumnLayout
     {
         spacing: 10;
         Text
         {
-            text: "GameSession";
+            text: "Server login";
             font.family: "Helvetica"
-            font.pixelSize: 20
-            color: "#000099"
-        }
-        Text
-        {
-            text: "SessionTime: " + gameSession.sessionTime.toFixed(1);
-            font.family: "Helvetica"
-            font.pixelSize: 15
-            color: "#999999"
+            font.pixelSize: 17
+            color: "#008800"
         }
 
         Text
         {
-            id:nonActiveText;
-            text: "UserNonActiveTime: 0";
+            id:cleanTimeText;
+            text: "response: ";
             font.family: "Helvetica"
             font.pixelSize: 15
             color: "#999999"

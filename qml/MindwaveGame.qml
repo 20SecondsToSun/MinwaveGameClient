@@ -82,7 +82,7 @@ Item {
         title: "Splash Window"
         // modality: Qt.ApplicationModal
         flags: Qt.SplashScreen
-        x: 1920
+        x: 2920
         width: 1920
         height: 1080
 
