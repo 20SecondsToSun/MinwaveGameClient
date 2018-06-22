@@ -24,7 +24,8 @@ SOURCES += main.cpp \
     mindwave/TaskCreator.cpp \
     mindwave/GameTask.cpp \
     mindwave/GamePreTask.cpp \
-    mindwave/GameSession.cpp
+    mindwave/GameSession.cpp \
+    mindwave/GamePostTask.cpp
 
 RESOURCES += qml.qrc
 
@@ -72,6 +73,8 @@ HEADERS += \
     tools/MathTools.h \
     mindwave/TaskCreator.h \
     mindwave/GamePreTask.h \
-    mindwave/GameSession.h
+    mindwave/GameSession.h \
+    mindwave/gametypes.h \
+    mindwave/GamePostTask.h
 
 DISTFILES +=

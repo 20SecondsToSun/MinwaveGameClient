@@ -53,23 +53,23 @@ QList<GameTask*> TaskCreator::create()
     velocitycalculator.setLimits(0, 3.3, 45);
     gameTasks.append(new GameTask(path, velocitycalculator));
 
-    //PATH3
-    path.clear();
-    velocitycalculator.setLimits(0, 3, 60);
-    path<<point2<<point1<<point6<<point5<<point9;
-    gameTasks.append(new GameTask(path, velocitycalculator));
+//    //PATH3
+//    path.clear();
+//    velocitycalculator.setLimits(0, 3, 60);
+//    path<<point2<<point1<<point6<<point5<<point9;
+//    gameTasks.append(new GameTask(path, velocitycalculator));
 
-    //PATH4
-    path.clear();
-    velocitycalculator.setLimits(0, 2, 65);
-    path<<point9<<point13<<point10<<point14<<point15<<point16<<point17<<point18<<point19;
-    gameTasks.append(new GameTask(path, velocitycalculator));
+//    //PATH4
+//    path.clear();
+//    velocitycalculator.setLimits(0, 2, 65);
+//    path<<point9<<point13<<point10<<point14<<point15<<point16<<point17<<point18<<point19;
+//    gameTasks.append(new GameTask(path, velocitycalculator));
 
-    //PATH5
-    path.clear();
-    velocitycalculator.setLimits(0, 3, 70);
-    path<<point19<<point12<<point11<<point20<<point8<<point10<<point1;
-    gameTasks.append(new GameTask(path, velocitycalculator));
+//    //PATH5
+//    path.clear();
+//    velocitycalculator.setLimits(0, 3, 70);
+//    path<<point19<<point12<<point11<<point20<<point8<<point10<<point1;
+//    gameTasks.append(new GameTask(path, velocitycalculator));
 
     return gameTasks;
 }

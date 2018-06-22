@@ -6,10 +6,16 @@
 #include <QTimer>
 #include <QVariantList>
 #include "mindwave/MindWave.h"
+
 #include "mindwave/GameTask.h"
 #include "mindwave/GamePreTask.h"
+#include "mindwave/GamePostTask.h"
+
+#include "mindwave/GameTypes.h"
 #include "mindwave/TaskCreator.h"
 #include "mindwave/GameSession.h"
+
+
 
 
 class GameTaskManager: public QObject
@@ -18,68 +24,52 @@ class GameTaskManager: public QObject
 public:
     GameTaskManager();
 
-    Q_PROPERTY(float gameTime READ gameTime WRITE setGameTime NOTIFY gameTimeChanged)
-
-
-    Q_INVOKABLE void start();
-    Q_INVOKABLE void stop();
-
     Q_INVOKABLE bool isRunning() const;
     Q_INVOKABLE bool isPreTaskState() const;
-
     Q_INVOKABLE QPointF getStartPoint() const;    
     Q_INVOKABLE QPointF getCurPoint() const;
     Q_INVOKABLE QPointF getEndPoint() const;
     Q_INVOKABLE QVariantList getCompletedPath() const;
     Q_INVOKABLE QVariantList getFullPath() const;
     Q_INVOKABLE float getForwardVectorRotation() const;
-    Q_INVOKABLE float getAllTaskCleanTime() const;
     Q_INVOKABLE int getTaskCount() const;
     Q_INVOKABLE float getMindwaveLimit() const;
 
-    void setMindWaveClient(MindWave* mindWave);
+    enum class TaskState
+    {
+        None,
+        PreGame,
+        Game,
+        PostGame
+    };
 
-    float gameTime() const;
-    void setGameTime(float value);
+    void start();
+    void stop();
+    void setMindWaveClient(MindWave* mindWave);
+    void setTaskState(TaskState taskState);
 
 private:
-    const int gameTimerMills = 10;
-    const int preTaskMills = 3 * 1000;
-
+    TaskState currentTaskState;
     TaskCreator* taskCreator;
-
-
-    QList<GameTask*> gameTasks;
-    QList<GamePreTask*> gamePreTasks;
-    GamePreTask* currentPreTask;
-    GameTask* currentTask = nullptr;
-
-    int currentTaskIndex = 0;
     MindWave* mindWave = nullptr;
-
-    bool running = false;
-    bool preTaskState = false;
-
-    QTimer *gameTimer, *preTaskTimer;
-
-    float _gameTime;
-    float allTaskCleanTime;
-    int gameStartTime, preTaskStartTime;
 
     void runTask();
     void preTaskTimerComplete();
-    void setCurrentTaskIndex(int index);
-
+    void setCurrentGameTaskIndex(int index);
     void initCurrentTask();
-
-    GameSession* gameSession;
-
     bool isAllTaskCompleted() const;
+
+    GamePreTask* gamePreTask = nullptr;
+    GameTask* gameTask = nullptr;
+    GamePostTask* gamePostTask = nullptr;
+    int currentTaskIndex = 0;
+    QList<GameTask*> gameTasks;
+
 
 signals:
     void updateCanvas();
     void gameTimeChanged();
-    void taskComleteEvent(int taskNumber, int allTaskCount);
+    void taskComleteEvent(int taskNumber, int completionTime, int allTaskCount);
     void allTaskComleteEvent();
 
     void taskStartEvent();
@@ -88,13 +78,10 @@ signals:
     void preTaskCoundownUpdate(float time);
 
 private slots:
-    void onGameTimerUpdate();
-    //void onPreTaskTimerUpdate();
     void onTaskCompleteEvent();
-
-private slots:
     void onPreGameTaskUpdate(float countDown);
     void onPreGameTaskComplete();
+    void onTaskUpdateEvent();
 };
 
 #endif // GAMETASKMANAGER_H

@@ -13,18 +13,6 @@ Item {
         State{name: "game";},
         State{name: "gameOver";}]
 
-    Timer
-    {
-        interval: 500;
-        running: true;
-        repeat: false
-        id:preloadTimer
-        onTriggered:
-        {
-            setComplitionProgressText(0, gameTaskManager.getTaskCount());
-        }
-    }
-
     Component.onCompleted:
     {
 
@@ -32,20 +20,12 @@ Item {
 
     Connections
     {
-        target:gameTaskManager;
-
-        onTaskComleteEvent:
-        {
-            gameProgressBar.value = taskNumber * 1.0/allTaskCount;
-            setComplitionProgressText(taskNumber, allTaskCount);
-        }
+        target:gameTaskManager;      
 
         onAllTaskComleteEvent:
         {
             setState("gameOver");
-            fullGameTimeText.visible = true;
-            fullGameTimeText.text = "Your full time " + (gameTaskManager. getAllTaskCleanTime()).toFixed(1);
-        }
+         }
 
         onTaskStartEvent:
         {
@@ -87,69 +67,7 @@ Item {
                 }
             }
         }
-    }
-
-    ColumnLayout
-    {
-        x: 540;
-        spacing: 20;
-        RowLayout {
-            spacing: 6;
-            Text {
-                id:completionText
-                text: "Completion 0/0";
-                font.family: "Helvetica";
-                font.pixelSize: 18;
-                color: "#009900";
-            }
-        }
-        RowLayout
-        {
-            spacing: 6;
-            ProgressBar
-            {
-                id:gameProgressBar;
-                value: .0
-                style: ProgressBarStyle {
-                    background: Rectangle {
-                        radius: 2
-                        color: "lightgray"
-                        border.color: "gray"
-                        border.width: 1
-                        implicitWidth: 200
-                        implicitHeight: 24
-                    }
-                    progress: Rectangle {
-                        color: "#009900"
-                        border.color: "steelblue"
-                    }
-                }
-            }
-        }
-    }
-
-    Text
-    {
-        id:gameTimeText;
-        text: "Time : " + gameTaskManager.gameTime.toFixed(1);
-        font.family: "Helvetica";
-        font.pixelSize: 35;
-        color: "#009900";
-        x: 1450;
-        y: 10;
-    }
-
-    Text
-    {
-        visible: false;
-        id:fullGameTimeText;
-        text: "Yor Full Time : ";
-        font.family: "Helvetica";
-        font.pixelSize: 35;
-        color: "#009900";
-        x: 540;
-        y: -110;
-    }
+    }  
 
     Consts
     {
@@ -174,7 +92,6 @@ Item {
         }
     }
 
-
     function setState(state)
     {
         root.state = state;
@@ -189,25 +106,15 @@ Item {
         case "idle":
             btnReset.enabled = false;
             btnStart.enabled = true;
-            gameTaskManager.stop();
-            gameProgressBar.value = 0.0;
-            setComplitionProgressText(0, gameTaskManager.getTaskCount());
-            fullGameTimeText.visible = false;
+            clientService.stopGame();
             break;
 
         case "game":
             btnReset.enabled = true;
             btnStart.enabled = false;
-            gameProgressBar.value = 0.0;
-            gameTaskManager.start();
-            setComplitionProgressText(0, gameTaskManager.getTaskCount());
-            fullGameTimeText.visible = false;
+            clientService.startGame();
             break;
         }
     }
 
-    function setComplitionProgressText(taskNumber, allTaskCount)
-    {
-        completionText.text = "Completion " + taskNumber + "/" + allTaskCount;
-    }
 }

@@ -27,7 +27,6 @@ void GamePreTask::stop()
 void GamePreTask::onUpdate()
 {
     int newTime = QDateTime::currentMSecsSinceEpoch() - startTime;
-    qDebug()<<newTime;
 
     if(newTime < preTaskMills)
     {

@@ -33,7 +33,7 @@ ApplicationWindow {
     MindwaveClient
     {
        // anchors.fill: parent
-            focus: true
+        focus: true
 
         Keys.onPressed:
         {
@@ -47,10 +47,22 @@ ApplicationWindow {
         id:mindWave
     }
 
+    UserData
+    {
+        x:marginLeft + 700;
+        y:marginTop
+    }
+
+    GameSession
+    {
+        x:marginLeft + 1000;
+        y:marginTop
+    }
+
     MindwaveGame
     {
         x:marginLeft;
-        y:marginTop + 90
+        y:marginTop + 130
         id:mindWaveGame
     }
 }

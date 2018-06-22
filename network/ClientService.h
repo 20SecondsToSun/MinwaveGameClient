@@ -19,6 +19,9 @@ public:
     virtual void setConfig(Config* config) override;
     virtual void stopService() override{};
 
+    Q_INVOKABLE void startGame();
+    Q_INVOKABLE void stopGame();
+
 private:
      QQmlContext* qmlContext;
     // TCPSocketClient* client;
@@ -26,6 +29,7 @@ private:
      QScopedPointer<MindWave>  mindWave;
      QScopedPointer<TCPSocketClient> client;
      QScopedPointer<GameTaskManager> gameTaskManager;
+     QScopedPointer<GameSession> gameSession;
 
 signals:
 
@@ -33,6 +37,7 @@ public slots:
 
 private slots:
       void onItemDataRecieve(const QString& data);
+      void onTaskComleteEvent(int currentTaskIndex, int completionTime, int allTaskCount);
 };
 
 #endif // CLIENTSERVICE_H

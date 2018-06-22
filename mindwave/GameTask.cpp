@@ -6,7 +6,8 @@
 
 GameTask::GameTask()
 {
-
+    // timer = new QTimer(this);
+    //connect(timer, SIGNAL(timeout()), this, SLOT(onUpdate()));
 }
 
 GameTask::GameTask(const QVector<QPointF>& value, const VelocityCalculator& velCalc)
@@ -18,6 +19,8 @@ GameTask::GameTask(const QVector<QPointF>& value, const VelocityCalculator& velC
     }
 
     velocityCalculator = velCalc;
+    timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(onUpdate()));
 }
 
 void GameTask::setPath(const QVector<QPointF>& value)
@@ -30,19 +33,19 @@ void GameTask::init()
     taskComplete = false;
     currentPointIndex = 0;
     completedPathList.clear();
-    setPoints();   
+    setPoints();
     addCompletedPoint(path[0]);
 }
 
 void GameTask::start()
 {
-   taskStartTime = QDateTime::currentMSecsSinceEpoch();
+    startTime = QDateTime::currentMSecsSinceEpoch();
+    timer->start(10);
 }
 
 void GameTask::addCompletedPoint(const QPointF& point)
 {
-    // completedPath.push_back(point);
-     completedPathList.append(point);
+    completedPathList.append(point);
 }
 
 void GameTask::setPoints()
@@ -54,6 +57,21 @@ void GameTask::setPoints()
 
     velocityDirection = QVector2D(endPoint - startPoint);
     velocityDirection.normalize();
+}
+
+void GameTask::onUpdate()
+{
+    //int newTime = QDateTime::currentMSecsSinceEpoch() - startTime;
+
+    int humanValue = 0;
+    //    if(mindWave)
+    //    {
+    //        humanValue = mindWave->attention();
+    //    }
+
+    update(humanValue);
+
+    emit updateEvent();
 }
 
 void GameTask::update(int humanValue)
@@ -82,7 +100,8 @@ void GameTask::update(int humanValue)
         else
         {
             taskComplete = true;
-            emit taskCompleteEvent();
+            stop();
+            emit completeEvent();
         }
     }
     else
@@ -93,15 +112,9 @@ void GameTask::update(int humanValue)
         curPoint.setX(startPoint.x() + position.x() * velocityDirection.x());
         curPoint.setY(startPoint.y() + position.y() * velocityDirection.y());
 
-      //  qDebug()<< curPoint.x()<< curPoint.y();
+        //  qDebug()<< curPoint.x()<< curPoint.y();
     }
 }
-
-//QVector<QPointF> GameTask::getCompletedPath() const
-//{
-//    return completedPath;
-//}
-
 
 float GameTask::getMindwaveLimit() const
 {
@@ -121,12 +134,14 @@ QVariantList GameTask::getFullPath() const
 void GameTask::stop()
 {
     // completedPath.clear();
-     completedPathList.clear();
+    timer->stop();
+    completedPathList.clear();
 }
 
 int GameTask::getCompletionTime() const
 {
-    return QDateTime::currentMSecsSinceEpoch() - taskStartTime;
+    int time = QDateTime::currentMSecsSinceEpoch() - startTime;
+    return time;
 }
 
 QPointF GameTask::getStartPoint() const

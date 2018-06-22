@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QVector>
 #include <QVector2D>
+#include <QTimer>
 #include "mindwave/VelocityCalculator.h"
 
 class GameTask: public QObject
@@ -37,8 +38,7 @@ public:
 private:
     QVector<QPointF> path;
     QPointF curPoint, startPoint, endPoint, position;
-    int currentPointIndex = 0;
-    int taskStartTime;
+    int currentPointIndex = 0;   
     bool taskComplete = false;
     //QVector<QPointF> completedPath, fullPath;
     QVariantList completedPathList, fullPathList;
@@ -49,11 +49,16 @@ private:
     void setPoints();
     void addCompletedPoint(const QPointF& point);
 
+    QTimer* timer;
 
+    int startTime;
 
+private slots:
+     void onUpdate();
 
 signals:
-    void taskCompleteEvent();
+    void updateEvent();
+    void completeEvent();
 
 };
 

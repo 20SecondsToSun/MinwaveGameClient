@@ -8,7 +8,6 @@
 #include <QList>
 #include <QJsonObject>
 
-
 typedef int LancherId;
 typedef QVector<class OneProcessData> ProcessData;
 

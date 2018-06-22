@@ -4,44 +4,77 @@
 
 GameTaskManager::GameTaskManager()
 {
+    gamePreTask = new GamePreTask();
+
     taskCreator = new TaskCreator();
     gameTasks = taskCreator->create();
 
-    gameTimer = new QTimer(this);
-    connect(gameTimer, SIGNAL(timeout()), this, SLOT(onGameTimerUpdate()));    
-
-    //preTasks = preTaskcreator->create();
-    currentPreTask = new GamePreTask();
-    connect(currentPreTask, SIGNAL(update(float)), this, SLOT(onPreGameTaskUpdate(float)));
-    connect(currentPreTask, SIGNAL(complete()), this, SLOT(onPreGameTaskComplete()));
-
-    gameSession = new GameSession();
-
-    setGameTime(0);
+    gamePostTask = new GamePostTask();
 }
 
 void GameTaskManager::start()
 {  
-    setCurrentTaskIndex(0);
-
-    gameSession->init();
-    currentPreTask->init();
-    currentPreTask->run();
-    initCurrentTask();
-    preTaskState = true;
-    running = false;
-    emit preTaskStartEvent();
+   setCurrentGameTaskIndex(0);
+   setTaskState(TaskState::PreGame);
 }
 
-void GameTaskManager::initCurrentTask()
+void GameTaskManager::setCurrentGameTaskIndex(int index)
 {
-    if(currentTask)
+    gameTask = gameTasks[index];
+    currentTaskIndex = index;
+
+    if(gameTask)
     {
-        disconnect(currentTask, SIGNAL(taskCompleteEvent()), this, SLOT(onTaskCompleteEvent()));
+        disconnect(gameTask, SIGNAL(completeEvent()), this, SLOT(onTaskCompleteEvent()));
+        disconnect(gameTask, SIGNAL(updateEvent()), this, SLOT(onTaskUpdateEvent()));
     }
-    currentTask = gameTasks.at(currentTaskIndex);
-    connect(currentTask, SIGNAL(taskCompleteEvent()), this, SLOT(onTaskCompleteEvent()));
-    currentTask->init();
+
+    connect(gameTask, SIGNAL(updateEvent()), this, SLOT(onTaskUpdateEvent()));
+    connect(gameTask, SIGNAL(completeEvent()), this, SLOT(onTaskCompleteEvent()));
+
+    if(gamePreTask)
+    {
+        disconnect(gamePreTask, SIGNAL(update(float)), this, SLOT(onPreGameTaskUpdate(float)));
+        disconnect(gamePreTask, SIGNAL(complete()), this, SLOT(onPreGameTaskComplete()));
+    }
+    connect(gamePreTask, SIGNAL(update(float)), this, SLOT(onPreGameTaskUpdate(float)));
+    connect(gamePreTask, SIGNAL(complete()), this, SLOT(onPreGameTaskComplete()));
+
+    emit taskNumberChangedEvent(index);
+}
+
+void GameTaskManager::stop()
+{
+    setTaskState(TaskState::None);
+}
+
+void GameTaskManager::setTaskState(TaskState taskState)
+{
+    currentTaskState = taskState;
+    switch(taskState)
+    {
+        case TaskState::None:
+            gameTask->stop();
+            gamePreTask->stop();
+            emit updateCanvas();
+        break;
+
+        case TaskState::PreGame:
+            gameTask->init();
+            gamePreTask->init();
+            gamePreTask->run();
+            emit preTaskStartEvent();
+        break;
+
+        case TaskState::Game:
+            gamePreTask->stop();
+            gameTask->start();
+            emit taskStartEvent();
+        break;
+
+        case TaskState::PostGame:
+        break;
+    }
 }
 
 void GameTaskManager::onPreGameTaskUpdate(float countDown)
@@ -52,78 +85,34 @@ void GameTaskManager::onPreGameTaskUpdate(float countDown)
 
 void GameTaskManager::onPreGameTaskComplete()
 {
-    preTaskState = false;
-    running = true;
-    gameStartTime = QDateTime::currentMSecsSinceEpoch();
-
-    currentTask->start();
-    gameTimer->start(gameTimerMills);
-    emit taskStartEvent();
+    setTaskState(TaskState::Game);
 }
 
-void GameTaskManager::stop()
+void GameTaskManager::onTaskUpdateEvent()
 {
-    running = false;
-    preTaskState = false;
-    currentTask->stop();
-    gameTimer->stop();   
-    allTaskCleanTime = 0;
-    setGameTime(0);
-    currentPreTask->stop();
     emit updateCanvas();
-}
-
-void GameTaskManager::onGameTimerUpdate()
-{
-    int newGameTime = QDateTime::currentMSecsSinceEpoch() - gameStartTime;
-    setGameTime(allTaskCleanTime + newGameTime / 1000.0f);
-
-    int humanValue = 0;
-    if(mindWave)
-    {
-        humanValue = mindWave->attention();
-    }
-    currentTask->update(humanValue);
-
-    emit updateCanvas();
-}
-
-void GameTaskManager::setCurrentTaskIndex(int index)
-{
-    currentTaskIndex = index;
-    emit taskNumberChangedEvent(currentTaskIndex);
 }
 
 void GameTaskManager::onTaskCompleteEvent()
 {
     qDebug()<<"-------------------------------onTaskCompleteEvent-------------------------------";
 
-    auto completionTime = currentTask->getCompletionTime();
-    gameSession->addTaskTime(completionTime);
+    auto completionTime = gameTask->getCompletionTime();
 
     if(!isAllTaskCompleted())
     {
-        setCurrentTaskIndex(currentTaskIndex + 1);
-        emit taskComleteEvent(currentTaskIndex, gameTasks.length());
-        gameTimer->stop();
-
-        currentPreTask->init();
-        currentPreTask->run();
-        initCurrentTask();
-        preTaskState = true;
-        running = false;
-        emit preTaskStartEvent();
+        setCurrentGameTaskIndex(currentTaskIndex + 1);
+        emit taskComleteEvent(currentTaskIndex, completionTime, gameTasks.length());
+        setTaskState(TaskState::PreGame);
     }
     else
     {
-        emit taskComleteEvent(gameTasks.length(), gameTasks.length());
+        emit taskComleteEvent(gameTasks.length(), completionTime, gameTasks.length());
         emit allTaskComleteEvent();
         stop();
         qDebug()<<"------------------------------- Game Finished -------------------------------";
     }
 }
-
-
 
 bool GameTaskManager::isAllTaskCompleted() const
 {
@@ -135,62 +124,44 @@ void GameTaskManager::setMindWaveClient(MindWave* value)
     mindWave = value;
 }
 
-void GameTaskManager::setGameTime(float value)
-{
-    _gameTime = value;
-    emit gameTimeChanged();
-}
-
-float GameTaskManager::gameTime() const
-{
-    return _gameTime;
-}
-
-
 bool GameTaskManager::isRunning() const
 {
-    return running;
+    return currentTaskState == TaskState::Game;
 }
 
 bool GameTaskManager::isPreTaskState() const
 {
-    return preTaskState;
+     return currentTaskState == TaskState::PreGame;
 }
-
 
 QPointF GameTaskManager::getStartPoint() const
 {
-   return currentTask->getStartPoint();
+   return gameTask->getStartPoint();
 }
 
 QPointF GameTaskManager::getCurPoint() const
 {
-   return currentTask->getCurPoint();
+   return gameTask->getCurPoint();
 }
 
 QPointF GameTaskManager::getEndPoint() const
 {
-   return currentTask->getEndPoint();
-}
-
-float GameTaskManager::getAllTaskCleanTime() const
-{
-   return allTaskCleanTime;
+   return gameTask->getEndPoint();
 }
 
 float GameTaskManager::getForwardVectorRotation() const
 {
-   return currentTask->getForwardVectorRotation();
+   return gameTask->getForwardVectorRotation();
 }
 
 QVariantList GameTaskManager::getCompletedPath() const
 {
-   return currentTask->getCompletedPath();
+   return gameTask->getCompletedPath();
 }
 
 QVariantList GameTaskManager::getFullPath() const
 {
-   return currentTask->getFullPath();
+   return gameTask->getFullPath();
 }
 
 int GameTaskManager::getTaskCount() const
@@ -200,5 +171,5 @@ int GameTaskManager::getTaskCount() const
 
 float GameTaskManager::getMindwaveLimit() const
 {
-    return currentTask->getMindwaveLimit();
+    return gameTask->getMindwaveLimit();
 }

@@ -4,7 +4,6 @@
 ClientService::ClientService(QQmlContext* qmlContext, QObject *parent) : IService(parent)
 {
     this->qmlContext = qmlContext;
-
 }
 
 void ClientService::setConfig(Config* config)
@@ -19,10 +18,8 @@ void ClientService::startService()
 
    if(!client)
    {
-      // client = new TCPSocketClient();
        client.reset(new TCPSocketClient);
        client->setConfig(socketServerData);
-
        //connect(server, SIGNAL(runningChanged()), this, SLOT(onRunningChanged()));
        //connect(server, SIGNAL(socketConnected(int)), this, SLOT(onItemConnected(int)));
        //connect(server, SIGNAL(socketDisconnected(int)), this, SLOT(onItemDisconnected(int)));
@@ -41,12 +38,36 @@ void ClientService::startService()
      gameTaskManager.reset(new GameTaskManager);
      gameTaskManager->setMindWaveClient(mindWave.data());
      qmlContext->setContextProperty("gameTaskManager", gameTaskManager.data());
+     connect(gameTaskManager.data(), SIGNAL(taskComleteEvent(int, int, int)), this, SLOT(onTaskComleteEvent(int, int, int)));
   }
 
   if(client)
   {
       client->init();
   }
+
+  if(!gameSession)
+  {
+     gameSession.reset(new GameSession());
+     qmlContext->setContextProperty("gameSession", gameSession.data());
+  }
+}
+
+void ClientService::onTaskComleteEvent(int currentTaskIndex, int completionTime, int allTaskCount)
+{
+    gameSession->addTaskTime(completionTime);
+}
+
+void ClientService::startGame()
+{
+    gameSession->start();
+    gameTaskManager->start();
+}
+
+void ClientService::stopGame()
+{
+     gameTaskManager->stop();
+     gameSession->stop();
 }
 
 void ClientService::onItemDataRecieve(const QString& data)
