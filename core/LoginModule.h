@@ -10,12 +10,21 @@ class LoginModule : public BaseModule
 {
     Q_OBJECT
 public:
+    enum class LoginError
+    {
+        UserDoesntExist,
+        WasRecently,
+        ServerError,
+        ArduinoError,
+        Undefined
+    };
+    Q_ENUMS(LoginError)
+
     enum class LoginState
     {
-        Success,
-        Error,
-        UserDoesntExist,
-        Undefined
+        Login,
+        Logout,
+        Error
     };
     Q_ENUMS(LoginState)
 
@@ -28,15 +37,15 @@ public:
     virtual void stop() override;
     virtual void setUserData(UserData* userData);
 
+    friend class LoginModuleTest;
+
 private:
     ArduinoComponent* arduinoComponent;
     UserData* userData;
 
 signals:
-    void loginStateChanged(LoginState loginState);
+    void loginStateChanged(LoginModule::LoginState loginState);
 
-
-public slots:
 };
 
 #endif // LOGINMODULE_H

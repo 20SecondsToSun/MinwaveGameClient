@@ -14,9 +14,18 @@ Window {
     id: mainGameWindow
     title: "Splash Window"
     flags: Qt.SplashScreen
-    x: 2920
+    x: 2820
     width: 1920
     height: 1080
+
+    Connections
+    {
+        target:appController;
+        onAppStateChanged:
+        {
+            setState(appState);
+        }
+    }
 
     GameScreen
     {

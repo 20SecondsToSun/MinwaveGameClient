@@ -13,8 +13,7 @@ public:
     virtual void setQmlContext(QQmlContext* qmlContext) override;
 
     Q_INVOKABLE virtual void loginSuccessTest();
-
-
+    Q_INVOKABLE virtual void logoutTest();
 signals:
 
 public slots:

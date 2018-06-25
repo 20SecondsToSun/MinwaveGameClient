@@ -54,13 +54,13 @@ Item {
         Connections
         {
             target:logger;
-            onLogToOutputConsole:
-            {
-               console.log("-----------", msg);
-               //var color = "red";
-               var richMsg = '<font color=' + color + '>' + msg + '</font>';
-               ouputConsole.append(richMsg);
-            }
+//            onLogToOutputConsole:
+//            {
+//               console.log("-----------", msg);
+//               //var color = "red";
+//               var richMsg = '<font color=' + color + '>' + msg + '</font>';
+//               ouputConsole.append(richMsg);
+//            }
         }
     }
 }

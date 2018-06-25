@@ -61,5 +61,14 @@ Item {
 
             }
         }
+
+        Button
+        {
+            text:"Log out"
+            onClicked:
+            {
+                loginModule.logoutTest();
+            }
+        }
     }
 }

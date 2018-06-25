@@ -14,20 +14,7 @@ ApplicationWindow {
 
     property int marginLeft:50;
     property int marginTop:10;
-    property int columnShift:400;
-
-    Connections
-    {
-        target:appController;
-        onAppStateChanged:
-        {
-            console.log("app state changes :::::::::::::", appState);
-
-            touchWindow.setState(appState);
-            mainWindow.setState(appState);
-            controlsWindow.setState(appState);
-        }
-    }
+    property int columnShift:400;   
 
     Item
     {

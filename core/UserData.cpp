@@ -42,7 +42,6 @@ void UserData::setQmlContext(QQmlContext* value)
 {
     qmlContext = value;
     qmlContext->setContextProperty("userData", this);
-
 }
 
 

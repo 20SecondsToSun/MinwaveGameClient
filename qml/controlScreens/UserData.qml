@@ -5,38 +5,23 @@ import QtQuick.Controls.Styles 1.4
 
 Item {
 
-    function setCompletionProgressText(taskNumber, allTaskCount)
-    {
-        completionText.text = "Completion " + taskNumber + "/" + allTaskCount;
-    }
-
-    //TODO on loading
-    Timer
-    {
-        interval: 500; running: true; repeat: false
-        onTriggered:
-        {
-            setCompletionProgressText(0, gameTaskManager.getTaskCount());
-        }
-    }
-
     Connections
     {
-        target:gameTaskManager;
-
-        onTaskComleteEvent:
-        {
-            setCompletionProgressText(taskNumber, allTaskCount);
-        }
+        target: gameTaskManager
 
         onAllTaskComleteEvent:
         {
-
+            completionText.text = "Completion: " + (gameTaskManager.allTaskCount) + "/" + gameTaskManager.allTaskCount;
         }
 
-        onTaskStartEvent:
+        onTaskComleteEvent:
         {
+            completionText.text = "Completion: " + (gameTaskManager.currentTaskIndex) + "/" + gameTaskManager.allTaskCount;
+        }
 
+        onTaskReset:
+        {
+            completionText.text = "Completion: " + (gameTaskManager.currentTaskIndex) + "/" + gameTaskManager.allTaskCount;
         }
     }
 
@@ -53,7 +38,23 @@ Item {
 
         Text
         {
-            text: "UserName: User1";
+            text: "Name: " + userData.name;
+            font.family: "Helvetica"
+            font.pixelSize: 15
+            color: "#999999"
+        }
+
+        Text
+        {
+            text: "Surname: " + userData.surname;
+            font.family: "Helvetica"
+            font.pixelSize: 15
+            color: "#999999"
+        }
+
+        Text
+        {
+            text: "Id: " + userData.id;
             font.family: "Helvetica"
             font.pixelSize: 15
             color: "#999999"
@@ -62,7 +63,7 @@ Item {
         Text
         {
             id:cleanTimeText;
-            text: "CleanGameTaskTime: 0";
+            text: "Clean game task-time: " + gameSession.cleanTime.toFixed(1);
             font.family: "Helvetica"
             font.pixelSize: 15
             color: "#999999"
@@ -71,7 +72,7 @@ Item {
         Text
         {
             id:stageText;
-            text: "CurrentStage:";
+            text: "Current stage: " +  (gameTaskManager.currentTaskIndex + 1);
             font.family: "Helvetica"
             font.pixelSize: 15
             color: "#999999"
@@ -79,7 +80,7 @@ Item {
         Text
         {
             id:completionText;
-            text: "Completion 0/0";
+            text: "Completion: " + (gameTaskManager.currentTaskIndex) + "/" + gameTaskManager.allTaskCount;
             font.family: "Helvetica"
             font.pixelSize: 15
             color: "#999999"

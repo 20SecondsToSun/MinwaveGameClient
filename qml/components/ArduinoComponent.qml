@@ -18,7 +18,7 @@ Item {
         Text
         {
             id:com;
-            text: "com: ";
+            text: "COM: ";
             font.family: "Helvetica"
             font.pixelSize: 15
             color: "#999999"
@@ -27,7 +27,7 @@ Item {
         Text
         {
             id:baudRate;
-            text: "baudRate: ";
+            text: "Baud rate: ";
             font.family: "Helvetica"
             font.pixelSize: 15
             color: "#999999"
@@ -37,7 +37,7 @@ Item {
         Text
         {
             id:conStatus;
-            text: "connection status: ";
+            text: "Connection status: ";
             font.family: "Helvetica"
             font.pixelSize: 15
             color: "#999999"
@@ -46,7 +46,7 @@ Item {
         Text
         {
             id:cleanTimeText;
-            text: "arduino data: 0";
+            text: "Arduino data: 0";
             font.family: "Helvetica"
             font.pixelSize: 15
             color: "#999999"

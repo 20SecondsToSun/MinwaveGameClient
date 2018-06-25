@@ -30,6 +30,15 @@ public:
     Q_INVOKABLE int getTaskCount() const;
     Q_INVOKABLE float getMindwaveLimit() const;
 
+    Q_PROPERTY(int currentTaskIndex READ currentTaskIndex WRITE setCurrentTaskIndex NOTIFY currentTaskIndexChanged)
+    Q_PROPERTY(int allTaskCount READ allTaskCount WRITE setAllTaskCount NOTIFY allTaskCountChanged)
+
+    void setCurrentTaskIndex(int value);
+    int currentTaskIndex() const;
+
+    void setAllTaskCount(int value);
+    int allTaskCount() const;
+
     enum class TaskState
     {
         None,
@@ -57,19 +66,25 @@ private:
     GamePreTask* gamePreTask = nullptr;
     GameTask* gameTask = nullptr;
     GamePostTask* gamePostTask = nullptr;
-    int currentTaskIndex = 0;
     QList<GameTask*> gameTasks;
+
+    int _currentTaskIndex = 1;
+    int _allTaskCount = 1;
 
 signals:
     void updateCanvas();
     void gameTimeChanged();
-    void taskComleteEvent(int taskNumber, int completionTime, int allTaskCount);
+    void taskComleteEvent(int completionTime);
     void allTaskComleteEvent();
 
     void taskStartEvent();
     void preTaskStartEvent();
     void taskNumberChangedEvent(int taskNumber);
     void preTaskCoundownUpdate(float time);
+
+    void currentTaskIndexChanged();
+    void allTaskCountChanged();
+    void taskReset();
 
 private slots:
     void onTaskCompleteEvent();

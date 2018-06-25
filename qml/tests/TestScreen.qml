@@ -11,11 +11,8 @@ Item {
         font.pixelSize: 18
         color: "#990000"
     }
-
-
     LoginTest
     {
         y : 50;
     }
-
 }

@@ -6,9 +6,13 @@ GameModule::GameModule() : BaseModule()
 
    gameTaskManager.reset(new GameTaskManager);
    gameTaskManager->setMindWaveClient(mindWave.data());
-   connect(gameTaskManager.data(), SIGNAL(taskComleteEvent(int, int, int)), this, SLOT(onTaskComleteEvent(int, int, int)));
+   connect(gameTaskManager.data(), SIGNAL(taskComleteEvent(int)), this, SLOT(onTaskComleteEvent(int)));
+   connect(gameTaskManager.data(), SIGNAL(allTaskComleteEvent()), this, SLOT(onAllTaskComleteEvent()));
+}
 
-   gameSession.reset(new GameSession());
+void GameModule::setGameSession(GameSession* value)
+{
+    gameSession = value;
 }
 
 void GameModule::setQmlContext(QQmlContext* value)
@@ -17,7 +21,7 @@ void GameModule::setQmlContext(QQmlContext* value)
 
     qmlContext->setContextProperty("mind", mindWave.data());   
     qmlContext->setContextProperty("gameTaskManager", gameTaskManager.data());
-    qmlContext->setContextProperty("gameSession", gameSession.data());
+    qmlContext->setContextProperty("gameSession", gameSession);
 }
 
 void GameModule::setConfig(Config* config)
@@ -28,17 +32,25 @@ void GameModule::setConfig(Config* config)
 
 void GameModule::start()
 {
-    gameSession->start();
+   // gameSession->start();
     gameTaskManager->start();
 }
 
 void GameModule::stop()
 {
     gameTaskManager->stop();
-     gameSession->stop();
+    //gameSession->stop();
 }
 
-void GameModule::onTaskComleteEvent(int currentTaskIndex, int completionTime, int allTaskCount)
+void GameModule::onTaskComleteEvent(int completionTime)
 {
     gameSession->addTaskTime(completionTime);
 }
+
+void GameModule::onAllTaskComleteEvent()
+{
+   emit allTaskComleteEvent();
+}
+
+
+

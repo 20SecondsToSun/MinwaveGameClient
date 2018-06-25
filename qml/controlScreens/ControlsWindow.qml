@@ -5,7 +5,7 @@ import "../tests"
 Item {
     property int marginLeft:50;
     property int marginTop:10;
-    property int columnShift:400;
+    property int columnShift:400;   
 
     function setState(state)
     {
@@ -28,13 +28,13 @@ Item {
     GameSession
     {
         x:marginLeft;
-        y:marginTop + 300;
+        y:marginTop + 350;
     }
 
     AppState
     {
         x:marginLeft;
-        y:marginTop + 450;
+        y:marginTop + 500;
     }
 
     MindwaveComponent

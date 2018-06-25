@@ -16,10 +16,10 @@ Item {
         }
         Text
         {
-            text: "Stand Id:";
-            font.family: "Helvetica"
-            font.pixelSize: 15
-            color: "#999999"
+            text: "Stand Id: " + standData.getStandId();
+            font.family: "Helvetica";
+            font.pixelSize: 15;
+            color: "#999999";
         }
     }
 }

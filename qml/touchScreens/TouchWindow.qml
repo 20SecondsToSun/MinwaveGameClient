@@ -17,13 +17,49 @@ Window {
     width: 820
     height: 1080
 
+    Connections
+    {
+        target:appController;
+        onAppStateChanged:
+        {
+            console.log("app state changes :::::::::::::", appState);
+            setState(appState);
+        }
+    }
+
+
+    Connections
+    {
+        target: gameTaskManager
+
+        onAllTaskComleteEvent:
+        {
+            setState(AppState.Result);
+        }
+    }
+
+    Connections
+    {
+        target:loginModule;
+        onLoginStateChanged:
+        {
+            switch(loginState)
+            {
+                case LoginState.Logout:
+                     hideAll();
+                     loginScreen.visible = true;
+                break;
+            }
+        }
+    }
+
     function setState(appState)
     {
         hideAll();
         switch(appState)
         {
         case AppState.Login:
-             loginScreen.visible = true;
+            loginScreen.visible = true;
             break;
 
         case AppState.Instruction:
@@ -88,6 +124,5 @@ Window {
         instructionScreen.reset();
         gameScreen.reset();
         resultScreen.reset();
-
     }
 }

@@ -4,12 +4,21 @@ import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 
 Item {
+    Connections
+    {
+        target:appController;
+        onAppStateChanged:
+        {
+            curScreen.text = "Current screen: " + appState;
+        }
+    }
+
     ColumnLayout
     {
         spacing: 10;
         Text
-        {
-            text: "App state";
+        {            
+            text: "App state" ;
             font.family: "Helvetica"
             font.pixelSize: 17
             color: "#000099"
@@ -17,8 +26,8 @@ Item {
 
         Text
         {
-            id:url;
-            text: "current screen: ";
+            id:curScreen;
+            text: "Current screen: ";
             font.family: "Helvetica"
             font.pixelSize: 15
             color: "#999999"

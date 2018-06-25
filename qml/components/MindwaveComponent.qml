@@ -52,7 +52,7 @@ Item {
         Text
         {
             id:conServer;
-            text: "server: ";
+            text: "Server: ";
             font.family: "Helvetica"
             font.pixelSize: 15
             color: "#999999"
@@ -61,7 +61,7 @@ Item {
         Text
         {
             id:conPort;
-            text: "port: ";
+            text: "Port: ";
             font.family: "Helvetica"
             font.pixelSize: 15
             color: "#999999"
@@ -70,7 +70,7 @@ Item {
         Text
         {
             id:conStatus;
-            text: "connection status: ";
+            text: "Connection status: ";
             font.family: "Helvetica"
             font.pixelSize: 15
             color: "#999999"

@@ -27,7 +27,7 @@ public:
 private:
      QString _name;
      QString _surname;
-     int _id;
+     int _id = -1;
      QQmlContext* qmlContext;
 
 signals:

@@ -10,8 +10,6 @@ Item {
     anchors.fill: parent
     anchors.centerIn: parent
 
-    signal start(bool showInstruction);
-
     Connections
     {
         target:loginModule;
@@ -20,8 +18,8 @@ Item {
             console.log("onLoginSuccess :::::::::::::", loginState);
             switch(loginState)
             {
-                case LoginState.Success:
-                    mainText.text = "О привет, Афанасий! Начнем!";
+                case LoginState.Login:
+                    mainText.text = "О привет, " + userData.name + "! Начнем!";
                     startBtn.visible = true;
                 break;
 
@@ -33,15 +31,15 @@ Item {
 //                     mainText.text = "О привет, Сергей! Слишком часто играем, возвращайся через час";
 //                break;
 
-                case LoginState.UserDoesntExist:
-                    erroText.visible = true;
-                    erroText.text = "Тебя не существует, иди на регистрацию"
-                break;
+//                case LoginState.UserDoesntExist:
+//                    erroText.visible = true;
+//                    erroText.text = "Тебя не существует, иди на регистрацию"
+//                break;
 
-                case LoginState.Error:
-                    erroText.visible = true;
-                    erroText.text = "Arduino или сервер не работает, если тебе это что-нибудь говорит"
-                break;
+//                case LoginState.Error:
+//                    erroText.visible = true;
+//                    erroText.text = "Arduino или сервер не работает, если тебе это что-нибудь говорит"
+//                break;
             }
         }
     }

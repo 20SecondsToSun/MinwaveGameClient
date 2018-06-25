@@ -55,10 +55,11 @@ private:
     ArduinoComponent* arduinoComponent;
     MindwaveComponent* mindWaveComponent;
 
-    StandData standData;
+    StandData* standData;
     UserData* userData;
     Logger logger;
     Config* config;
+    GameSession* gameSession;
 
     AppState appState = AppState::Login;
     BaseModule* currentModule = nullptr;
@@ -69,10 +70,15 @@ private:
 signals:
     void appStateChanged(AppState appState);
 
-public slots:
 
+public slots:
     void onConfigLoaded(Config* config);
     void onConfigError();
+
+private slots:
+    void onLoginStateChanged(LoginModule::LoginState loginState);
+    void onAllTaskComleteEvent();
+
 };
 
 #endif // APPCOPCONTROLLER_H

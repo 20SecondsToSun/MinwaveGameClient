@@ -15,8 +15,8 @@ Item {
             font.pixelSize: 17
             color: "#008800"
         }
-        RowLayout
-        {
+       // RowLayout
+       // {
         Text
         {
             id:conStatus;
@@ -51,6 +51,6 @@ Item {
             font.pixelSize: 15
             color: "#999999"
         }
-        }
+     //   }
     }
 }

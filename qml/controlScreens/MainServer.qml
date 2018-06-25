@@ -18,7 +18,7 @@ Item {
         Text
         {
             id:url;
-            text: "url: ";
+            text: "Url: ";
             font.family: "Helvetica"
             font.pixelSize: 15
             color: "#999999"
@@ -27,7 +27,7 @@ Item {
         Text
         {
             id:response;
-            text: "last response: ";
+            text: "Last response: ";
             font.family: "Helvetica"
             font.pixelSize: 15
             color: "#999999"

@@ -10,18 +10,28 @@ GameTaskManager::GameTaskManager()
     gameTasks = taskCreator->create();
 
     gamePostTask = new GamePostTask();
+
+    setAllTaskCount(gameTasks.length());
+    setCurrentGameTaskIndex(0);
 }
 
 void GameTaskManager::start()
 {  
-   setCurrentGameTaskIndex(0);
    setTaskState(TaskState::PreGame);
+}
+
+void GameTaskManager::stop()
+{
+    setAllTaskCount(gameTasks.length());
+    setCurrentGameTaskIndex(0);
+    setTaskState(TaskState::None);
+    emit taskReset();
 }
 
 void GameTaskManager::setCurrentGameTaskIndex(int index)
 {
     gameTask = gameTasks[index];
-    currentTaskIndex = index;
+    setCurrentTaskIndex(index);
 
     if(gameTask)
     {
@@ -41,11 +51,6 @@ void GameTaskManager::setCurrentGameTaskIndex(int index)
     connect(gamePreTask, SIGNAL(complete()), this, SLOT(onPreGameTaskComplete()));
 
     emit taskNumberChangedEvent(index);
-}
-
-void GameTaskManager::stop()
-{
-    setTaskState(TaskState::None);
 }
 
 void GameTaskManager::setTaskState(TaskState taskState)
@@ -101,22 +106,22 @@ void GameTaskManager::onTaskCompleteEvent()
 
     if(!isAllTaskCompleted())
     {
-        setCurrentGameTaskIndex(currentTaskIndex + 1);
-        emit taskComleteEvent(currentTaskIndex, completionTime, gameTasks.length());
+        setCurrentGameTaskIndex(currentTaskIndex() + 1);
+        emit taskComleteEvent(completionTime);
         setTaskState(TaskState::PreGame);
     }
     else
     {
-        emit taskComleteEvent(gameTasks.length(), completionTime, gameTasks.length());
+        emit taskComleteEvent(completionTime);
         emit allTaskComleteEvent();
-        stop();
+        //stop();
         qDebug()<<"------------------------------- Game Finished -------------------------------";
     }
 }
 
 bool GameTaskManager::isAllTaskCompleted() const
 {
-    return currentTaskIndex == gameTasks.length() - 1;
+    return currentTaskIndex() == gameTasks.length() - 1;
 }
 
 void GameTaskManager::setMindWaveClient(MindwaveComponent* value)
@@ -172,4 +177,26 @@ int GameTaskManager::getTaskCount() const
 float GameTaskManager::getMindwaveLimit() const
 {
     return gameTask->getMindwaveLimit();
+}
+
+void GameTaskManager::setCurrentTaskIndex(int value)
+{
+    _currentTaskIndex = value;
+    emit currentTaskIndexChanged();
+}
+
+int GameTaskManager::currentTaskIndex() const
+{
+    return _currentTaskIndex;
+}
+
+void GameTaskManager::setAllTaskCount(int value)
+{
+    _allTaskCount = value;
+    emit allTaskCountChanged();
+}
+
+int GameTaskManager::allTaskCount() const
+{
+    return _allTaskCount;
 }

@@ -34,13 +34,16 @@ QList<GameTask*> TaskCreator::create()
     QPointF point19 = QPointF(1144, 616);
     QPointF point20 = QPointF(1002, 316);
 
+    QList<GameTask*> gameTasks;
+
     //penta
     //path.clear();
    // path<<QPointF(150, 125)<<QPointF(260, 210)<<QPointF(125, 210)<<QPointF(235, 125)<<QPointF(194, 260)<<QPointF(150, 125);
-   // gameTasks.append(new GameTask(path, velocitycalculator));
+   // velocitycalculator.setLimits(0, 3.5, 40);
+  //  gameTasks.append(new GameTask(path, velocitycalculator));
 
 
-    QList<GameTask*> gameTasks;
+
     //PATH1
     path.clear();
     path<<point4<<point6<<point10<<point7<<point16<<point17;
