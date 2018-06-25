@@ -5,22 +5,22 @@ GameModule::GameModule() : BaseModule()
     client.reset(new TCPSocketClient);
     client->setConfig(socketServerData);
     connect(client.data(), SIGNAL(socketDataRecieve(const QString&)), this, SLOT(onItemDataRecieve(const QString&)));
-    client->init();
+    //client->init();
 
     mindWave.reset(new MindwaveComponent);
-    qmlContext->setContextProperty("mind", mindWave.data());
 
-    gameTaskManager.reset(new GameTaskManager);
-    gameTaskManager->setMindWaveClient(mindWave.data());
-    connect(gameTaskManager.data(), SIGNAL(taskComleteEvent(int, int, int)), this, SLOT(onTaskComleteEvent(int, int, int)));
+   gameTaskManager.reset(new GameTaskManager);
+   gameTaskManager->setMindWaveClient(mindWave.data());
+   connect(gameTaskManager.data(), SIGNAL(taskComleteEvent(int, int, int)), this, SLOT(onTaskComleteEvent(int, int, int)));
 
-    gameSession.reset(new GameSession());
+   gameSession.reset(new GameSession());
 }
 
 void GameModule::setQmlContext(QQmlContext* value)
 {
     BaseModule::setQmlContext(value);
 
+    qmlContext->setContextProperty("mind", mindWave.data());
     qmlContext->setContextProperty("socketClient", client.data());
     qmlContext->setContextProperty("gameTaskManager", gameTaskManager.data());
     qmlContext->setContextProperty("gameSession", gameSession.data());

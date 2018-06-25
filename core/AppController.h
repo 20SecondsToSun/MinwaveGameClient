@@ -12,7 +12,8 @@
 #include "config/Config.h"
 #include "LoginModule.h"
 #include "InstructionModule.h"
-
+#include "GameModule.h"
+#include "ResultModule.h"
 #include "tests/LoginModuleTest.h"
 #include "Types.h"
 
@@ -33,19 +34,20 @@ public:
     AppController(QObject *parent = nullptr);
 
 public:   
-    void setLogger(Logger* logger);
-    void start();
+    void setLogger(Logger* logger);    
     void setQmlContext(QQmlContext* qmlContext);
 
+    Q_INVOKABLE void start();
     Q_INVOKABLE void startInstruction();
-
+    Q_INVOKABLE void startGame();
+    Q_INVOKABLE void startResult();
 
 private:
     LoginModule* loginModule;
     LoginModuleTest* loginModuleTest;
     InstructionModule* instructionModule;
-   // GameModule gameModule;
-   // ResultModule resultModule;
+    GameModule* gameModule;
+    ResultModule* resultModule;
     QList<BaseModule*> modules;
 
     HealthCheckerComponent* healthCheckerComponent;

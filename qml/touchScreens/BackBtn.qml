@@ -3,10 +3,7 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 1.4
 
 Item {
-
-    id:backcore
-
-    signal back();
+    id:backbtn
 
     Button
     {
@@ -15,8 +12,7 @@ Item {
         visible:true
         onClicked:
         {
-            backcore.back();
+           appController.start();
         }
     }
-
 }

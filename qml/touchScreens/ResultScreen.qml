@@ -1,5 +1,4 @@
 import QtQuick 2.0
-import QtQuick.Controls 2.2
 
 Item {
     anchors.fill: parent
@@ -17,21 +16,10 @@ Item {
         {
             id:mainText;
             anchors.centerIn: parent
-            text: "Game 1";
+            text: "Result screen";
             font.family: "Helvetica"
             font.pixelSize: 25
             color: "#999999"
-        }
-
-        Button
-        {
-            text: "Fin"
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: mainText.bottom
-            onClicked:
-            {
-                 appController.startResult();
-            }
         }
     }
 }

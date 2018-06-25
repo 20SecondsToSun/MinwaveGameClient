@@ -34,5 +34,6 @@
         <file>qml/mainScreens/MainWindow.qml</file>
         <file>qml/controlScreens/ControlsWindow.qml</file>
         <file>qml/touchScreens/LoginScreen.qml</file>
+        <file>qml/touchScreens/ResultScreen.qml</file>
     </qresource>
 </RCC>

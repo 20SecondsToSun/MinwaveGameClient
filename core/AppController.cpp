@@ -8,7 +8,7 @@ AppController::AppController(QObject *parent) : QObject(parent)
 
     // loginModule = new LoginModule(arduinoComponent);
     // loginModule->setArduino(arduinoComponent);
-    //  modules.append(loginModule);
+    // modules.append(loginModule);
 
     loginModule = new LoginModuleTest();
     loginModule->setArduino(arduinoComponent);
@@ -17,16 +17,26 @@ AppController::AppController(QObject *parent) : QObject(parent)
     instructionModule = new InstructionModule();
     modules.append(instructionModule);
 
-    // gameModule = new GameModule(mindWaveComponent);
-    // modules.append(gameModule);
+    gameModule = new GameModule();
+    modules.append(gameModule);
 
-    // resultModule = new ResultModule();
-    // modules.append(resultModule);
+    resultModule = new ResultModule();
+    modules.append(resultModule);
 }
 
 void AppController::startInstruction()
 {
     setAppState(AppState::Instruction);
+}
+
+void AppController::startGame()
+{
+    setAppState(AppState::Game);
+}
+
+void AppController::startResult()
+{
+    setAppState(AppState::Result);
 }
 
 void AppController::setQmlContext(QQmlContext* qmlContext)
@@ -58,7 +68,11 @@ BaseModule* AppController::getModuleByAppState(AppState value)
     {
     case AppState::Login: return loginModule;
     case AppState::Instruction: return instructionModule;
+    case AppState::Game: return gameModule;
+    case AppState::Result: return resultModule;
     }
+
+    return nullptr;
 }
 
 void AppController::onConfigLoaded(Config* config)
@@ -88,4 +102,3 @@ void AppController::start()
 {
     setAppState(AppState::Login);
 }
-

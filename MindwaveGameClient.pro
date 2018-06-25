@@ -31,7 +31,8 @@ SOURCES += main.cpp \
     core/GameModule.cpp \
     core/AppController.cpp \
     tests/LoginModuleTest.cpp \
-    core/InstructionModule.cpp
+    core/InstructionModule.cpp \
+    core/ResultModule.cpp
 
 RESOURCES += qml.qrc
 
@@ -87,6 +88,7 @@ HEADERS += \
     core/GameModule.h \
     core/AppController.h \
     tests/LoginModuleTest.h \
-    core/InstructionModule.h
+    core/InstructionModule.h \
+    core/ResultModule.h
 
 DISTFILES +=

@@ -27,8 +27,15 @@ Window {
             break;
 
         case AppState.Instruction:
-            console.log("touchWindow app state changes :::::::::::::", appState);
-             instructionScreen.visible = true;
+            instructionScreen.visible = true;
+            break;
+
+        case AppState.Game:
+            gameScreen.visible = true;
+            break;
+
+        case AppState.Result:
+            resultScreen.visible = true;
             break;
         }
     }
@@ -50,6 +57,12 @@ Window {
         visible: false
     }
 
+    ResultScreen
+    {
+        id: resultScreen;
+        visible: false
+    }
+
     HealthCheckerComponent
     {
         id:health
@@ -62,12 +75,6 @@ Window {
         id:backBtn
         x: 720
         y: 100
-
-        onBack:
-        {
-            hideAll();
-            loginScreen.visible = true;
-        }
     }
 
     function hideAll()
@@ -75,9 +82,12 @@ Window {
         loginScreen.visible = false;
         instructionScreen.visible = false;
         gameScreen.visible = false;
+        resultScreen.visible = false;
+
         loginScreen.reset();
         instructionScreen.reset();
         gameScreen.reset();
+        resultScreen.reset();
 
     }
 }
