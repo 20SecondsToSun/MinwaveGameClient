@@ -43,7 +43,14 @@ Item {
             font.pixelSize: 15
             color: "#999999"
         }
+        Text
+        {
+            id:memoryText;
+            text: "Memory health: ";
+            font.family: "Helvetica"
+            font.pixelSize: 15
+            color: "#999999"
         }
-
+        }
     }
 }

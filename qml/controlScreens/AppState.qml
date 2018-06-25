@@ -9,23 +9,16 @@ Item {
         spacing: 10;
         Text
         {
-            text: "GameSession";
+            text: "App state";
             font.family: "Helvetica"
             font.pixelSize: 17
             color: "#000099"
         }
-        Text
-        {
-            text: "SessionTime: " + gameSession.sessionTime.toFixed(1);
-            font.family: "Helvetica"
-            font.pixelSize: 15
-            color: "#999999"
-        }
 
         Text
         {
-            id:nonActiveText;
-            text: "UserNonActiveTime: 0";
+            id:url;
+            text: "current screen: ";
             font.family: "Helvetica"
             font.pixelSize: 15
             color: "#999999"

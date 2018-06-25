@@ -12,49 +12,70 @@ Item {
 
     }
 
+    StandData
+    {
+        x:marginLeft;
+        y:marginTop;
+    }
+
+    UserData
+    {
+        x:marginLeft;
+        y:marginTop + 100;
+    }
+
+
+    GameSession
+    {
+        x:marginLeft;
+        y:marginTop + 300;
+    }
+
+    AppState
+    {
+        x:marginLeft;
+        y:marginTop + 450;
+    }
+
     MindwaveComponent
     {
-        x:marginLeft
-        y:marginTop
-        id:mindWave
+        x:marginLeft + 300;
+        y:marginTop;
+        id:mindWave;
     }
 
-    LoginTest
+    ArduinoComponent
     {
-        x:marginLeft + 500;
-        y:marginTop + 300;
-
-        onLoginState:
-        {
-            touchWindow.setLoginTestState(state);
-        }
+        x:marginLeft + 300;
+        y:marginTop + 250;
+        id:arduino;
     }
 
-    //    LoginModule
-    //    {
-    //        id:loginModule;
-    //        x:marginLeft + 500;
-    //        y:marginTop
-    //    }
-
-
-
-    //    UserData
-    //    {
-    //        x:marginLeft + 900;
-    //        y:marginTop
-    //    }
-
-    //    GameSession
-    //    {
-    //        x:marginLeft + 1200;
-    //        y:marginTop
-    //    }
+    MainServer
+    {
+        x:marginLeft + 300;
+        y:marginTop + 450;
+        id:server;
+    }
 
     HealthCheckerComponent
     {
-        x:marginLeft;
-        y:marginTop + 190
+        x:marginLeft + 300;
+        y:marginTop + 600;
         id:health
+    }
+
+    Logger
+    {
+        x:marginLeft + 800;
+        y:marginTop;
+        id:logger;
+    }
+
+    TestScreen
+    {
+        x:marginLeft + 800;
+        y:marginTop + 300;
+        id:testScreen;
     }
 }

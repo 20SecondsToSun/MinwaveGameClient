@@ -13,12 +13,16 @@ void LoginModule::setQmlContext(QQmlContext* qmlContext)
 void LoginModule::setConfig(Config* config)
 {
     BaseModule::setConfig(config);
-   // socketServerData = config->socketServerData;
 }
 
 void LoginModule::setArduino(ArduinoComponent* arduinoComponentValue)
 {
      arduinoComponent = arduinoComponentValue;
+}
+
+void LoginModule::setUserData(UserData* value)
+{
+    userData = value;
 }
 
 void LoginModule::start()

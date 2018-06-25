@@ -47,7 +47,7 @@ Item {
         {
             text: "User data";
             font.family: "Helvetica"
-            font.pixelSize: 20
+            font.pixelSize: 17
             color: "#000099"
         }
 

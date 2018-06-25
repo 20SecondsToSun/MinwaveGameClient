@@ -39,12 +39,12 @@ void ConfigParser::parse(const QString& configData)
     }
 }
 
-ConfigData ConfigParser::parseConfigData(const QJsonObject& jsonObj)
+MainConfig ConfigParser::parseConfigData(const QJsonObject& jsonObj)
 {
-    ConfigData configData;
+    MainConfig configData;
     configData.version = jsonObj["version"].toString();
     configData.configUpdateUrl = jsonObj["configUpdateUrl"].toString();
     configData.needRemoteUpdate = jsonObj["needRemoteUpdate"].toBool();
-    configData.launcherId = jsonObj["launcherId"].toInt();
+    configData.standId = jsonObj["launcherId"].toInt();
     return configData;
 }

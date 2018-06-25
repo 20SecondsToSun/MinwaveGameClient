@@ -17,6 +17,25 @@ Item {
 
         Text
         {
+            id:com;
+            text: "com: ";
+            font.family: "Helvetica"
+            font.pixelSize: 15
+            color: "#999999"
+        }
+
+        Text
+        {
+            id:baudRate;
+            text: "baudRate: ";
+            font.family: "Helvetica"
+            font.pixelSize: 15
+            color: "#999999"
+        }
+
+
+        Text
+        {
             id:conStatus;
             text: "connection status: ";
             font.family: "Helvetica"

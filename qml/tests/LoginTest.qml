@@ -3,11 +3,8 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 
-
-
 Item {
     id: loginTest
-    signal loginState(int state);
 
     ColumnLayout
     {
@@ -34,7 +31,7 @@ Item {
             text:"Login success / second time"
             onClicked:
             {
-               loginTest.loginState(2);
+
             }
         }
 
@@ -43,7 +40,7 @@ Item {
             text:"Wait you played resent"
             onClicked:
             {
-               loginTest.loginState(3);
+
             }
         }
 
@@ -52,7 +49,7 @@ Item {
             text:"User doesn't exist"
             onClicked:
             {
-               loginTest.loginState(400);
+
             }
         }
 
@@ -61,10 +58,8 @@ Item {
             text:"Module error"
             onClicked:
             {
-               loginTest.loginState(401);
+
             }
         }
-
     }
-
 }

@@ -18,17 +18,28 @@ struct TCPConfig
     QString delimeter = "\r";
 };
 
+struct ArduinoConfig
+{
+    QString serialPort = "COM1";
+    int baudRate = 9600;
+};
+
 struct MindwaveConfig
 {
    TCPConfig tcpConfig;
 };
 
-struct ConfigData
+struct MainConfig
 {
     QString version;
     QString configUpdateUrl;
     bool needRemoteUpdate;
-    StandId launcherId;
+    StandId standId;
+};
+
+struct ServerConfig
+{
+    QString url = "http://";
 };
 
 

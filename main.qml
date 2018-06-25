@@ -8,7 +8,7 @@ import com.app 1.0
 ApplicationWindow {
     visible: true
     width: 1700
-    height: 580
+    height: 800
     title: qsTr("App")
     id:core
 

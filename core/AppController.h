@@ -7,7 +7,8 @@
 #include "components/HealthCheckerComponent.h"
 #include "components/ArduinoComponent.h"
 #include "components/MindwaveComponent.h"
-#include "StandInfo.h"
+#include "StandData.h"
+#include "UserData.h"
 #include "tools/Logger.h"
 #include "config/Config.h"
 #include "LoginModule.h"
@@ -54,7 +55,8 @@ private:
     ArduinoComponent* arduinoComponent;
     MindwaveComponent* mindWaveComponent;
 
-    StandInfo standInfo;
+    StandData standData;
+    UserData* userData;
     Logger logger;
     Config* config;
 

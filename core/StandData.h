@@ -3,11 +3,11 @@
 
 #include <QObject>
 
-class StandInfo : public QObject
+class StandData : public QObject
 {
     Q_OBJECT
 public:
-    explicit StandInfo(QObject *parent = nullptr);
+    explicit StandData(QObject *parent = nullptr);
 
 private:
     int standId = 1;

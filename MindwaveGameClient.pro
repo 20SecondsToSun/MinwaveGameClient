@@ -14,7 +14,6 @@ SOURCES += main.cpp \
     network/http/HTTPClient.cpp \
     tools/MathTools.cpp \
     components/ArduinoComponent.cpp \
-    core/StandInfo.cpp \
     components/HealthCheckerComponent.cpp \
     components/MindwaveComponent.cpp \
     core/game/GamePostTask.cpp \
@@ -30,7 +29,9 @@ SOURCES += main.cpp \
     tests/LoginModuleTest.cpp \
     core/InstructionModule.cpp \
     core/ResultModule.cpp \
-    core/GameSession.cpp
+    core/GameSession.cpp \
+    core/UserData.cpp \
+    core/StandData.cpp
 
 RESOURCES += qml.qrc
 
@@ -68,14 +69,12 @@ HEADERS += \
     network/http/HTTPClient.h \
     tools/MathTools.h \
     components/ArduinoComponent.h \
-    core/StandInfo.h \
     components/HealthCheckerComponent.h \
     components/MindwaveComponent.h \
     core/game/GamePostTask.h \
     core/game/GamePreTask.h \
     core/game/GameTask.h \
     core/game/GameTaskManager.h \
-    core/game/gametypes.h \
     core/game/TaskCreator.h \
     core/game/VelocityCalculator.h \
     core/BaseModule.h \
@@ -85,6 +84,8 @@ HEADERS += \
     tests/LoginModuleTest.h \
     core/InstructionModule.h \
     core/ResultModule.h \
-    core/GameSession.h
+    core/GameSession.h \
+    core/UserData.h \
+    core/StandData.h
 
 DISTFILES +=

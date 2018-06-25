@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include "BaseModule.h"
+#include "UserData.h"
 #include "components/ArduinoComponent.h"
 
 class LoginModule : public BaseModule
@@ -25,9 +26,11 @@ public:
     void setQmlContext(QQmlContext* qmlContext) override;
     virtual void start() override;
     virtual void stop() override;
+    virtual void setUserData(UserData* userData);
 
 private:
-    ArduinoComponent* arduinoComponent;   
+    ArduinoComponent* arduinoComponent;
+    UserData* userData;
 
 signals:
     void loginStateChanged(LoginState loginState);

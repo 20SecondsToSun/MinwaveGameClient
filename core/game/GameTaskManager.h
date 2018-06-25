@@ -11,7 +11,6 @@
 #include "core/game/GamePreTask.h"
 #include "core/game/GamePostTask.h"
 
-#include "core/game/GameTypes.h"
 #include "core/game/TaskCreator.h"
 
 class GameTaskManager: public QObject

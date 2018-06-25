@@ -51,6 +51,24 @@ Item {
 
         Text
         {
+            id:conServer;
+            text: "server: ";
+            font.family: "Helvetica"
+            font.pixelSize: 15
+            color: "#999999"
+        }
+
+        Text
+        {
+            id:conPort;
+            text: "port: ";
+            font.family: "Helvetica"
+            font.pixelSize: 15
+            color: "#999999"
+        }
+
+        Text
+        {
             id:conStatus;
             text: "connection status: ";
             font.family: "Helvetica"

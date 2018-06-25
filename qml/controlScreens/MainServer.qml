@@ -4,19 +4,12 @@ import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 
 Item {
-
-//    anchors {
-//        bottom: parent.bottom
-//        left: parent.left
-//        right: parent.right
-//    }
-
     ColumnLayout
     {
         spacing: 10;
         Text
         {
-            text: "Server login";
+            text: "Main server";
             font.family: "Helvetica"
             font.pixelSize: 17
             color: "#008800"
@@ -24,8 +17,17 @@ Item {
 
         Text
         {
-            id:cleanTimeText;
-            text: "response: ";
+            id:url;
+            text: "url: ";
+            font.family: "Helvetica"
+            font.pixelSize: 15
+            color: "#999999"
+        }
+
+        Text
+        {
+            id:response;
+            text: "last response: ";
             font.family: "Helvetica"
             font.pixelSize: 15
             color: "#999999"

@@ -14,7 +14,7 @@ public:
     Config();
     bool valid = true;
 
-    ConfigData configData;
+    MainConfig configData;
     MindwaveConfig mindwaveConfig;
 
     QString getRawData() const;

@@ -22,7 +22,7 @@ public slots:
 private:
     Config* config;
 
-    ConfigData parseConfigData(const QJsonObject& jsonObj); 
+    MainConfig parseConfigData(const QJsonObject& jsonObj);
 
 };
 
