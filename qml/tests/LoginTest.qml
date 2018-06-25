@@ -3,8 +3,15 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 
+import "../mainScreens"
+
 Item {
     id: loginTest
+
+    Consts
+    {
+       id:consts;
+    }
 
     ColumnLayout
     {
@@ -14,7 +21,7 @@ Item {
             text: "Login Test";
             font.family: "Helvetica"
             font.pixelSize: 17
-            color: "#009999"
+            color: consts.infoTextColor
         }
 
         Button

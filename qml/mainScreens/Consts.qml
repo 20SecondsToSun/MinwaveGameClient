@@ -2,6 +2,8 @@ import QtQuick 2.0
 
 Item {
 
+    property string infoTextColor: "#009999";
+
     property string cityMapUrl : "qrc:/resources/gameplay-new.jpg";
     property int canvasY: 100;
     property int lineWidth: 5;
