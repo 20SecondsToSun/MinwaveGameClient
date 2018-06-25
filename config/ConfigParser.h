@@ -22,14 +22,7 @@ public slots:
 private:
     Config* config;
 
-    ConfigData parseConfigData(const QJsonObject& jsonObj);
-    QVector<OneProcessData> parseProcessesData(const QJsonObject& jsonObj);
-    SocketServerData parseSocketServerData(const QJsonObject& jsonObj);
-    SocketClientData parseSocketClientData(const QJsonObject& jsonObj);
-    MonitoringData parseMonitoringData(const QJsonObject& jsonObj);    
-    QVector<CommandData> parseProcessCommandData(const QJsonObject& jsonObj);
-    ProcessConfigData parseProcessConfigData(const QJsonObject& jsonObj);
-    AutoUpdateData parseAutoUpdateData(const QJsonObject& jsonObj);
+    ConfigData parseConfigData(const QJsonObject& jsonObj); 
 
 };
 

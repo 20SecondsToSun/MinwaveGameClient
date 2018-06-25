@@ -9,7 +9,6 @@ SOURCES += main.cpp \
     config/ConfigParser.cpp \
     config/ConfigWriter.cpp \
     core/Types.cpp \
-    network/socketClient/SocketClient.cpp \
     network/socketClient/TCPSocketClient.cpp \
     tools/Logger.cpp \
     network/http/HTTPClient.cpp \
@@ -64,7 +63,6 @@ HEADERS += \
     config/ConfigParser.h \
     config/ConfigWriter.h \
     core/Types.h \
-    network/socketClient/SocketClient.h \
     network/socketClient/TCPSocketClient.h \
     tools/Logger.h \
     network/http/HTTPClient.h \

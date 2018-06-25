@@ -5,15 +5,12 @@
 #include <QQmlContext>
 #include <QScopedPointer>
 
-#include "network/socketClient/SocketClient.h"
 #include "config/ConfigController.h"
 #include "core/AppController.h"
 #include "core/LoginModule.h"
 
 int main(int argc, char *argv[])
-{
-    qRegisterMetaType<ConnectedAppData>("ConnectedAppData");
-
+{ 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QApplication app(argc, argv);
     QQmlApplicationEngine engine;

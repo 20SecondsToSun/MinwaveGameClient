@@ -42,7 +42,6 @@ signals:
     void portChanged();
     void autoConnectChanged();
     void connectionMetaChanged();
-
     void socketDataRecieve(const QString& data);
 
 public:

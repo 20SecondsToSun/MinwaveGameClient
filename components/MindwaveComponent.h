@@ -42,8 +42,6 @@ private:
      MindwaveConfig mindwaveConfig;
 
      QScopedPointer<TCPSocketClient> client;
-     SocketServerData socketServerData;
-
      QTimer* senderTimer;
 
 signals:

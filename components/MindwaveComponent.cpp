@@ -90,18 +90,6 @@ void MindwaveComponent::setMeditation(int value)
 void MindwaveComponent::setPoorSignalLevel(int value)
 {
     _poorSignalLevel = value;
-//    if(value >= 0 && value < 50)
-//    {
-//        _poorSignalColor = "#009900";
-//    }
-//    else if(value >= 50 && value < 150)
-//    {
-//        _poorSignalColor = "#999900";
-//    }
-//    else if(value >= 150 && value <= 200)
-//    {
-//        _poorSignalColor = "#999999";
-//    }
 
     if(value >= 66 && value <= 100)
     {
@@ -160,7 +148,7 @@ void MindwaveComponent::parse(const QString& data)
         int  RandMed = qrand() % ((100 + 1) - 0) + 0;
         setMeditation(RandMed);
     }
-   //  qDebug()<<data;
+    // qDebug()<<data;
     int signalValue = jsonObj.value("poorSignalLevel").toInt();
     int signalRemappedValue = MathTools::map<float>(signalValue, 0,  200, 100,  0);
 
