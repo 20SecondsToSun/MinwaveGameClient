@@ -1,42 +1,42 @@
-#include "MindWave.h"
+#include "MindwaveComponent.h"
 #include <QDebug>
 #include <QJsonDocument.h>
 #include <QJsonObject.h>
 #include "tools/MathTools.h"
 
-MindWave::MindWave()
+MindwaveComponent::MindwaveComponent(QObject *parent) : QObject(parent)
 {
 
 }
 
-int MindWave::attention() const
+int MindwaveComponent::attention() const
 {
     return _attention;
 }
 
-int MindWave::meditation() const
+int MindwaveComponent::meditation() const
 {
     return _meditation;
 }
 
-int MindWave::poorSignalLevel() const
+int MindwaveComponent::poorSignalLevel() const
 {
     return _poorSignalLevel;
 }
 
-void MindWave::setAttention(int value)
+void MindwaveComponent::setAttention(int value)
 {
     _attention = value;
     emit attentionChanged();
 }
 
-void MindWave::setMeditation(int value)
+void MindwaveComponent::setMeditation(int value)
 {
     _meditation = value;
     emit meditationChanged();
 }
 
-void MindWave::setPoorSignalLevel(int value)
+void MindwaveComponent::setPoorSignalLevel(int value)
 {
     _poorSignalLevel = value;
 //    if(value >= 0 && value < 50)
@@ -68,22 +68,22 @@ void MindWave::setPoorSignalLevel(int value)
     emit poorSignalLevelChanged();
 }
 
-QString MindWave::poorSignalColor() const
+QString MindwaveComponent::poorSignalColor() const
 {
     return _poorSignalColor;
 }
 
-int MindWave::getAttentionDelta() const
+int MindwaveComponent::getAttentionDelta() const
 {
     return _attention - _lastAttention;
 }
 
-int MindWave::getMeditationDelta() const
+int MindwaveComponent::getMeditationDelta() const
 {
     return _meditation - _lastMeditation;
 }
 
-void MindWave::parse(const QString& data)
+void MindwaveComponent::parse(const QString& data)
 {
     QJsonDocument jsonDoc = QJsonDocument::fromJson(data.toUtf8());
     QJsonObject jsonObj   = jsonDoc.object();
@@ -117,17 +117,3 @@ void MindWave::parse(const QString& data)
 
     qDebug()<<"attention: "<<_attention <<"meditation: "<<_meditation <<"poorSignalLevel: "<<_poorSignalLevel;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

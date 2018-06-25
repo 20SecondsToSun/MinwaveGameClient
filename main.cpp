@@ -9,6 +9,7 @@
 #include "network/socketClient/SocketClient.h"
 #include "config/ConfigController.h"
 #include "core/MainController.h"
+#include "core/AppController.h"
 #include "core/IService.h"
 
 
@@ -26,20 +27,25 @@ int main(int argc, char *argv[])
     QScopedPointer<ConfigController> configController(new ConfigController);
     engine.rootContext()->setContextProperty("configController", configController.data());
 
-    QScopedPointer<MainController> mainController(new MainController);
-    engine.rootContext()->setContextProperty("mainController", mainController.data());
+   // QScopedPointer<MainController> mainController(new MainController);
+   // engine.rootContext()->setContextProperty("mainController", mainController.data());
+
+    QScopedPointer<AppController> appController(new AppController);
+    engine.rootContext()->setContextProperty("appController", appController.data());
 
     // services
-    QScopedPointer<IService> clientService(new ClientService(engine.rootContext()));
-    engine.rootContext()->setContextProperty("clientService", clientService.data());
+   // QScopedPointer<IService> clientService(new ClientService(engine.rootContext()));
+   // engine.rootContext()->setContextProperty("clientService", clientService.data());
 
     // add services
-    mainController.data()->addService(clientService.data());
-    mainController.data()->setLogger(logger.data());
+//    mainController.data()->addService(clientService.data());
+    appController.data()->setLogger(logger.data());
 
     // listeners
-    QObject::connect(configController.data(), SIGNAL(configServiceReady(Config*)), mainController.data(), SLOT(configServiceReady(Config*)));
-    QObject::connect(configController.data(), SIGNAL(configServiceError()), mainController.data(), SLOT(configServiceError()));
+    QObject::connect(configController.data(), SIGNAL(configServiceReady(Config*)), appController.data(), SLOT(onConfigLoaded(Config*)));
+    QObject::connect(configController.data(), SIGNAL(configServiceError()), appController.data(), SLOT(onConfigError()));
+
+    qmlRegisterType<AppController>("com.app", 1, 0, "AppState");
 
 
     // qml

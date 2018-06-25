@@ -5,14 +5,14 @@
 #include <QList>
 #include <QTimer>
 #include <QVariantList>
-#include "mindwave/MindWave.h"
+#include "components/MindwaveComponent.h"
 
-#include "mindwave/GameTask.h"
-#include "mindwave/GamePreTask.h"
-#include "mindwave/GamePostTask.h"
+#include "core/game/GameTask.h"
+#include "core/game/GamePreTask.h"
+#include "core/game/GamePostTask.h"
 
-#include "mindwave/GameTypes.h"
-#include "mindwave/TaskCreator.h"
+#include "core/game/GameTypes.h"
+#include "core/game/TaskCreator.h"
 #include "mindwave/GameSession.h"
 
 
@@ -45,13 +45,13 @@ public:
 
     void start();
     void stop();
-    void setMindWaveClient(MindWave* mindWave);
+    void setMindWaveClient(MindwaveComponent* mindWave);
     void setTaskState(TaskState taskState);
 
 private:
     TaskState currentTaskState;
     TaskCreator* taskCreator;
-    MindWave* mindWave = nullptr;
+    MindwaveComponent* mindWave = nullptr;
 
     void runTask();
     void preTaskTimerComplete();

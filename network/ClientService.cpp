@@ -29,7 +29,7 @@ void ClientService::startService()
 
   if(!mindWave)
   {
-    mindWave.reset(new MindWave);
+    mindWave.reset(new MindwaveComponent);
     qmlContext->setContextProperty("mind", mindWave.data());
   }
 

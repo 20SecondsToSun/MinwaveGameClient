@@ -2,7 +2,7 @@
 #define TASKCREATOR_H
 
 #include <QObject>
-#include "mindwave/GameTask.h"
+#include "core/game/GameTask.h"
 
 class TaskCreator : public QObject
 {

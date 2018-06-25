@@ -3,8 +3,8 @@
 
 #include <QObject>
 #include <QQmlContext>
-#include "mindwave/MindWave.h"
-#include "mindwave/GameTaskManager.h"
+#include "components/MindwaveComponent.h"
+#include "core/game/GameTaskManager.h"
 #include <core/IService.h>
 
 class TCPSocketClient;
@@ -26,7 +26,7 @@ private:
      QQmlContext* qmlContext;
     // TCPSocketClient* client;
      SocketServerData socketServerData;
-     QScopedPointer<MindWave>  mindWave;
+     QScopedPointer<MindwaveComponent>  mindWave;
      QScopedPointer<TCPSocketClient> client;
      QScopedPointer<GameTaskManager> gameTaskManager;
      QScopedPointer<GameSession> gameSession;

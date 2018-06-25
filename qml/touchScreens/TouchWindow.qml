@@ -5,6 +5,8 @@ import QtQuick.Controls.Styles 1.4
 import QtQuick.Window 2.2
 import "../components"
 
+import com.app 1.0
+
 Window {
     objectName: "touchWindow"
     visible: true
@@ -15,6 +17,18 @@ Window {
     width: 820
     height: 1080
 
+    function setState(appState)
+    {
+        hideAll();
+
+        switch(appState)
+        {
+        case AppState.Login:
+             helloScreen.visible = true;
+            break;
+        }
+    }
+
     function setLoginTestState(state)
     {
         helloScreen.setTestState(state);
@@ -22,7 +36,7 @@ Window {
 
     Component.onCompleted:
     {
-        instructionScreen.visible = false;
+       // instructionScreen.visible = false;
     }
 
     HelloScreen

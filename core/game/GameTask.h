@@ -5,7 +5,7 @@
 #include <QVector>
 #include <QVector2D>
 #include <QTimer>
-#include "mindwave/VelocityCalculator.h"
+#include "core/game/VelocityCalculator.h"
 
 class GameTask: public QObject
 {

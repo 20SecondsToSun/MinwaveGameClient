@@ -1,15 +1,13 @@
-#ifndef MINDWAVE_H
-#define MINDWAVE_H
+#ifndef MINDWAVECOMPONENT_H
+#define MINDWAVECOMPONENT_H
 
 #include <QObject>
-#include <QString>
 
-class MindWave : public QObject
+class MindwaveComponent : public QObject
 {
     Q_OBJECT
-
 public:
-    MindWave();
+    explicit MindwaveComponent(QObject *parent = nullptr);
 
     Q_PROPERTY(int attention READ attention WRITE setAttention NOTIFY attentionChanged)
     Q_PROPERTY(int meditation READ meditation WRITE setMeditation NOTIFY meditationChanged)
@@ -46,4 +44,4 @@ signals:
     void poorSignalLevelChanged();
 };
 
-#endif // MINDWAVE_H
+#endif // MINDWAVECOMPONENT_H

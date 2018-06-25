@@ -119,7 +119,7 @@ bool GameTaskManager::isAllTaskCompleted() const
     return currentTaskIndex == gameTasks.length() - 1;
 }
 
-void GameTaskManager::setMindWaveClient(MindWave* value)
+void GameTaskManager::setMindWaveClient(MindwaveComponent* value)
 {
     mindWave = value;
 }

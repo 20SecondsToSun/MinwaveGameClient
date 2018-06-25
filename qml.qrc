@@ -33,5 +33,7 @@
         <file>qml/touchScreens/InstructionScreen.qml</file>
         <file>qml/touchScreens/BackBtn.qml</file>
         <file>qml/touchScreens/GameScreen.qml</file>
+        <file>qml/mainScreens/MainWindow.qml</file>
+        <file>qml/controlScreens/ControlsWindow.qml</file>
     </qresource>
 </RCC>

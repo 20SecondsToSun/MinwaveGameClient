@@ -17,16 +17,22 @@ SOURCES += main.cpp \
     tools/Logger.cpp \
     network/ClientService.cpp \
     network/http/HTTPClient.cpp \
-    mindwave/MindWave.cpp \
-    mindwave/GameTaskManager.cpp \
-    mindwave/VelocityCalculator.cpp \
     tools/MathTools.cpp \
-    mindwave/TaskCreator.cpp \
-    mindwave/GameTask.cpp \
-    mindwave/GamePreTask.cpp \
     mindwave/GameSession.cpp \
-    mindwave/GamePostTask.cpp \
-    components/ArduinoComponent.cpp
+    components/ArduinoComponent.cpp \
+    core/StandInfo.cpp \
+    components/HealthCheckerComponent.cpp \
+    components/MindwaveComponent.cpp \
+    core/game/GamePostTask.cpp \
+    core/game/GamePreTask.cpp \
+    core/game/GameTask.cpp \
+    core/game/GameTaskManager.cpp \
+    core/game/TaskCreator.cpp \
+    core/game/VelocityCalculator.cpp \
+    core/BaseModule.cpp \
+    core/LoginModule.cpp \
+    core/GameModule.cpp \
+    core/AppController.cpp
 
 RESOURCES += qml.qrc
 
@@ -67,16 +73,22 @@ HEADERS += \
     tools/Logger.h \
     network/ClientService.h \
     network/http/HTTPClient.h \
-    mindwave/MindWave.h \
-    mindwave/GameTask.h \
-    mindwave/GameTaskManager.h \
-    mindwave/VelocityCalculator.h \
-    tools/MathTools.h \
-    mindwave/TaskCreator.h \
-    mindwave/GamePreTask.h \
+    tools/MathTools.h \   
     mindwave/GameSession.h \
-    mindwave/gametypes.h \
-    mindwave/GamePostTask.h \
-    components/ArduinoComponent.h
+    components/ArduinoComponent.h \
+    core/StandInfo.h \
+    components/HealthCheckerComponent.h \
+    components/MindwaveComponent.h \
+    core/game/GamePostTask.h \
+    core/game/GamePreTask.h \
+    core/game/GameTask.h \
+    core/game/GameTaskManager.h \
+    core/game/gametypes.h \
+    core/game/TaskCreator.h \
+    core/game/VelocityCalculator.h \
+    core/BaseModule.h \
+    core/LoginModule.h \
+    core/GameModule.h \
+    core/AppController.h
 
 DISTFILES +=

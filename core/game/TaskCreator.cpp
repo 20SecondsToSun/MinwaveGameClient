@@ -1,5 +1,5 @@
 #include "TaskCreator.h"
-#include "mindwave/GameTask.h"
+#include "core/game/GameTask.h"
 
 TaskCreator::TaskCreator(QObject *parent) : QObject(parent)
 {

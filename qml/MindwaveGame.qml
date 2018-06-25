@@ -18,6 +18,7 @@ Item {
 
     }
 
+
     Connections
     {
         target:gameTaskManager;      
