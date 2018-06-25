@@ -23,11 +23,11 @@ void ConfigParser::parse(const QString& configData)
         QJsonObject jsonObj   = jsonDoc.object();
 
         config->configData = parseConfigData(jsonObj);
-        config->processData = parseProcessesData(jsonObj);
-        config->socketServerData = parseSocketServerData(jsonObj);
-        config->socketClientData = parseSocketClientData(jsonObj);
-        config->monitoringData = parseMonitoringData(jsonObj);
-        config->autoUpdateData = parseAutoUpdateData(jsonObj);
+        //config->processData = parseProcessesData(jsonObj);
+       // config->socketServerData = parseSocketServerData(jsonObj);
+       // config->socketClientData = parseSocketClientData(jsonObj);
+      // config->monitoringData = parseMonitoringData(jsonObj);
+       // config->autoUpdateData = parseAutoUpdateData(jsonObj);
         config->setRawData(configData);
         config->valid = true;
         emit parseComplete(config);

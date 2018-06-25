@@ -2,6 +2,7 @@
 #define MINDWAVECOMPONENT_H
 
 #include <QObject>
+#include "network/socketClient/TCPSocketClient.h"
 
 class MindwaveComponent : public QObject
 {
@@ -26,6 +27,7 @@ public:
      void setPoorSignalLevel(int value);
 
      void parse(const QString& data);
+     void setConfig(const MindwaveConfig& config);
 
 private:
      int _attention = 0;
@@ -37,11 +39,26 @@ private:
      int _poorSignalLevel = 0;
 
      QString _poorSignalColor = "black";
+     MindwaveConfig mindwaveConfig;
+
+     QScopedPointer<TCPSocketClient> client;
+     SocketServerData socketServerData;
+
+     QTimer* senderTimer;
 
 signals:
-    void attentionChanged();
-    void meditationChanged();
-    void poorSignalLevelChanged();
+     void attentionChanged();
+     void meditationChanged();
+     void poorSignalLevelChanged();
+
+private slots:
+     void onItemDataRecieve(const QString& data);
+     void onConnectionSuccess();
+     void onDisconnectionSuccess();
+
+
+     void senderTimerHandler();
+
 };
 
 #endif // MINDWAVECOMPONENT_H

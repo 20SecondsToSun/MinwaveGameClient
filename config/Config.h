@@ -15,11 +15,7 @@ public:
     bool valid = true;
 
     ConfigData configData;
-    SocketServerData socketServerData;
-    SocketClientData socketClientData;
-    ProcessData processData;
-    MonitoringData monitoringData;
-    AutoUpdateData autoUpdateData;
+    MindwaveConfig mindwaveConfig;
 
     QString getRawData() const;
     void setRawData(const QString& value);

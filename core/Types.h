@@ -11,6 +11,30 @@
 typedef int LancherId;
 typedef QVector<class OneProcessData> ProcessData;
 
+
+struct TCPConfig
+{
+    QString ip = "127.0.0.1";
+    int port = 13854;
+    bool autoConnect = true;
+    QString delimeter = "\r";
+};
+
+struct MindwaveConfig
+{
+   TCPConfig tcpConfig;
+};
+
+
+
+
+
+
+
+
+
+
+
 enum class AppTypeId
 {
     Undefined,
@@ -68,6 +92,8 @@ struct SocketServerData
     QString initialCommand;
     QList<AppTypeId> connectionTypesAllow;
 };
+
+
 
 struct SocketClientData
 {

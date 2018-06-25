@@ -13,10 +13,6 @@
 
 #include "core/game/GameTypes.h"
 #include "core/game/TaskCreator.h"
-#include "mindwave/GameSession.h"
-
-
-
 
 class GameTaskManager: public QObject
 {
@@ -64,7 +60,6 @@ private:
     GamePostTask* gamePostTask = nullptr;
     int currentTaskIndex = 0;
     QList<GameTask*> gameTasks;
-
 
 signals:
     void updateCanvas();

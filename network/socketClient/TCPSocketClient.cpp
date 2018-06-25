@@ -11,7 +11,7 @@ TCPSocketClient::TCPSocketClient():
 
 }
 
-void TCPSocketClient::setConfig(const SocketServerData& config)
+void TCPSocketClient::setConfig(const TCPConfig& config)
 {
     setIp(config.ip);
     setPort(config.port);
@@ -58,24 +58,7 @@ TCPSocketClient::~TCPSocketClient()
 void TCPSocketClient::connected()
 {   
     qDebug()<<"TCPSocketSender : connected";
-    setConnectionStatus(ConnectionStatus::CONNECTED);
-
-    sendData("{\"enableRawOutput\": true, \"format\": \"Json\"}\\r");
-
-    senderTimer = new QTimer(this);
-    senderTimer->setSingleShot(true);
-    senderTimer->setInterval(2000);
-    connect(senderTimer, SIGNAL(timeout()), this, SLOT(senderTimerHandler()));
-    senderTimer->start();
-}
-
-
-void TCPSocketClient::senderTimerHandler()
-{
-    qDebug()<<"---------------------------------- ";
-
-    sendData("{\"appName\":\"BrainwaveShooters\",\"appKey\":\"0054141b4b4c567c558d3a76cb8d715cbde03096\"}\\r");
-   // sendData("{""getAppNames"":null}\\r");
+    setConnectionStatus(ConnectionStatus::CONNECTED);  
 }
 
 void TCPSocketClient::setConnectionStatus(ConnectionStatus status)
@@ -116,10 +99,8 @@ void TCPSocketClient::disconnected()
 void TCPSocketClient::readyRead()
 {
     QByteArray data = socket->readAll();
-    QString  s_data = data;//getLastMessage(data);
+    QString  s_data = data;
     emit socketDataRecieve(s_data);
-
-   // qDebug()<< this << "data = " <<s_data;
 }
 
 void TCPSocketClient::bytesWritten(qint64)
@@ -199,24 +180,6 @@ void TCPSocketClient::killAllTimers()
 void TCPSocketClient::setDelimeter(const QString& value)
 {
     delimeter = value;
-}
-
-QString TCPSocketClient::getLastMessage(const QByteArray& data)
-{
-    QString s_data = QString::fromUtf8(data);
-    QStringList query = s_data.split(delimeter);
-    QString lastResponse;
-
-    for (int i = query.size() - 1; i >= 0; --i)
-    {
-        if(query.at(i) != "")
-        {
-            lastResponse = query.at(i);
-            break;
-        }
-    }
-
-    return lastResponse;
 }
 
 void TCPSocketClient::setRunning(bool value)

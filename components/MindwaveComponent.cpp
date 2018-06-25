@@ -6,7 +6,58 @@
 
 MindwaveComponent::MindwaveComponent(QObject *parent) : QObject(parent)
 {
+    client.reset(new TCPSocketClient);
+    connect(client.data(), SIGNAL(socketDataRecieve(const QString&)), this, SLOT(onItemDataRecieve(const QString&)));
+    connect(client.data(), SIGNAL(connectionSuccess()), this, SLOT(onConnectionSuccess()));
+    connect(client.data(), SIGNAL(disconnectionSuccess()), this, SLOT(onDisconnectionSuccess()));
 
+}
+
+void MindwaveComponent::onConnectionSuccess()
+{
+    qDebug()<<"MindwaveComponent : connected";
+    client->sendData("{\"enableRawOutput\": true, \"format\": \"Json\"}\\r");
+
+    senderTimer = new QTimer(this);
+    senderTimer->setSingleShot(true);
+    senderTimer->setInterval(2000);
+    connect(senderTimer, SIGNAL(timeout()), this, SLOT(senderTimerHandler()));
+    senderTimer->start();
+}
+
+void MindwaveComponent::senderTimerHandler()
+{
+    client->sendData("{\"appName\":\"BrainwaveShooters\",\"appKey\":\"0054141b4b4c567c558d3a76cb8d715cbde03096\"}\\r");
+   // sendData("{""getAppNames"":null}\\r");
+}
+
+void MindwaveComponent::onDisconnectionSuccess()
+{
+    qDebug()<<"MindwaveComponent : disconnected............";
+}
+
+void MindwaveComponent::setConfig(const MindwaveConfig& config)
+{
+    client->setConfig(config.tcpConfig);
+    client->init();
+}
+
+void MindwaveComponent::onItemDataRecieve(const QString& data)
+{
+    auto delimeter = mindwaveConfig.tcpConfig.delimeter;
+
+    QStringList json = data.split(delimeter);
+    int count = 0;
+
+    for(int i = 0; i < json.length(); i++)
+    {
+        if(json[i].indexOf("eSense") != -1)
+        {
+            count++;
+            parse(json[i]);
+            break;
+        }
+    }
 }
 
 int MindwaveComponent::attention() const

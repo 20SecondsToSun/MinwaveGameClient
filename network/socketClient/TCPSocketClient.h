@@ -9,7 +9,6 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QtQML>
-
 #include "core/Types.h"
 
 class TCPSocketClient : public QObject
@@ -68,7 +67,6 @@ public:
     void setPort(int value);
     void setAutoConnect(bool value);
 
-
     Q_INVOKABLE void connectToServer(const QString& ip, int port);
     Q_INVOKABLE void sendData(const QString& data);
 
@@ -79,7 +77,7 @@ public:
 
     virtual void init();
 
-    virtual void setConfig(const SocketServerData& config);
+    virtual void setConfig(const TCPConfig& config);
 
 protected:
     QTcpSocket* socket;
@@ -92,10 +90,8 @@ protected:
     QString _connectionMeta;
     int _port;
     bool _autoConnect;
-
     QString delimeter;
 
-    QString getLastMessage(const QByteArray& data);
     void setConnectionStatus(ConnectionStatus status);
 
 private:
@@ -109,7 +105,6 @@ private:
 private slots:
     void connectionTimerHandler();
     void reconnectionTimerHandler();
-    void senderTimerHandler();
 };
 
 #endif // TCPSOCKETSENDER_H

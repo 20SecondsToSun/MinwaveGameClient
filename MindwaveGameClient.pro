@@ -11,11 +11,9 @@ SOURCES += main.cpp \
     core/Types.cpp \
     network/socketClient/SocketClient.cpp \
     network/socketClient/TCPSocketClient.cpp \
-    network/socketClient/TCPSocketClientCmnd.cpp \
     tools/Logger.cpp \
     network/http/HTTPClient.cpp \
     tools/MathTools.cpp \
-    mindwave/GameSession.cpp \
     components/ArduinoComponent.cpp \
     core/StandInfo.cpp \
     components/HealthCheckerComponent.cpp \
@@ -32,7 +30,8 @@ SOURCES += main.cpp \
     core/AppController.cpp \
     tests/LoginModuleTest.cpp \
     core/InstructionModule.cpp \
-    core/ResultModule.cpp
+    core/ResultModule.cpp \
+    core/GameSession.cpp
 
 RESOURCES += qml.qrc
 
@@ -67,11 +66,9 @@ HEADERS += \
     core/Types.h \
     network/socketClient/SocketClient.h \
     network/socketClient/TCPSocketClient.h \
-    network/socketClient/TCPSocketClientCmnd.h \
     tools/Logger.h \
     network/http/HTTPClient.h \
-    tools/MathTools.h \   
-    mindwave/GameSession.h \
+    tools/MathTools.h \
     components/ArduinoComponent.h \
     core/StandInfo.h \
     components/HealthCheckerComponent.h \
@@ -89,6 +86,7 @@ HEADERS += \
     core/AppController.h \
     tests/LoginModuleTest.h \
     core/InstructionModule.h \
-    core/ResultModule.h
+    core/ResultModule.h \
+    core/GameSession.h
 
 DISTFILES +=

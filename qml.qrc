@@ -2,26 +2,11 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>qtquickcontrols2.conf</file>
-        <file>qml/SocketClient.qml</file>
         <file>resources/config.json</file>
-        <file>qml/MindwaveGame.qml</file>
-        <file>resources/road.jpg</file>
-        <file>resources/car.png</file>
-        <file>qml/PreTaskPopup.qml</file>
-        <file>qml/StartBullet.qml</file>
-        <file>qml/FinishBullet.qml</file>
-        <file>qml/Consts.qml</file>
-        <file>resources/road1.jpg</file>
-        <file>resources/start.png</file>
         <file>resources/car2.png</file>
         <file>resources/shadow.png</file>
-        <file>qml/CircularProgress.qml</file>
-        <file>resources/start2.png</file>
         <file>resources/finish.png</file>
         <file>resources/gameplay-new.jpg</file>
-        <file>qml/GameScreen.qml</file>
-        <file>qml/GameSession.qml</file>
-        <file>qml/UserData.qml</file>
         <file>qml/components/ArduinoComponent.qml</file>
         <file>qml/login/ServerLogin.qml</file>
         <file>qml/components/MindwaveComponent.qml</file>
@@ -35,5 +20,14 @@
         <file>qml/controlScreens/ControlsWindow.qml</file>
         <file>qml/touchScreens/LoginScreen.qml</file>
         <file>qml/touchScreens/ResultScreen.qml</file>
+        <file>qml/mainScreens/Consts.qml</file>
+        <file>qml/mainScreens/GameScreen.qml</file>
+        <file>qml/controlScreens/GameSession.qml</file>
+        <file>qml/controlScreens/SocketClient.qml</file>
+        <file>qml/controlScreens/UserData.qml</file>
+        <file>qml/mainScreens/elements/CircularProgress.qml</file>
+        <file>qml/mainScreens/elements/FinishBullet.qml</file>
+        <file>qml/mainScreens/elements/StartBullet.qml</file>
+        <file>qml/mainScreens/popups/PreTaskPopup.qml</file>
     </qresource>
 </RCC>

@@ -1,5 +1,8 @@
 import QtQuick 2.0
 
+import "elements"
+import "popups"
+
 Item {
 
     id:gameView
@@ -185,25 +188,36 @@ Item {
         shadow.rotation = car.rotation;
     }
 
+    function gameStop()
+    {
+        car.visible = false;
+        shadow.visible = false;
+        finishBullet.visible = false;
+        circProgress.visible = false;
+        startBullet.visible = false;
+        pretaskPopup.visible = false;
+    }
+
+    function gameStart()
+    {
+        //car.visible = true;
+       // shadow.visible = true;
+        finishBullet.visible = true;
+        circProgress.visible = true;
+        startBullet.visible = true;
+        pretaskPopup.visible = true;
+    }
+
     function setState(state)
     {
         switch(state)
         {
         case "gameOver":
-            car.visible = false;
-            shadow.visible = false;
-            finishBullet.visible = false;
-            circProgress.visible = false;
-            startBullet.visible = false;
+            gameStop();
             break;
 
         case "idle":
-            car.visible = false;
-            shadow.visible = false;
-            startBullet.visible = false;
-            finishBullet.visible = false;
-            circProgress.visible = false;
-            pretaskPopup.visible = false;
+            gameStop();
             break;
 
         case "game":
