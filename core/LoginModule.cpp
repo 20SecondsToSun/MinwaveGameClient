@@ -1,14 +1,19 @@
 #include "LoginModule.h"
 
-LoginModule::LoginModule(ArduinoComponent* value):BaseModule()
+LoginModule::LoginModule(QObject *parent):BaseModule(parent)
 {
-    arduinoComponent = value;
+
 }
 
 void LoginModule::setConfig(Config* config)
 {
     BaseModule::setConfig(config);
    // socketServerData = config->socketServerData;
+}
+
+void LoginModule::setArduino(ArduinoComponent* arduinoComponentValue)
+{
+     arduinoComponent = arduinoComponentValue;
 }
 
 void LoginModule::start()

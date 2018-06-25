@@ -19,7 +19,7 @@ Window {
 
     function setState(appState)
     {
-        hideAll();
+        hideAll();        
 
         switch(appState)
         {

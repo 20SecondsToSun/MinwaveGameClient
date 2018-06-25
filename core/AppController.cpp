@@ -7,7 +7,12 @@ AppController::AppController(QObject *parent) : QObject(parent)
     healthCheckerComponent = new HealthCheckerComponent(arduinoComponent, mindWaveComponent);
 
     loginModule = new LoginModule(arduinoComponent);
+    loginModule->setArduino(arduinoComponent);
     modules.append(loginModule);
+
+    loginModuleTest = new LoginModuleTest();
+    loginModule->setArduino(arduinoComponent);
+    modules.append(loginModuleTest);
     //instructionModule = new InstructionModule();
     // modules.append(instructionModule);
 
@@ -16,6 +21,14 @@ AppController::AppController(QObject *parent) : QObject(parent)
 
     // resultModule = new ResultModule();
     // modules.append(resultModule);
+}
+
+void AppController::setQmlContext(QQmlContext* qmlContext)
+{
+    for (auto module : modules)
+    {
+         module->setQmlContext(qmlContext);
+    }
 }
 
 void AppController::setAppState(AppState value)
@@ -39,7 +52,6 @@ void AppController::onConfigLoaded(Config* config)
     {
         module->setConfig(config);
     }
-
 
     start();
 }

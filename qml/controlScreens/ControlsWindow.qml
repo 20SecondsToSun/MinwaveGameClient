@@ -1,7 +1,12 @@
 import QtQuick 2.0
 import "../components"
+import "../tests"
 
 Item {
+    property int marginLeft:50;
+    property int marginTop:10;
+    property int columnShift:400;
+
     function setState(state)
     {
 
@@ -14,35 +19,37 @@ Item {
         id:mindWave
     }
 
-//    LoginModule
-//    {
-//        id:loginModule;
-//        x:marginLeft + 500;
-//        y:marginTop
-//    }
+    LoginTest
+    {
+        x:marginLeft + 500;
+        y:marginTop + 300;
 
-//    LoginTest
-//    {
-//        x:marginLeft + 500;
-//        y:marginTop + 300;
+        onLoginState:
+        {
+            touchWindow.setLoginTestState(state);
+        }
+    }
 
-//        onLoginState:
-//        {
-//            touchWindow.setLoginTestState(state);
-//        }
-//    }
+    //    LoginModule
+    //    {
+    //        id:loginModule;
+    //        x:marginLeft + 500;
+    //        y:marginTop
+    //    }
 
-//    UserData
-//    {
-//        x:marginLeft + 900;
-//        y:marginTop
-//    }
 
-//    GameSession
-//    {
-//        x:marginLeft + 1200;
-//        y:marginTop
-//    }
+
+    //    UserData
+    //    {
+    //        x:marginLeft + 900;
+    //        y:marginTop
+    //    }
+
+    //    GameSession
+    //    {
+    //        x:marginLeft + 1200;
+    //        y:marginTop
+    //    }
 
     HealthCheckerComponent
     {

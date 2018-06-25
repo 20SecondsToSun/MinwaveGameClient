@@ -9,13 +9,11 @@ SOURCES += main.cpp \
     config/ConfigParser.cpp \
     config/ConfigWriter.cpp \
     core/IService.cpp \
-    core/MainController.cpp \
     core/Types.cpp \
     network/socketClient/SocketClient.cpp \
     network/socketClient/TCPSocketClient.cpp \
     network/socketClient/TCPSocketClientCmnd.cpp \
     tools/Logger.cpp \
-    network/ClientService.cpp \
     network/http/HTTPClient.cpp \
     tools/MathTools.cpp \
     mindwave/GameSession.cpp \
@@ -32,7 +30,8 @@ SOURCES += main.cpp \
     core/BaseModule.cpp \
     core/LoginModule.cpp \
     core/GameModule.cpp \
-    core/AppController.cpp
+    core/AppController.cpp \
+    tests/LoginModuleTest.cpp
 
 RESOURCES += qml.qrc
 
@@ -65,13 +64,11 @@ HEADERS += \
     config/ConfigParser.h \
     config/ConfigWriter.h \
     core/IService.h \
-    core/MainController.h \
     core/Types.h \
     network/socketClient/SocketClient.h \
     network/socketClient/TCPSocketClient.h \
     network/socketClient/TCPSocketClientCmnd.h \
     tools/Logger.h \
-    network/ClientService.h \
     network/http/HTTPClient.h \
     tools/MathTools.h \   
     mindwave/GameSession.h \
@@ -89,6 +86,7 @@ HEADERS += \
     core/BaseModule.h \
     core/LoginModule.h \
     core/GameModule.h \
-    core/AppController.h
+    core/AppController.h \
+    tests/LoginModuleTest.h
 
 DISTFILES +=

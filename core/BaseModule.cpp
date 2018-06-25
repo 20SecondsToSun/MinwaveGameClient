@@ -1,6 +1,6 @@
 #include "BaseModule.h"
 
-BaseModule::BaseModule()
+BaseModule::BaseModule(QObject *parent) : QObject(parent)
 {
 
 }
@@ -14,3 +14,11 @@ void BaseModule:: setLogger(Logger* value)
 {
     logger = value;
 }
+
+void BaseModule::setQmlContext(QQmlContext* value)
+{
+    qmlContext = value;
+}
+
+
+

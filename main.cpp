@@ -10,8 +10,8 @@
 #include "config/ConfigController.h"
 #include "core/MainController.h"
 #include "core/AppController.h"
+#include "core/LoginModule.h"
 #include "core/IService.h"
-
 
 int main(int argc, char *argv[])
 {
@@ -27,28 +27,17 @@ int main(int argc, char *argv[])
     QScopedPointer<ConfigController> configController(new ConfigController);
     engine.rootContext()->setContextProperty("configController", configController.data());
 
-   // QScopedPointer<MainController> mainController(new MainController);
-   // engine.rootContext()->setContextProperty("mainController", mainController.data());
-
-    QScopedPointer<AppController> appController(new AppController);
+    QScopedPointer<AppController> appController(new AppController());
     engine.rootContext()->setContextProperty("appController", appController.data());
-
-    // services
-   // QScopedPointer<IService> clientService(new ClientService(engine.rootContext()));
-   // engine.rootContext()->setContextProperty("clientService", clientService.data());
-
-    // add services
-//    mainController.data()->addService(clientService.data());
     appController.data()->setLogger(logger.data());
+    appController.data()->setQmlContext(engine.rootContext());
 
-    // listeners
     QObject::connect(configController.data(), SIGNAL(configServiceReady(Config*)), appController.data(), SLOT(onConfigLoaded(Config*)));
     QObject::connect(configController.data(), SIGNAL(configServiceError()), appController.data(), SLOT(onConfigError()));
 
     qmlRegisterType<AppController>("com.app", 1, 0, "AppState");
+    qmlRegisterType<LoginModule>("com.app", 1, 0, "LoginState");
 
-
-    // qml
     engine.load(QUrl(QLatin1String("qrc:/main.qml")));
 
     if (engine.rootObjects().isEmpty())

@@ -21,6 +21,8 @@ ApplicationWindow {
         target:appController;
         onAppStateChanged:
         {
+            console.log("state changes :::::::::::::", appState);
+
             touchWindow.setState(appState);
             mainWindow.setState(appState);
             controlsWindow.setState(appState);

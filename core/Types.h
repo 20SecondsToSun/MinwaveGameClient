@@ -113,7 +113,7 @@ private:
     QString args;
     QString metaName;
     QString filePath;
-    QString configPath;   
+    QString configPath;
     QString configVersion;
     AppTypeId appId;
     SocketClientData socketServer;
@@ -138,10 +138,10 @@ struct AutoUpdateData
     UpdateProviderType providerType;
     QMap<UpdateProviderType, AutoUpdateProviderData> providersData;
 
-   AutoUpdateProviderData getProviderData() const
-   {
-       return providersData[providerType];
-   }
+    AutoUpdateProviderData getProviderData() const
+    {
+        return providersData[providerType];
+    }
 };
 
 
@@ -197,8 +197,8 @@ struct ConnectedClientTypeMetaData
 
     QString getFormatString(int connectionsNum) const
     {
-       QString colorOut = connectionsNum > 0 ? "green" : color;
-       return  "<font color=" + colorOut + ">" + metaName + ":" + QString::number(connectionsNum) + "</font>";
+        QString colorOut = connectionsNum > 0 ? "green" : color;
+        return  "<font color=" + colorOut + ">" + metaName + ":" + QString::number(connectionsNum) + "</font>";
     }
 };
 

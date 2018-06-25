@@ -1,6 +1,7 @@
 ﻿#ifndef APPCOPCONTROLLER_H
 #define APPCOPCONTROLLER_H
 
+#include <QQmlContext>
 #include <QObject>
 #include <QList>
 #include "components/HealthCheckerComponent.h"
@@ -10,6 +11,9 @@
 #include "tools/Logger.h"
 #include "config/Config.h"
 #include "LoginModule.h"
+
+#include "tests/LoginModuleTest.h"
+#include "Types.h"
 
 class AppController : public QObject
 {
@@ -25,15 +29,17 @@ public:
     };
     Q_ENUMS(AppState)
 
-public:
-    explicit AppController(QObject *parent = nullptr);
+    AppController(QObject *parent = nullptr);
 
 public:   
     void setLogger(Logger* logger);
     void start();
+    void setQmlContext(QQmlContext* qmlContext);
+
 
 private:
     LoginModule* loginModule;
+    LoginModuleTest* loginModuleTest;
     //InstructionModule instructionModule;
    // GameModule gameModule;
    // ResultModule resultModule;
@@ -50,7 +56,7 @@ private:
     AppState appState = AppState::Login;
     BaseModule* currentModule = nullptr;
 
-     void setAppState(AppState appState);
+    void setAppState(AppState appState);
 
 signals:
     void appStateChanged(AppState appState);

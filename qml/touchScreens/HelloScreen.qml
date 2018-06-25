@@ -2,6 +2,7 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
+import com.app 1.0
 
 Item {
 
@@ -10,6 +11,42 @@ Item {
     anchors.centerIn: parent
 
     signal start(bool showInstruction);
+
+    Connections
+    {
+        target:loginModule;
+        onLoginStateChanged:
+        {
+            console.log("onLoginSuccess :::::::::::::", loginState);
+            switch(loginState)
+            {
+                case LoginState.Success:
+                    mainText.text = "О привет, Афанасий! Начнем!";
+                    startBtn.visible = true;
+                break;
+
+//                case 2:
+//                     mainText.text = "О привет, Сергей! Ты не впервые у нас! Будем смотреть инструкцию?";
+//                break;
+
+//                case 3:
+//                     mainText.text = "О привет, Сергей! Слишком часто играем, возвращайся через час";
+//                break;
+
+                case LoginState.UserDoesntExist:
+                    erroText.visible = true;
+                    erroText.text = "Тебя не существует, иди на регистрацию"
+                break;
+
+                case LoginState.Error:
+                    erroText.visible = true;
+                    erroText.text = "Arduino или сервер не работает, если тебе это что-нибудь говорит"
+                break;
+            }
+        }
+    }
+
+
 
     function reset()
     {
@@ -22,31 +59,7 @@ Item {
     {
         reset();
 
-        switch(state)
-        {
-            case 1:
-                mainText.text = "О привет, Афанасий! Начнем!";
-                startBtn.visible = true;
-            break;
 
-            case 2:
-                 mainText.text = "О привет, Сергей! Ты не впервые у нас! Будем смотреть инструкцию?";
-            break;
-
-            case 3:
-                 mainText.text = "О привет, Сергей! Слишком часто играем, возвращайся через час";
-            break;
-
-            case 400:
-                erroText.visible = true;
-                erroText.text = "Тебя не существует, иди на регистрацию"
-            break;
-
-            case 401:
-                erroText.visible = true;
-                erroText.text = "Arduino или сервер не работает, если тебе это что-нибудь говорит"
-            break;
-        }
     }
 
     ColumnLayout

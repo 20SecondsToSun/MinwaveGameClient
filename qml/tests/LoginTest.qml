@@ -3,6 +3,8 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 
+
+
 Item {
     id: loginTest
     signal loginState(int state);
@@ -23,7 +25,7 @@ Item {
             text:"Login success / first time"
             onClicked:
             {
-                loginTest.loginState(1);
+                loginModule.loginSuccessTest();
             }
         }
 
