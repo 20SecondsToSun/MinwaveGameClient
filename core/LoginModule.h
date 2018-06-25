@@ -22,6 +22,7 @@ public:
 
     void setArduino(ArduinoComponent* arduinoComponent);
     virtual void setConfig(Config* config) override;
+    void setQmlContext(QQmlContext* qmlContext) override;
     virtual void start() override;
     virtual void stop() override;
 

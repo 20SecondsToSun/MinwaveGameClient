@@ -24,9 +24,7 @@
         <file>qml/UserData.qml</file>
         <file>qml/components/ArduinoComponent.qml</file>
         <file>qml/login/ServerLogin.qml</file>
-        <file>qml/login/LoginModule.qml</file>
         <file>qml/components/MindwaveComponent.qml</file>
-        <file>qml/touchScreens/HelloScreen.qml</file>
         <file>qml/components/HealthCheckerComponent.qml</file>
         <file>qml/touchScreens/TouchWindow.qml</file>
         <file>qml/tests/LoginTest.qml</file>
@@ -35,5 +33,6 @@
         <file>qml/touchScreens/GameScreen.qml</file>
         <file>qml/mainScreens/MainWindow.qml</file>
         <file>qml/controlScreens/ControlsWindow.qml</file>
+        <file>qml/touchScreens/LoginScreen.qml</file>
     </qresource>
 </RCC>

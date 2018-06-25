@@ -58,8 +58,6 @@ Item {
     function setTestState(state)
     {
         reset();
-
-
     }
 
     ColumnLayout
@@ -95,7 +93,7 @@ Item {
             visible:false
             onClicked:
             {
-                login.start(true);
+                appController.startInstruction();
             }
         }
     }

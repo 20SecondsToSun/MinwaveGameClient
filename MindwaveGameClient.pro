@@ -8,7 +8,6 @@ SOURCES += main.cpp \
     config/ConfigLoader.cpp \
     config/ConfigParser.cpp \
     config/ConfigWriter.cpp \
-    core/IService.cpp \
     core/Types.cpp \
     network/socketClient/SocketClient.cpp \
     network/socketClient/TCPSocketClient.cpp \
@@ -31,7 +30,8 @@ SOURCES += main.cpp \
     core/LoginModule.cpp \
     core/GameModule.cpp \
     core/AppController.cpp \
-    tests/LoginModuleTest.cpp
+    tests/LoginModuleTest.cpp \
+    core/InstructionModule.cpp
 
 RESOURCES += qml.qrc
 
@@ -63,7 +63,6 @@ HEADERS += \
     config/ConfigLoader.h \
     config/ConfigParser.h \
     config/ConfigWriter.h \
-    core/IService.h \
     core/Types.h \
     network/socketClient/SocketClient.h \
     network/socketClient/TCPSocketClient.h \
@@ -87,6 +86,7 @@ HEADERS += \
     core/LoginModule.h \
     core/GameModule.h \
     core/AppController.h \
-    tests/LoginModuleTest.h
+    tests/LoginModuleTest.h \
+    core/InstructionModule.h
 
 DISTFILES +=

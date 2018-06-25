@@ -6,15 +6,16 @@ AppController::AppController(QObject *parent) : QObject(parent)
     mindWaveComponent = new MindwaveComponent();
     healthCheckerComponent = new HealthCheckerComponent(arduinoComponent, mindWaveComponent);
 
-    loginModule = new LoginModule(arduinoComponent);
+    // loginModule = new LoginModule(arduinoComponent);
+    // loginModule->setArduino(arduinoComponent);
+    //  modules.append(loginModule);
+
+    loginModule = new LoginModuleTest();
     loginModule->setArduino(arduinoComponent);
     modules.append(loginModule);
 
-    loginModuleTest = new LoginModuleTest();
-    loginModule->setArduino(arduinoComponent);
-    modules.append(loginModuleTest);
-    //instructionModule = new InstructionModule();
-    // modules.append(instructionModule);
+    instructionModule = new InstructionModule();
+    modules.append(instructionModule);
 
     // gameModule = new GameModule(mindWaveComponent);
     // modules.append(gameModule);
@@ -23,11 +24,16 @@ AppController::AppController(QObject *parent) : QObject(parent)
     // modules.append(resultModule);
 }
 
+void AppController::startInstruction()
+{
+    setAppState(AppState::Instruction);
+}
+
 void AppController::setQmlContext(QQmlContext* qmlContext)
 {
     for (auto module : modules)
     {
-         module->setQmlContext(qmlContext);
+        module->setQmlContext(qmlContext);
     }
 }
 
@@ -40,10 +46,19 @@ void AppController::setAppState(AppState value)
 
     appState = value;
 
-   currentModule = loginModule;//getModuleByState();
+    currentModule = getModuleByAppState(value);
 
     currentModule->start();
     emit appStateChanged(value);
+}
+
+BaseModule* AppController::getModuleByAppState(AppState value)
+{
+    switch(value)
+    {
+    case AppState::Login: return loginModule;
+    case AppState::Instruction: return instructionModule;
+    }
 }
 
 void AppController::onConfigLoaded(Config* config)
@@ -65,7 +80,7 @@ void AppController::setLogger(Logger* logger)
 {
     for (auto module : modules)
     {
-         module->setLogger(logger);
+        module->setLogger(logger);
     }
 }
 

@@ -19,35 +19,23 @@ Window {
 
     function setState(appState)
     {
-        hideAll();        
-
+        hideAll();
         switch(appState)
         {
         case AppState.Login:
-             helloScreen.visible = true;
+             loginScreen.visible = true;
+            break;
+
+        case AppState.Instruction:
+            console.log("touchWindow app state changes :::::::::::::", appState);
+             instructionScreen.visible = true;
             break;
         }
     }
 
-    function setLoginTestState(state)
+    LoginScreen
     {
-        helloScreen.setTestState(state);
-    }
-
-    Component.onCompleted:
-    {
-       // instructionScreen.visible = false;
-    }
-
-    HelloScreen
-    {
-        id: helloScreen;
-
-        onStart:
-        {
-            helloScreen.visible = false;
-            instructionScreen.visible = true;
-        }
+        id: loginScreen;
     }
 
     InstructionScreen
@@ -78,16 +66,16 @@ Window {
         onBack:
         {
             hideAll();
-            helloScreen.visible = true;
+            loginScreen.visible = true;
         }
     }
 
     function hideAll()
     {
-        helloScreen.visible = false;
+        loginScreen.visible = false;
         instructionScreen.visible = false;
         gameScreen.visible = false;
-        helloScreen.reset();
+        loginScreen.reset();
         instructionScreen.reset();
         gameScreen.reset();
 

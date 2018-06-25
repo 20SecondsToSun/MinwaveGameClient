@@ -5,13 +5,10 @@
 #include <QQmlContext>
 #include <QScopedPointer>
 
-#include "network/ClientService.h"
 #include "network/socketClient/SocketClient.h"
 #include "config/ConfigController.h"
-#include "core/MainController.h"
 #include "core/AppController.h"
 #include "core/LoginModule.h"
-#include "core/IService.h"
 
 int main(int argc, char *argv[])
 {

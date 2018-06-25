@@ -11,6 +11,7 @@
 #include "tools/Logger.h"
 #include "config/Config.h"
 #include "LoginModule.h"
+#include "InstructionModule.h"
 
 #include "tests/LoginModuleTest.h"
 #include "Types.h"
@@ -23,7 +24,7 @@ public:
     enum class AppState
     {
         Login,
-        Intstruction,
+        Instruction,
         Game,
         Result
     };
@@ -36,11 +37,13 @@ public:
     void start();
     void setQmlContext(QQmlContext* qmlContext);
 
+    Q_INVOKABLE void startInstruction();
+
 
 private:
     LoginModule* loginModule;
     LoginModuleTest* loginModuleTest;
-    //InstructionModule instructionModule;
+    InstructionModule* instructionModule;
    // GameModule gameModule;
    // ResultModule resultModule;
     QList<BaseModule*> modules;
@@ -57,6 +60,7 @@ private:
     BaseModule* currentModule = nullptr;
 
     void setAppState(AppState appState);
+    BaseModule* getModuleByAppState(AppState value);
 
 signals:
     void appStateChanged(AppState appState);

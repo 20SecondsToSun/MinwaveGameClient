@@ -18,9 +18,9 @@ public:
     virtual void stop() override;
     virtual void setQmlContext(QQmlContext* value) override;
 
-
     Q_INVOKABLE void startGame();
     Q_INVOKABLE void stopGame();
+
 private:
      SocketServerData socketServerData;
      QScopedPointer<MindwaveComponent>  mindWave;
