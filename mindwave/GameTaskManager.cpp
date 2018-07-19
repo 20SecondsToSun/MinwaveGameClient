@@ -55,13 +55,13 @@ GameTaskManager::GameTaskManager()
 
     //PATH4
     path.clear();
-    velocitycalculator.setLimits(0, 2, 65);
+    velocitycalculator.setLimits(0, 2, 60);
     path<<point9<<point13<<point10<<point14<<point15<<point16<<point17<<point18<<point19;
     gameTasks.append(new GameTask(path, velocitycalculator));
 
     //PATH5
     path.clear();
-    velocitycalculator.setLimits(0, 3, 70);
+    velocitycalculator.setLimits(0, 3, 60);
     path<<point19<<point12<<point11<<point20<<point8<<point10<<point1;
     gameTasks.append(new GameTask(path, velocitycalculator));
 

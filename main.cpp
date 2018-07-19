@@ -38,17 +38,25 @@ int main(int argc, char *argv[])
     mainController.data()->setLogger(logger.data());
 
     // listeners
-    QObject::connect(configController.data(), SIGNAL(configServiceReady(Config*)), mainController.data(), SLOT(configServiceReady(Config*)));
+  //  QObject::connect(configController.data(), SIGNAL(configServiceReady(Config*)), mainController.data(), SLOT(configServiceReady(Config*)));
     QObject::connect(configController.data(), SIGNAL(configServiceError()), mainController.data(), SLOT(configServiceError()));
 
 
-    // qml
-    engine.load(QUrl(QLatin1String("qrc:/main.qml")));
+    QObject::connect(configController.data(), &ConfigController::configServiceReady,[&](Config* conf)
+       {
+           mainController->configServiceReady(conf);
 
-    if (engine.rootObjects().isEmpty())
-    {
-        return -1;
-    }
+           // qml
+           engine.load(QUrl(QLatin1String("qrc:/main.qml")));
+
+           if (engine.rootObjects().isEmpty())
+           {
+               return -1;
+           }
+       });
+
+
+
 
     // config load. entry point
     configController.data()->setLoadingMethod(ConfigLoader::CONFIG_LOAD_METHOD::RESOURCE_FILE);
